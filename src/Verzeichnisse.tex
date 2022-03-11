@@ -1,0 +1,34 @@
+\begin{spacing}{1}
+    \pagenumbering{Roman}
+    \setcounter{page}{2}
+    \tableofcontents
+    \end{spacing}
+    \newpage
+    \begin{spacing}{1}
+    \section*{Abbildungsverzeichnis} 
+    \addcontentsline{toc}{section}{Abbildungsverzeichnis}
+    \renewcommand{\listfigurename}{}
+    \listoffigures
+    \end{spacing}
+    \newpage
+    \section*{Tabellenverzeichnis} 
+    \addcontentsline{toc}{section}{Tabellenverzeichnis} 
+    \renewcommand{\listtablename}{}
+    \listoftables % Tabellenverzeichnis
+    \newpage
+    \section*{Symbolverzeichnis} 
+    \addcontentsline{toc}{section}{Symbolverzeichnis} 
+    %Sortieren nach Auftreten im Text
+    \begin{table}[h] \begin{center} \begin{tabular}{|lll|} \hline 
+    & \textbf{Symbol} & \textbf{Bedeutung} \\ \hline \hline
+    \end{tabular} \end{center} \end{table}
+    \newpage
+    \section*{Abkürzungsverzeichnis} 
+    \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+    \printacronyms[display=all,name=Abkürzungen]
+    \newpage
+    \clearpage
+    \setcounter{SeitenzahlSpeicher}{\value{page}}
+    \pagenumbering{arabic}
+    \newpage
+    \pagenumbering{arabic}

@@ -1,0 +1,38 @@
+\documentclass[12pt, a4paper, oneside]{article}
+%die Pakete werden hier durch den Include-Befehl separat eingelesen
+\include{Pakete.tex}
+\addbibresource{bibba.bib}
+
+
+\title{\textbf{Entwicklung einer Resourcenübersicht auf Basis von Jira}}
+\author{Nico Päller}
+
+\setlength{\parindent}{0cm} %keine Einrückung
+\linespread{1.5} 
+
+\include{src/Acronyms.tex}
+
+\newpage
+\newpage
+%in alphabetischer Reihenfolge
+
+\newcounter{SeitenzahlSpeicher}
+\begin{document}
+
+\include{src/Titelseite.tex}
+
+\include{src/Verzeichnisse.tex}
+
+\include{src/Einfuehrung.tex}
+
+
+\printbibliography
+
+\section{Eigenständigkeitserklärung}
+``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein. Ich stimme der Überprüfung der Arbeit durch eine Plagiatssoftware zu.''
+\paragraph{}$~~$\\
+\paragraph{}$~~$\\
+\vspace{50pt} 
+\noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
+\noindent Ort, Datum \hfill Unterschrift 
+\end{document}
