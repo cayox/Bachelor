@@ -1,0 +1,10 @@
+{
+    "cSpell.language": "en,de-DE",
+    "editor.rulers": [80,120],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#ff4081"
+    },
+    "cSpell.words": [
+        "grequests"
+    ]
+}

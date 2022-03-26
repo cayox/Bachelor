@@ -1,0 +1,342 @@
+\section{Grundlagen}
+In diesem Kapitel werden die Grundlagen der im \gls{HOD} System Test erläutert.
+Anschließend wird auf das zentrale Element der Arbeit, die REST API eingegangen.
+Zusätzlich werden Programmiersprachen zur Entwicklung vom \gls{Backend} 
+gegenübergestellt und eine potenzielle Verwendung abgewogen.
+
+\subsection{HOD Systemtest}
+Die Abteilung Hands-On-Detection entwickelt ein Lenkrad, welches durch eine 
+kapazitive Matte im Lenkrad erkennen kann, ob und wie ein Lenkrad berührt wurde.
+Dieses System muss nicht nur entwickelt sondern auch ausgiebig getestet werden.
+Da Joyson nach dem V-Modell testet, werden die Tests auf mehrere Ebenen verteilt.
+Die Ebene des Systemtests, testet das ganze System, das heißt es wird das ganze
+Lenkrad mit der von Joyson entwickelten \gls{ECU} getestet.
+
+\begin{figure}[H]
+    \includegraphics[width=8cm,keepaspectratio]{img/duts_in_cc.jpg}
+    \centering
+    \caption{HOD Lenkräder in einer Klimakammer}\label{fig:duts_in_cc}
+\end{figure}
+
+Die verschiedenen Funktionen der Lenkräder wird bei -40°C bis 80°C getestet. 
+Dabei werden meistens 3 Lenkräder in einer Klimakammer getestet. Alle, für 
+diese Tests verwendeten Teile, wie Kabelbäume, Messhardware, die Klimakammer etc.,
+werden Ressourcen genannt.
+
+
+\subsection{REST API}
+Seit der ersten Website von Tim Berners-Lee 1991 wächst das Web teilweise 
+exponentiell. Allerdings war das Web nicht für solch ein rasantes Wachstum gemacht.
+Es gab weder einheitliche Kommunikationsprotokolle, noch konnte die Infrastruktur
+den Datenverkehr standhalten. Alarmiert von diesem Problem, entwickelte Roy Fielding
+eine Web Architektur, welche die Bedingungen des Webs einheitlich lösen soll.
+Diese Bedingungen lassen sich in 6 Kategorien zusammenfassen~\cite{Mas11}:
+
+\begin{description}
+
+    \item[1. Client-Server]\hfill \\
+    Die Client-Server Struktur stellt eine Trennung der Anliegen dar. Der Client
+    fordert dabei einen Dienst oder eine Information an, welche der Server erfüllt.
+    Die Technologie welche zum Entwickeln von Client und Server verwendet wird,
+    spielt dabei keine Rolle, solange sie das einheitliche Interface implementieren.
+
+    \item[2. Einheitliches Interface]\hfill \\
+    Mark Massé fasst in seinem Buch \textit{Rest Api: Design Rulebook}~\cite{Mas11}
+    das einheitliche Interface in 4 Anforderungen zusammen: 
+    
+    \begin{enumerate}
+        \item Identifikation von Ressourcen\hfill \\
+        Jedes webbasierte Konzept (Ressource) muss über einen einzigartigen 
+        \gls{URI} adressiert werden können. 
+
+        \item Manipulation von Ressourcen durch Repräsentationen\hfill \\
+        Clients müssen die Ressourcen manipulieren können, indem Sie mit verschiedenen
+        Repräsentationen arbeiten. Beispielsweise kann ein Dokument sowohl in 
+        \gls{JSON} für ein automatisiertes Programm als auch als \gls{HTML} für 
+        einen Webbrowser repräsentiert werden. Dadurch lässt sich laut Massé eine
+        Interaktion mit dem Dokument gewährleisten, ohne das Dokument und seinen
+        Identifier zu verändern.
+
+        \item Selbstbeschreibende Nachrichten\hfill \\
+        Wenn der Client eine Anfrage schickt, ist dies nur der gewünschte Zustand
+        der Ressource. Der tatsächlich aktuelle Zustand, ist repräsentativ in 
+        der Antwort des Servers enthalten. Wenn also jemand einen Kommentar bei 
+        YouTube schreibt, schlägt er nur den Inhalt des Kommentars vor. Ob der 
+        Kommentar tatsächlich übernommen und angezeigt wird, hängt allein vom 
+        Server ab. 
+        Um diese selbstbeschreibenden Nachrichten mehr Informationen über die 
+        versendete oder angefragte Ressource enthalten zu lassen, können Metadaten
+        in den Nachrichten enthalten sein. Diese Metadaten können zum Beispiel
+        die Art der Repräsentation, die Länge der Daten oder eine Authentifizierung 
+        sein.\\
+
+        Bei einer \gls{HTTP}-Nachricht werden diese Metadaten in die ``Header'' 
+        geschrieben, welche vordefinierte Zwecke besitzen.
+
+        \item Hypermedien als Antrieb des Applikationsstatuses\hfill \\
+        Laut Massé, sind Links die ``Fäden die das Netz zusammennähen''~\cite[][4]{Mas11}.
+        Daher sollte es in dem einheitlichen Interface die Möglichkeit eine Navigation
+        der Informationen durch Links geben.
+
+    \end{enumerate}
+
+    \item[3. Schichtsystem]\hfill \\
+    Durch ein Schichtsystem soll ermöglicht werden, Zwischensysteme, wie einen
+    Proxy Server oder ein Gateway zu etablieren. Diese Systeme werden benötigt, 
+    um beispielsweise Sicherheitsstandards zu erzwingen oder um viele gleichzeitige
+    Anfragen auf die vorhandene Hardware zu balancieren (load balancing).
+
+    \item[4. Caching]\hfill \\
+    Caching ist das Zwischenspeichern von Informationen. Um den Server zu entlasten
+    und somit Geld zu sparen und zusätzlich die Latenz des Clients zu verringern,
+    sollten Ressourcen zwischengespeichert werden, sodass bei einer erneuten 
+    Anfrage die zwischengespeicherte Version geladen wird und keine neue 
+    Datenübertragung initialisiert werden muss. Caching wird von allen modernen 
+    Webbrowsern automatisch betrieben, kann aber auch von den oben genannten
+    Zwischensystemen umgesetzt werden.
+
+    \item[5. Zustandslosigkeit]\hfill \\
+    Die Anforderungen der Zustandslosigkeit beschreibt, dass alle kontextuellen 
+    Informationen in der Anfrage des Clients enthalten sein muss, sodass der 
+    Server keine Informationen zum Client speichern muss. Dadurch kann der Server
+    wesentlich mehr Anfragen bearbeiten, das der Aufwand pro Anfrage gering 
+    gehalten wird. Die Zustandslosigkeit trägt erheblich zur Skalierung der
+    Architektur des Webs bei, laut Massé~\cite[][4]{Mas11}. 
+
+    \item[6. Code-On-Demand]\hfill \\
+    Code-On-Demand ist die Möglichkeit, ausführbare Skripte oder Programme vom 
+    Server an den Client zu schicken. Da der Client jedoch den empfangenen Code
+    verstehen und ausführen muss, ist dies die einzige optionale Anforderung an
+    die Architektur des Webs.
+\end{description}
+
+Diese zuvor genannten Anforderungen, werden elegant durch eine \gls{REST} \gls{API}
+erfüllt. REST steht für Representational State Transfer und beschreibt eine Ansammlung von
+Regeln, nach welchem man seine \gls{API} architektonisch aufbauen sollte. Diese 
+Regeln lassen sich jedoch auf die unterschiedlichsten Weisen implementieren. 
+
+\subsection{HTTP Kommunikation}
+Das Hypertext Transfer Protokoll (kurz HTTP) regelt die Datenübertragung zwischen
+Anwendungen. Viele \gls{REST} \gls{API}s verwenden HTTP, da dieses gewisse
+Anforderung, wie die Zustandslosigkeit, bereits implementiert. Im Folgenden soll
+die Funktionsweise vom HTTP erläutert werden, da dies grundlegend für sowohl ``TestHub''
+als auch die \gls{JIRA} Kommunikation ist.
+
+\subsubsection{Allgemeines}
+HTTP implementiert verschiedene Anfragetypen und Headertypen. Die wichtigsten,
+welche auch von der \gls{REST} \gls{API} von ``TestHub'' verwendet wird, werden 
+hier aufgelistet:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c | c|} 
+     \hline
+     \textbf{Anfragetyp} & \textbf{Beschreibung} \\ [1ex] 
+     \hline
+     GET & erhalten einer Ressource \\ [1ex]
+     \hline
+     POST* & erstellen einer Ressource oder Query-Abfrage \\ [1ex] 
+     \hline
+     PUT* & editieren einer Ressource \\ [1ex] 
+     \hline
+     DELETE & löschen einer Ressource \\ [1ex] 
+     \hline
+    \end{tabular}
+    \caption{REST API HTTP Anfragetypen}
+    * darf Daten im Body der Anfrage versenden
+    \label{table:requests}
+\end{table}
+
+Außerdem hat jede Antwort des Servers auch einen entsprechenden Status Code, 
+welcher verschiedene Aussagemöglichkeiten hat:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c | c|} 
+     \hline
+     \textbf{HTTP Statuscode} & \textbf{Kategorie} \\ [1ex] 
+     \hline
+     1XX & Information \\ [1ex]
+     \hline
+     2XX & Erfolg \\ [1ex] 
+     \hline
+     3XX & Weiterleitung \\ [1ex] 
+     \hline
+     4XX & Client Error \\ [1ex] 
+     \hline
+     5XX & Server Error \\ [1ex] 
+     \hline
+    \end{tabular}
+    \caption{HTTP Statuskategorien}
+    \label{table:status}
+\end{table}
+
+Zusätzlich gibt es eine Vielzahl an Headern, welche verwendet werden können. 
+``TestHub'' verwendet dabei nur die Standardheader wie \textit{Content-Length},
+\textit{Date} und \textit{Content-Type}, um 
+dem Client mitzuteilen, um welche Art der Repräsentation es sich handelt. 
+
+\subsubsection{Kommunikation}
+HTTP verwendet \gls{TCP}, welches für eine akkurate Übertragung der Daten sorgt.
+Wenn der Client nun mit dem Server kommunizieren möchte, muss er zuerst eine \gls{TCP}
+Verbindung aufbauen. 
+
+\begin{figure}[H]
+    \includegraphics[width=8cm,keepaspectratio]{img/Tcp-handshake.svg.png}
+    \centering
+    \caption[Diagramm des Beginns einer TCP-Verbindung]{Diagramm des Beginns einer TCP-Verbindung~\cite{Wik10}}\label{fig:tcp}
+\end{figure}
+
+\begin{description}
+    \item[\textbf{SYN}]\hfill \\
+    Der Client erstellt eine zufällige Zahlenfolge $x$ und versendet diese (und
+    eventuell weitere TCP Optionen) in einem \textit{SYN} Packet an den Server.
+
+    \item[\textbf{SYN-ACK}]\hfill \\
+    Der Server inkrementiert $x$ um 1 und erstellt selbst eine zufällige 
+    Zahlenfolge $y$. Der Server kann an dieser Stelle seine eigenen TCP Optionen
+    zusammen mit den Zahlenfolgen $x$ und $y$ an den Client zurückschicken.
+
+    \item[\textbf{ACK}]\hfill \\
+    Der Client inkrementiert sowohl $x$ als auch $y$ um 1 und sendet das Packet
+    wieder an den Server zurück. 
+\end{description}
+
+Sobald der Server die \textit{ACK} Nachricht empfangen hat, ist der Handshake
+abgeschlossen. Von nun an können Daten versendet werden. Dies geschieht über
+eine HTTP Nachricht, welche wie folgt aussehen kann:
+
+\begin{lstlisting}[caption=Beispielhafte HTTP Anfrage]
+    GET / HTTP/1.1
+    Host: domain.com
+    Accept-Language: de
+\end{lstlisting}
+
+In dieser Nachricht sind Anfragetyp, und die HTTP Version enthalten. \textit{Host}
+und \textit{Accept-Language} sind dabei Header, welche gewisse Metadaten zur 
+Anfrage enthalten. HTTP/1.1 ist dabei noch in Klartext gestaltet, und somit 
+von Menschen lesbar. HTTP/2 verwendet das gleiche Prinzip, jedoch sind die 
+Nachrichten als Frames verpackt und somit nicht mehr einfach so lesbar. \\
+
+Sobald der Server alle vom Client angefragten Ressourcen gesammelt hat, 
+sendet er eine Antwort:
+
+\begin{lstlisting}[caption=Beispielhafte HTTP Antwort]
+    HTTP/1.1 200 OK
+    Date: Sat, 09 Oct 2010 14:28:02 GMT
+    Content-Length: 29769
+    Content-Type: text/html
+    
+    <!DOCTYPE html ... (29769 Bytes der angefragten Seite)
+\end{lstlisting}
+
+Üblicherweise sendet der Server zu seiner Antwort, für den Client wichtige Header,
+wie der zuvor genannte \textit{Content-Type} Header, wodurch der Client weiß,
+wie er die empfangenen Daten interpretieren soll. Die tatsächlichen Daten stehen
+dabei ganz unten im sogenannten Body. Der Server sendet zusätzlich einen Status,
+in diesem Fall ist das der Status 200, welcher für einen unspezifischen Erfolg
+steht. \\
+
+Schlussendlich kann die Verbindung geschlossen werden, um Platz für andere Anfragen
+von anderen Clients zu schaffen oder die Verbindung kann für Folgeanfragen genutzt
+werden.
+
+
+\subsection{Programmiersprachen zur Backend Entwicklung}
+Die Grundlage und demnach auch die Performance des Backends bildet die 
+verwendete Programmiersprache. Joyson verwendet in der Firma hauptsächlich 
+Python, C\# und Go. Da mit C\# nicht in der Abteilung 
+\gls{HOD} System Test entwickelt wird, werden lediglich die 
+Sprachen Python und Go gegenüber gestellt und ein Fazit zur verwendeten Sprache 
+gebildet. \\
+
+Sowohl Python als auch Go sind \gls{Open-Source} und somit frei verwendbar. Es 
+gibt für beide Sprachen mehrere Bibliotheken zur Entwicklung einer \gls{REST} 
+\gls{API}.
+
+\subsubsection{Python}
+Python wurde von Guido van Rossum 1989 in Amsterdam entwickelt. Es ist eine 
+\gls{dynamisch typisiert}e Skriptsprache, welche auch \gls{objektorientiert} nutzbar 
+ist. Python ist allerdings eine interpretierte Sprache, das bedeutet, das der 
+compilierte Byte-Code in einer virtuellen Maschine ausgeführt wird. Diese 
+virtuelle Maschine nennt man Interpreter~\cite{ErKa20}. \\
+
+Trotz der umfangreichen Standardbibliothek von Python kann ein Webserver nicht
+ohne Weiteres entwickelt werden. Hierfür wird ein \gls{Framework} benötigt, wie 
+zum Beispiel Django, Flask oder FastAPI. Da Flask laut \textit{StackOverflow 
+Developer Survey 2021} unter den genannten 3 Frameworks, das ist, welches am 
+meisten genutzt wird~\cite{Sta21}, bezieht sich die folgende Gegenüberstellung 
+auf diese Bibliothek. \\
+
+\subsubsection{Go}
+Die Programmiersprache Go wurde 2012 von der Firma Google veröffentlicht. Go 
+wirbt damit, effizient und übersichtlich zu sein. Weiterhin kann in Go 
+Concurrency, also das parallele ausführen von Code, sehr leicht umgesetzt werden.
+Im Gegensatz zu Python ist Go \gls{statisch typisiert}, beide Sprachen besitzen jedoch
+einen \gls{Garbage Collector}. \\
+
+Go bietet in seiner Standardbibliothek schon das `net/http' package an, welches
+verwendet werden kann um einen Webserver zu implementieren. 
+
+\subsubsection{Gegenüberstellung}
+Sowohl Python als auch Go sind bekannte Sprachen, wobei Python wesentlich 
+beliebter ist. Python wird von ca. 48\% der an der \textit{StackOverflow 
+Developer Survey 2021} teilgenommenen Entwickler verwendet, Go hingegen nur ca. 
+10\%.Allerdings ist Go auf Platz 4 der Sprachen, die die meisten dieser Entwickler
+lernen wollen~\cite{Sta21}. Demnach gibt es für beide Sprachen eine ausreichende
+Community für Fragen oder Probleme. Außerdem werden beide Sprachen wahrscheinlich
+in den nächsten Jahren weiterhin verwendet werden. \\
+
+Da `TestHub' so schnell und responsive wie möglich sein sollte, wurde ein 
+Geschwindigkeitstest durchgeführt. Es wurden jeweils ein Webserver in Go mit 
+dem `net/http' Package und in Python mit Flask entwickelt. Beide Webserver stellen
+einen \gls{REST} \gls{API} Endpunkt bereit, welcher eine Test Website~\cite{Bra22} verschickt.
+Es wurden anschließend 100 asynchrone Request an diesen Endpunkt geschickt und die jeweilige
+Zeit gemessen.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c | c|} 
+     \hline
+     \textbf{Framework} & \textbf{$\diameter$ Antwortzeit [s]} \\ [0.5ex] 
+     \hline
+     Go (net/http) & 0,2242 \\ [0.5ex]
+     \hline
+     Python (Flask) & 2,2979 \\ [0.5ex] 
+     \hline
+     \textbf{Leistungsunterschied} & 10,2493 \\ [1ex] 
+     \hline
+    \end{tabular}
+    \caption{$\diameter$ Antwortzeit zwischen Go und Python Webservers}
+    \label{table:1}
+\end{table}
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/results.png}
+    \caption{Geschwindigkeitsvergleich eines Webservers: Python vs. Go}\label{fig:speedtestresults}
+\end{figure}
+
+\textit{Tests wurden lokal auf einem Dell Latitude 5590 (Intel Core i5-8350U CPU
+@ 1.70GHz; 8GB RAM) durchgeführt, der Code lässt sich im Anhang finden} \\[2ex]
+
+In Abbildung~\ref{fig:speedtestresults} ist die Antwortzeit in Sekunden über der Nummer 
+der Anfrage dargestellt. Es ist schnell ersichtlich, dass Go ca. 10 mal schneller
+als Flask ist, zumindest beim verschicken einer HTML Datei. Diese Ergebnisse 
+decken sich mit den Web Framework Benchmarks von TechEmpower, wo Go beim 
+versenden von Text auf Platz 18 vor Flask auf Platz 55 ist. Auch bei der 
+\gls{JSON} Serialisierung liegt Go (Platz 22) weit vor Flask (Platz 59)
+~\cite{Tec21}. Weiterhin ist die Performance des Go Servers mehr konsistent, als
+die des Python Servers\\
+
+\subsubsection{Fazit}
+Da die Geschwindigkeit der Webseite und der \gls{REST} \gls{API} essentiell für 
+die Benutzererfahrung ist, sowohl beim Laden der Seite, als auch beim bearbeiten
+von \gls{HTTP} Anfragen, beispielsweise Suchanfragen, ist Go hier klar die
+bessere Alternative. Des weiteren werden nur weniger Abhängigkeiten benötigt, da
+Go schon viele benötigten Webserver Funktionen in seiner Standardbibliothek hat.
+Somit ist das Programm, langfristig gesehen, weniger anfällig für Fehler bei 
+Aktualisierungen der Bibliotheken.
+
+
+
+

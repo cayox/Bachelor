@@ -1,23 +1,52 @@
 \documentclass[12pt, a4paper, oneside]{article}
-%die Pakete werden hier durch den Include-Befehl separat eingelesen
 \include{Pakete.tex}
-\addbibresource{bibba.bib}
+\addbibresource{refs.bib}
+\makeglossaries
+\include{src/Glossar.tex}
+\include{src/Acronyms.tex}
 
 
-\title{\textbf{Entwicklung einer Resourcenübersicht auf Basis von Jira}}
+\title{\textbf{Entwicklung einer Resourcen-Übersicht auf Basis von Jira}}
 \author{Nico Päller}
 
 \setlength{\parindent}{0cm} %keine Einrückung
 \linespread{1.5} 
 
-\include{src/Acronyms.tex}
 
 \newpage
 \newpage
-%in alphabetischer Reihenfolge
 
 \newcounter{SeitenzahlSpeicher}
 \begin{document}
+
+
+\definecolor{codecomment}{rgb}{0.70, 0.70, 0.70}
+\definecolor{codekeyword}{rgb}{0.83,0.14,0.44}
+\definecolor{codestring}{rgb}{0.20,0.14,0.44}
+\definecolor{backcolour}{rgb}{0.98, 0.98, 0.98}
+
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword},
+    numberstyle=\tiny\color{codecomment},
+    stringstyle=\color{codestring},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
 
 \include{src/Titelseite.tex}
 
@@ -25,14 +54,18 @@
 
 \include{src/Einfuehrung.tex}
 
+\include{src/Grundlagen.tex}
+
+\include{src/Anforderungen.tex}
 
 \printbibliography
+% \section{Eigenständigkeitserklärung}
+% ``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein. Ich stimme der Überprüfung der Arbeit durch eine Plagiatssoftware zu.''
+% \paragraph{}$~~$\\
+% \paragraph{}$~~$\\
+% \vspace{50pt} 
+% \noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
+% \noindent Ort, Datum \hfill Unterschrift 
 
-\section{Eigenständigkeitserklärung}
-``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein. Ich stimme der Überprüfung der Arbeit durch eine Plagiatssoftware zu.''
-\paragraph{}$~~$\\
-\paragraph{}$~~$\\
-\vspace{50pt} 
-\noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
-\noindent Ort, Datum \hfill Unterschrift 
+\include{anhang/Anhang.tex}
 \end{document}

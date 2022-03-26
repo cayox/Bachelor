@@ -1,15 +1,147 @@
 \section{Einführung}
 
-Die Effizienz in einem Unternehmen spielt immer mehr eine wichtige Rolle, da es häufig viele Deadlines gibt, die eingehalten werden müssen. Effizientes
-Arbeiten, benötigt jedoch nicht nur eine genaue Planung, sondern auch eine Möglichkeit für alle Beteiligten,
-die vorgesehenen Prozessschritte einzusehen und einzuhalten. Gerade im Bereich der Digitalisierug, gibt es viel Potential, Prozesse 
+Die Effizienz in einem Unternehmen spielt immer mehr eine wichtige Rolle, da es häufig viele Deadlines gibt, die 
+eingehalten werden müssen. Effizientes Arbeiten benötigt jedoch nicht nur eine genaue Planung, sondern auch eine Möglichkeit für alle Beteiligten,
+die vorgesehenen Prozessschritte einzusehen und einzuhalten. Gerade im Bereich der Digitalisierung, gibt es viel Potential, Prozesse 
 effizienter zu gestalten. Circa ein Drittel der Maschinenbau- und Anlagenbau Unternehmen sehen eine Effizienzsteigerung durch die 
-Digitalisierung \cite{stat17}
+Digitalisierung~\cite{Bre17}
 
-\subsection{Situationsbeschreibung}
+\subsection{Problemstellung}
+Bei Joyson Safety Systems in der Abteilung `\gls{HOD} System Test' werden die 
+durchzuführenden Tests mittels der Ticketsoftware Jira geplant. 
+Diese beinhaltet meistens hunderte einzelne Tests, welche in einer gewissen
+Reihenfolge durchgeführt werden. Anschließend wird jeden Morgen ein Tagesplan 
+erstellt, in welchem genau beschrieben ist, welcher Test auf welche Weise 
+durchzuführen ist. Dieser Plan liegt in Form einer \gls{PDF} Datei vor. Dadurch sind 
+die Informationen, die die \gls{Techniker} erhalten auf das Wichtigste begrenzt. 
+
+Um die Zeit des Umbaus zu minimieren und die verfügbare Zeit einer Klimakammer
+für Tests zu maximieren, muss ein \gls{Techniker} jedoch wissen, was er für den 
+nächsten Test umbauen muss. Diese Information steht ausschließlich im JIRA 
+Ticket zur Verfügung, weshalb das Nachsehen im Ticket für jeden Test einen
+erheblichen Aufwand darstellt.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/jira-ticket.png}
+    \caption{Jira Ticket}
+\end{figure}
+
+Solch ein Jira Ticket ist zu unübersichtlich um schnell alle wichtigen 
+Informationen zu erhalten. Wichtige Daten, wie etwa das zu verwendende Zubehör
+sind nur in Unstrukturierter Form vorhanden. Außerdem bringt das Heraussuchen 
+jedes Tickets einen gewissen Zeitaufwand mit sich.\\
 
 
-\subsection{Motivation und Forschungsfragen}
+Zusätzlich werden die Wartungsinformationen momentan lediglich in einer Excel
+Tabelle gespeichert und vom Wartungsbeauftragten gepflegt. Somit
+weiß der \gls{Techniker} oder der \gls{Planer} nicht genau, ob das geplante 
+Zubehör auch wirklich verwendet werden darf bzw. er muss sich darauf verlassen, 
+dass es rechtzeitig gewartet wurde.\\
+
+\pagebreak
+Aus den zuvor genannten Situationen treten folgende Probleme hervor:
+
+\begin{description}
+
+    \item[1. Heraussuchen der Jiratickets für Informationen]\hfill \\
+    Wenn der Techniker beispielsweise beim Umbau eines Tests wissen möchte,
+    welcher Test folgt, muss er sich in Jira anmelden, das Ticket über die
+    Testrun-ID aus dem Tagesplan suchen, und im Ticket gucken, ob der nächste 
+    Test verlinkt ist. Da in einer Klimakammer meistens 3 Muster getestet werden
+    muss dieser Prozess für jedes weitere Muster wiederholt werden.
+    
+
+    \item[2. Wartungsdatum eines Zubehörs einsehen und anpassen]\hfill \\
+    Wer wissen möchte wann ein gewissen Zubehör gewartet werden muss, bzw. ob 
+    es verwendet werden darf, muss, in einer Excel Datei nach dem entsprechenden
+    Zubehör suchen. Da diese Excel Datei im \gls{SVN} abgelegt ist, wird sie auch nur
+    darüber mit allen weiteren Benutzern synchronisiert. Dabei kann es auch zu 
+    unterschiedlichen Versionen der Datei kommen, wenn beispielsweise jemand 
+    vor dem einsehen die Datei seine lokale Working Copy aktualisiert.
+
+    % TODO: Unstrukturierte Daten
+
+\end{description}
+
+
+\subsection{Zielsetzung}
+Das Programm wird unter dem Namen `TestHub' innerhalb der Firma \gls{JSS} 
+veröffentlicht. Die Arbeit hat folgende Ziele:
+
+\begin{itemize}
+\item Entwicklung einer interaktiven Übersicht zum schnellen Überblick über Wartungstermine, aktuelle, vorherige und folgende Tests 
+\item Aufbereitung und Visualisierung der unstrukturierten Daten in den Labels eines Jira Tickets
+\item Zentrale Speicherung, Einsicht und Anpassung von Testzubehör Informationen
+\item Entwicklung einer offenen Schnittstelle, der zuvor genannten Punkte, zur Integration in andere Programme
+
+\end{itemize}
+
+Die Entwicklung von TestHub lässt sich in zwei grobe Punkte unterteilen:
+
+\begin{description}
+
+    \item[Entwicklung des Backends]\hfill \\
+    Das Backend ist die zentrale serverseitige Software, welche die nötigen 
+    Daten von Jira oder der Datenbank sammelt und aufbereitet über das Internet 
+    versendet.
+    
+
+    \item[Entwicklung des UI]\hfill \\
+    Um die Daten visuell und kompakt darzustellen, gibt es ein Interface, 
+    welches die vom Backend empfangenen Daten übersichtlich auf einer Webseite
+    anzeigt
+
+\end{description}
+
+
+Durch eine Trennung des Backends und des \gls{Frontend}s entstehen verschiedene 
+Vorteile. Zum einen können andere Programme das Backend ebenfalls benutzen und
+die nötigen Daten bei sich integrieren. Es lässt sich außerdem leicht erweitern,
+Zum Anderen lässt sich das \gls{UI} leicht austauschen bzw anpassen, da es lediglich 
+die vorhandenen Daten anzeigt. \\
+
+Testhub ist als \gls{MVP} entwickelt, es werden daher nur die wichtigsten in 
+Abschnitt
+% TODO: add abschnitt
 
 
 \subsection{Vorgehensweise}
+Die vorliegende Arbeit wird ind mehrere Kapitel unterteilt
+
+\begin{description}
+
+    \item[Kapitel 1: Einleitung:]
+    In der Einleitung werden die Problemstellung und die Ziele mitsamt der Motivation
+    der Arbeit beschrieben
+    
+    \item[Kapitel 2: Grundlagen:]
+    Im Kapitel über die Grundlagen werden Implementierungsmöglichkeiten diskutiert
+    und abgewogen. Zusätzlich wird dort die Strukturierung von unstrukturierten 
+    Daten besprochen.
+
+    \item[Kapitel 3: Anforderungsanalyse:]
+    Im Kapitel 3 werden die aktuellen Probleme analysiert und Anforderungen an 
+    das zu entwickelnde Programm definiert.
+
+    \item[Kapitel 4: Entwurf:]
+    Im Entwurf wird sowohl die Softwarearchitektur des Programms als auch Gestaltung 
+    des \gls{UI} beschrieben
+    
+    \item[Kapitel 5: Entwicklung:]
+    Im Entwicklungsteil der Arbeit werden sowohl die Implementierung als auch 
+    der Softwarelebenszyklus des gesamten Projekts beschrieben.
+
+    \item[Kapitel 6: Verifizierung und Validierung:]
+    Die in Kapitel 3 ermittelten Anforderungen werden in diesem Kapitel dem 
+    tatsächlichen Funktionen des Programms gegenübergestellt und verifiziert.
+
+    \item[Kapitel 7: Fazit:]
+    Im Fazit Kapitel werden die Ergebnisse der Arbeit zusammengefasst und weitere
+    mögliche Schritte hinsichtlich der Weiterentwicklung besprochen.
+
+\end{description}
+\newpage
+
+
+
+

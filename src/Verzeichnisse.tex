@@ -16,16 +16,20 @@
     \renewcommand{\listtablename}{}
     \listoftables % Tabellenverzeichnis
     \newpage
-    \section*{Symbolverzeichnis} 
-    \addcontentsline{toc}{section}{Symbolverzeichnis} 
-    %Sortieren nach Auftreten im Text
-    \begin{table}[h] \begin{center} \begin{tabular}{|lll|} \hline 
-    & \textbf{Symbol} & \textbf{Bedeutung} \\ \hline \hline
-    \end{tabular} \end{center} \end{table}
+    % \section*{Symbolverzeichnis} 
+    % \addcontentsline{toc}{section}{Symbolverzeichnis} 
+    % %Sortieren nach Auftreten im Text
+    % \begin{table}[h] \begin{center} \begin{tabular}{|lll|} \hline 
+    % & \textbf{Symbol} & \textbf{Bedeutung} \\ \hline \hline
+    % \end{tabular} \end{center} \end{table}
+    % \newpage
+    \addcontentsline{toc}{section}{Akronyme}
+    \printglossary[type=\acronymtype]
     \newpage
-    \section*{Abkürzungsverzeichnis} 
-    \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-    \printacronyms[display=all,name=Abkürzungen]
+    \addcontentsline{toc}{section}{Glossar}
+    \printglossary[type=main]
+    \newpage
+    \lstlistoflistings
     \newpage
     \clearpage
     \setcounter{SeitenzahlSpeicher}{\value{page}}
