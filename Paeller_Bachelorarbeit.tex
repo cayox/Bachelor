@@ -150,8 +150,8 @@
 
 \include{src/Entwicklung.tex}
 
-\section{Literaturverzeichnis}
-\printbibliography
+\include{src/Validierung.tex}
+
 \section{Eigenständigkeitserklärung}
 ``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein.''
 \paragraph{}$~~$\\
@@ -160,5 +160,10 @@
 \noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
 \noindent Ort, Datum \hfill Unterschrift 
 
-\include{anhang/Anhang.tex}
+\section{Literaturverzeichnis}
+\printbibliography[title={Fachliteratur},type=book]
+\printbibliography[title={Onlinequellen},type=online]
+
+
+\include{src/Anhang.tex}
 \end{document}
