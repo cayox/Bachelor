@@ -1,0 +1,343 @@
+\section{Entwurf}\label{sec:entwurd}
+Im folgenden Kapitel soll der Prozess der Gestaltung des \gls{UI}s erläutert 
+werden. Des Weiteren wird die Architektur des \gls{Backend}s und der Komponenten
+genauer beschrieben.
+
+\subsection{Entwurf des GUI}
+Im folgenden Abschnitt wird das Grundlegende design kurz erläutert. Anschließend
+wird auf den Aufbau und Entwurf der 2 Hauptseiten eingegangen. 
+
+Da ``TestHub'' im Browser auf verschiedenen Bildschirmen laufen wird, muss das 
+Design auch eine gewisse ``Responsiveness'' haben, was bedeutet, dass sich die 
+GUI dem Viewport anpasst.
+
+\subsubsection{Grunddesign}\label{sec:grunddesign}
+Um das in \descref{NFA\#04}{itm:nfa04} angesprochene einheitliche Design umzusetzen, 
+wurde ein simples Design erstellt, welches sich im gesamten Projekt wiederfinden
+lässt. Das Design basiert auf ``Karten'' welche sich leicht entwerfen lassen und
+zudem übersichtlich und skalierbar sind.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/KartenDesign.png}
+    \caption{Finales Kartendesign}\label{fig:card}
+\end{figure}
+
+Das Kartendesign wurde mit dem Designtool Figma erstellt. Jede Karte besitzt 
+einen Header welcher die Hintergrundfarbe \textit{\#1f2937} besitzt. In diesem
+Header lassen sich der Karten Titel und ein Button wiederfinden.
+Der Titel der Karte sollte dabei immer eine kurze Beschreibung des Inhalts sein.
+Der Button in der rechten Ecke des Headers its optional und kann beliebig 
+angepasst werden. Der Body der Karte lässt platz für alle beliebigen Elemente.
+Durch das simple Design sind die Höhe und Breite der Karte variabel, wodurch 
+jedes beliebige Element im Body platz findet. 
+
+\subsubsection{Entwurf einer kompakten Jira-Ticket Komponente}\label{sec:jirakompakt}
+Da es Sinn macht, vorherige und folgende Tests zusammen mit dem aktiven Test 
+anzuzeigen, wurde ein Element entworfen, welches die wichtigsten Informationen 
+des Tickets in kompakter Weise anzeigt und trotzdem die Möglichkeit bietet, den 
+vorherigen und folgenden Test einzusehen.
+Durch die Verwendung von TailwindCSS konnte die Komponente schnell und einfach 
+direkt in \gls{HTML} entworfen werden. Dadurch lässt sie sich auch leichter in
+das fertige Projekt einbauen.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/TicketKompakt.png}
+    \caption{Kompakte Jira-Ticket Komponente}\label{fig:ticketcompact}
+\end{figure}
+
+In dem Design dieser Komponente lassen sich die wichtigsten Ticket Informationen
+auf einen Blick erkennen, wie in~\descref{FA\#02}{itm:fa02} gefordert. 
+Falls man dennoch das ganze Jira-Ticket ansehen möchte,
+kann dies über die Verlinkung der Ticket-ID geschehen. Des Weiteren sieht man in 
+dieser Komponente auch schnell, falls ein Test der letzte Test ist (Abbildung
+~\ref{fig:ticketcompact} Nummer 3). Klickt man auf eine freie Stelle innerhalb
+der Komponente, soll sich die Detailansicht des Tickets öffnen, klickt man auf 
+den Knopf des vorherigen oder folgenden Tests soll sich die Detailansicht des 
+entsprechenden Tickets öffnen. Weiterhin lässt sich durch die geringe Höhe der 
+Komponente eine kompakte Auflistung mehrerer Tickets ermöglichen.
+
+\subsubsection{Dasboard}
+Um die in \descref{FA\#05}{itm:fa05} geforderte schnelle Übersicht zu entwerfen, 
+wurde zuerst analysiert, welche Daten angezeigt werden müssen. Wie in der 
+Anforderung beschrieben müssen sowohl die aktiven Jira-Tickets als auch 
+aufkommende Wartungen angezeigt werden. All diese Informationen sollen auf dem 
+``Dashboard'' übersichtlich dargestellt werden. Das Dashboard soll gleichzeitig
+die Hauptseite des Projekts sein.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/DashboardMockUp.png}
+    \caption{MockUp des Dashboards}\label{fig:dashboard}
+\end{figure}
+
+In Abbildung~\ref{fig:dashboard} ist ein Mockup des Dashboards zu sehen. 
+Die Entwicklung des Dashboard folgte einem iterativen Prozess. Das Mockup wurde
+den betroffenen Personen vorgestellt und in mehreren Schritten verfeinert und die 
+Rückmeldungen der Befragten implementiert.\\
+
+Das Dashboard benutzt das in Abschnitt~\ref{sec:grunddesign} gezeigte Kartendesign.
+Dabei wird das Dashboard in drei Spalten aufgeteilt, welche die aktiven Tests nach
+Klimakammer gruppiert (\ref{fig:dashboard}, Nummer 1), 
+die aufkommenden Wartungen (\ref{fig:dashboard}, Nummer 2) und eine 
+Projektübersicht (\ref{fig:dashboard}, Nummer 3) bietet. In den Klimakammerkarten
+lässt sich auch die in Abschnitt~\ref{sec:jirakompakt} gezeigte kompakte Jira-Ticket 
+Komponente wiederfinden. \\
+
+Da es für die Jira-Tickets viele weitere interessante Informationen gibt, welche
+jedoch sich nicht in einer kompakten Ansicht anzeigen lassen, gibt es für jedes
+aktive, vorheriges und folgendes Ticket eine Detailansicht. Damit wird sowohl die
+funktionale Anforderung \descref{FA\#01}{itm:fa01} als auch \descref{FA\#03}{itm:fa03} erfüllen.
+Die Detailansicht wird durch ein Modal umgesetzt. Ein Modal ist ein Dialog, welcher der rest der Anwendung sperrt,
+bis das Modal wieder geschlossen wird.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/TicketModal.png}
+    \caption{MockUp des Modals zur anzeige von Jira-Ticket Details}\label{fig:modal}
+\end{figure}
+
+In Abbildung~\ref{fig:modal} werden nur einige der Labelkategorien angezeigt.
+Falls es nicht möglich ist, ein Label zu kategorisieren, wird dieses ganz unten 
+unter ``Unknown Labels'' angezeigt. 
+
+\subsubsection{Ressourcendetailansicht}
+Um die Details einer Ressource einzusehen und diese zu bearbeiten muss es eine 
+extra dafür angefertigte Seite geben. 
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/RessourceMockUp.png}
+    \caption{MockUp der Ansicht einer spezifischen Ressource}\label{fig:ressource}
+\end{figure}
+
+Auch in dieser Ansicht lässt sich das Design aus Abschnitt~\ref{sec:grunddesign}
+wiederfinden. Das~\nameref{fig:ressource} liefert alle wichtigen Informationen
+auf einen Blick. Viele dieser Informationen lassen sich auch interaktiv anpassen
+und mit dem ``Save'' Button übernehmen. Die Kategorien und Tags zeigen bei Benutzung
+des jeweiligen Eingabefeldes, die schon vorhandenen Kategorien oder Tags des Servers
+an, um die Eingabe so bequem wie möglich zu machen. \\
+
+Unter der Equipment Karte, befinden sich noch zwei weitere Karten. Die linke Karte
+zeigt dabei die in \descref{FA\#07}{itm:fa07} geforderten Tickets, welche die 
+entsprechende Ressource verwenden. In Abbildung~\ref{fig:ressource} sieht man die Ansicht,
+wie sie aussieht, wenn es keine solcher TIckets gibt. Wenn es doch Tickets gibt, 
+wird die Klimakammeransicht aus Abbildung~\ref{fig:dashboard} Nummer 1 erneut verwendet,
+um die Tickets anzuzeigen.
+
+Mit dem ``Update'' Button kann ein neuer Wartungstermin erstellt werden.
+Es öffnet sich erneut ein Modal wo die in \descref{FA\#15}{itm:fa15}, 
+\descref{FA\#16}{itm:fa16} und \descref{FA\#17}{itm:fa17} geforderten wartungsspezifischen
+Informationen eingetragen und abgespeichert werden können.
+
+
+\subsection{Entwurf der Softwarearchitektur}\label{sec:swArchitectur}
+Im Kapitel~\ref{sec:swArchitectur} wird die Architektur der Software detailliert 
+erläutert und 
+
+\subsubsection{Systemarchitektur}
+Das System ist in dem klassischen Server-Client-Prinzip aufgebaut, in dem der Server, 
+als \gls{Backend}, die nötigen Daten zur Verfügung stellt und der Client diese 
+abfragen kann um seine spezifischen Aufgaben zu lösen~\cite{Nie13}.
+In diesem Fall ist der Client der Webbrowser mit dem der Benutzer interagiert. 
+Die Server-Komponente, stellt die Daten aus der Datenbank oder dem JiraServer
+zur Verfügung. Der Server dient auch als Webserver, indem er ebenfalls die
+\gls{HTML}, \gls{CSS} und Javascript Dokumente zur Verfügung stellt.\\
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{diagramme/KomponentenDiagramm.png}
+    \caption{UML-Komponentendiagramm zur Systemarchitektur}\label{fig:components}
+\end{figure}
+
+In Abbildung~\ref{fig:components} sind die genannten Komponenten visuell dargestellt.
+Die dick geschriebenen Komponenten sind in dieser Arbeit entwickelt worden, alle
+anderen werden nur als Tool genutzt, um Daten zu erhalten oder Interaktionen zu 
+ermöglichen. Dadurch ergeben sich 3 Hauptkomponenten
+
+\begin{description}
+    \descitem{GUI}{itm:GUI}\hfill\\
+    Die Grafische Benutzeroberfläche mit der der Benutzer interagieren kann.
+    Die \gls{GUI} wird durch strukturell durch \gls{HTML} Dokumente ermöglicht. 
+    Das Design wird dabei durch das in Abschnitt~\ref{sec:tailwind} erwähnte 
+    TailwindCSS umgesetzt.
+
+    \descitem{Server}{itm:server}\hfill\\
+    Der Server bietet über eine \gls{REST} \gls{API} (siehe Abs.~\ref{sec:restapi})
+    die vom Client benötigten Daten an. Der Server kann dabei eine Vielzahl an Clients
+    gleichzeitig bearbeiten.
+
+    \descitem{Controller}{itm:controller}\hfill\\
+    Der Controller verarbeitet die Daten des Servers, sodass sie in der GUI
+    dargestellt werden können. Er ist ein eigenes JavaScript Programm,
+    welches vom Browser ausgeführt wird.\\
+\end{description}
+
+Zusätzlich gibt es zwei weitere Komponenten mit denen der Server interagiert:
+
+\begin{description}
+    \descitem{Jira Server}{itm:jiraserver}\hfill\\
+    Der Jira Server ist der Server auf dem das Programm \gls{JIRA} ausgeführt wird, 
+    welches die Informationen zu allen Tests beinhaltet.
+
+    \descitem{Datenbank}{itm:datenbank}\hfill\\
+    Die Datenbank dient als zweite Informationsquelle. In ihr speichert der Server
+    die Daten der Ressourcen, welche üblicher Weise nicht durch \gls{JIRA} verwaltet
+    werden.
+\end{description}
+
+Die Kommunikation der Komponenten erfolgt auf unterschiedliche Weisen. Während 
+der Controller mit der GUI über das vom Browser zur Verfügung gestellte \gls{DOM}
+Interface interagiert, kommuniziert es mit dem Server via \gls{HTTP} (siehe Abs.\ref{sec:HTTP}).
+Der Server fragt seine Daten ebenfalls über HTTP vom Jira Server an. Um Einträge
+in der Datenbank zu speichern, anzupassen oder abzufragen wird die Query-Sprache
+der Datenbank verwendet.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{diagramme/SequenzDiagramm.png}
+    \caption{UML-Sequenzdiagramm zur Anfrage der aktiven Tickets bei Initialisierung}\label{fig:sequenz}
+\end{figure}
+
+In Abbildung~\ref{fig:sequenz} ist exemplarhaft die Kommunikation beim Laden des Dashboards 
+dargestellt. Da sich der Ablauf immer ähnelt, nur der rechte Teilnehmer, je nach 
+Anfrage die Datenbank ist, kann man dieses Prinzip auf die Kommunikation des gesamten
+Systems beziehen. Der Server ist demnach nur eine Zwischenkomponente, welche die
+einheitlich, gesammelt und aufbereitet wiedergibt.
+
+Aus Übersichtlichkeitsgründen wurde die \descrefnobold{GUI}{itm:GUI}
+und der \descrefnobold{Controller}{itm:controller} als Client zusammengefasst.\\
+
+\subsubsection{Jira Ticket Modellierung}
+Ein JiraTicket ist im Backend wie folgt strukturiert. Die Struktur ist abgeleitet 
+von dem \gls{JSON}-Dokument, welches vom Jira Server empfangen wird. Der Jira Server
+sendet noch viele weitere Informationen zu einem Ticket, welche aufgrund der Relevanz
+nicht beachtet werden.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{diagramme/KlassenDiagramm.png}
+    \caption{UML-Klassendiagramm zur Jira-Ticket Struktur}\label{fig:classes}
+\end{figure}
+
+In Abbildung~\ref{fig:classes} ist zu sehen, dass ein JiraIssue hauptsächlich aus 
+seinen ``Field''-Attributen besteht. Diese decken sich größtenteils mit der 
+\gls{JSON} Repräsentation des Jira Tickets, sie wurde lediglich um die ParsedLabels Struktur 
+erweitert, um die Labels in aufgeschlüsselter Form anzuzeigen (siehe \descref{FA\#03}{itm:fa03}). Dafür wird auch die
+öffentliche Methode ``ParseLabels'' eingeführt, welche das Parsen, also das
+Analysieren und Kategorisieren durchführt. 
+
+In den ``Field''-Attributen lassen sich auch die Verlinkungen wiederfinden, falls 
+es welche gibt. Diese Verlinkungen werden durch eine eigene Struktur realisiert.
+Dabei erhält jeder Link eine ID, die Art der Verlinkung und einen Inward- \textit{oder}
+einen Outward-Issue. ``Inward'' bedeutet in dem Fall, dass ein anderes Ticket auf dieses
+Ticket verlinkt, ``Outward'' beschreibt hingegen die ausgehende Verlinkung von 
+diesem Ticket aus. Um riesige Baumstrukturen durch die Verlinkungen zu vermeiden, 
+ist zwar der Inward- bzw. Outward-Issue ein Objekt der JiraIssue Klasse, jedoch 
+werden in dem verlinken Ticket nur eine geringe Anzahl der Felder mit Werten befüllt.
+Des Weiteren hat das verlinke Ticket nie weitere Verlinkungen.
+
+Die jeweilige Art der Verlinkung wird in der separaten 
+``JiraIssueLinkType'' Struktur festgehalten. Dort findet man auch die Beschreibung
+der Beziehung zwischen den Tickets in Worten. Durch diese Verlinkungsstruktur
+lassen sich die vorherigen und folgenden Tests, wie in \descref{FA\#01}{itm:fa01}
+gefordert, ermitteln.
+
+Nicht nur für die Verlinkung gibt es extra Strukturen, auch der Status, das Projekt, 
+die Testklasse und Accounts werden in eigenen Strukturen betrachtet, um weitere
+Informationen zu dem jeweiligen Feld zu liefern.
+
+Das Parsen zu oder von der \gls{JSON} Repräsentation kann in GO sehr leicht über
+sogenannte ``Tags'' realisieren. Somit kann man bei der Deklaration der Struktur
+direkt den \gls{JSON}-Key mit angeben, welcher zur (De)Serialisierung verwendet wird.
+
+\begin{lstlisting}[caption=Go Strukturdefinition mit JSON Tags,language=Go]
+type JiraIssue struct {
+    ID     string     `json:"id"`
+    Key    string     `json:"key"`
+    Fields JiraFields `json:"fields"`
+}
+\end{lstlisting}
+
+Ein in \gls{JSON} serialisiertes Jira-Ticket, beispielsweise im Body einer Antwort
+des Servers, sieht wie folgt aus:
+
+\begin{lstlisting}[caption=gekürzte beispielhafte JSON Repräsentation eines Jira-Tickets,language=json]
+{
+    "id": "12345",
+    "key": "C3000000-1234",
+    "fields": {
+        "labels": [
+            "Au123",
+            "HW:123",
+            "RBS:1.2.3",
+            "SW:321",
+            "heated"
+        ],
+        "parsed_labels": {
+            "arduino_sw": "Au123",
+            "ecu_hw": "HW:123",
+            "ecu_sw": "SW:321",
+            "heated": true,
+            "restbus_sim": "RBS:1.2.3",
+            "last_test": false,
+            "unknown_labels": null,
+            // ...
+        },
+        "description": "Please perform TCSY000",
+        "created": "2022-03-09T08:27:41.000+0100",
+        "updated": "2022-03-23T13:34:59.000+0100",
+        "assignee": {
+            "name": "paellern",
+            "key": "paellern",
+            "displayName": "Nico Paeller",
+            "emailAddress": "nico.paeller@joysonsafety.com",
+            "avatarUrls": {
+                // ...
+            }
+        },
+        "status": {
+            "id": "10900",
+            "name": "Ready for Test",
+        },
+    }
+}
+\end{lstlisting}
+
+Diese \gls{JSON}-Repräsentation eines Jira-Tickets wurde gekürzt, um die Übersichtlichkeit
+dieses Dokuments zu erhalten. \\
+
+Hier kann man auch die Labels im Vergleich zu den
+``ParsedLabels'' sehen.
+
+\subsubsection{Komponentenarchitektur}
+Die einzelnen Komponenten wurden nach der \gls{MVC}-Architektur entworfen. Unter
+Komponenten sind hier die Views, also die einzelnen Webseiten (Dashboard, etc.) 
+von TestHub gemeint.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{diagramme/MVC.png}
+    \caption{UML-Klassendiagramm zur Jira-Ticket Struktur}\label{fig:classes}
+\end{figure}
+
+Das Projekt ist also in drei Teile unterteilt:
+\begin{description}
+    \descitem{Model}{itm:model}\hfill\\
+    Das Model beinhaltet die Informationen, welche dargestellt werden sollen. Das
+    Model ist im Fall von ``TestHub'' der Server, welcher die Daten zur Verfügung stellt.
+
+    \descitem{View}{itm:view}\hfill\\
+    Das View übernimmt die Anzeige der Daten an den Benutzer. Es kann zusätzlich
+    verschiedene Methoden zur Verfügung stellen, um Benutzereingaben an den Controller
+    weiter zu geben. Bei TestHub ist das View das Zusammenspiel aus \gls{HTML} und \gls{CSS}.
+
+    \descitem{Controller}{itm:mvcController}\hfill\\
+    Der Controller stellt die Schnittstelle zwischen View und Model her. Er kann 
+    auf Eingaben vom View reagieren und entsprechende Models laden und anzeigen.
+    Der Controller wird durch die JavaScript/TypeScript Programme umgesetzt.
+\end{description}
+
+Durch diese Architektur bleibt das Projekt übersichtlich gegliedert und erweiterbar, 
+da einzelne Views, Controller oder Models ausgetauscht werden können und somit eine andere 
+Darstellung oder Funktionalität bieten können. Des Weiteren ist das Projekt so 
+aufgebaut, dass der einzige Punkt, wo View und Controller zusammengeführt werden,
+das Laden des jeweiligen Skripts im \gls{HTML} Heads ist. Da es keine weiteren 
+Funktionsaufrufe oder Ähnliches im \gls{HTML} Dokument gibt, kann der Controller
+aufgebaut und Design werden wie es nötig ist. \\
+
+Die schemenhafte Umsetzung dieser Architektur lässt sich in Abbildung~\ref{fig:components}
+wiederfinden.
+

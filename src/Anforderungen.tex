@@ -94,7 +94,7 @@ anzeigen lassen zu können, ergibt sich eine weitere Rolle:
     offenen Schnittstelle für eigene Programme verwendet
 \end{description}
 
-\subsection{Use Cases}
+\subsection{Use Cases}\label{sec:usecases}
 In Abbildung~\ref{fig:usecases} und Abbildung~\ref{fig:usecasesEntwickler} sind 
 die bereits definierten Rollen als Akteure dargestellt.
 Die Use Cases ergeben sich aus den Interviews.
@@ -109,68 +109,222 @@ Die Use Cases ergeben sich aus den Interviews.
     \caption{UML-Use-Case-Diagramm zu den Anwendungsfällen für die Entwickler-Rolle}\label{fig:usecasesEntwickler}
 \end{figure}
 
-\subsection{User Stories}
+\subsection{User Stories}\label{sec:userstories}
 Die User Stories ergeben sich aus den Use Cases.
 
 \begin{description}
-    \item[\textbf{US\#01}]\textit{Als Techniker möchte ich einen vorherigen Test
-    einsehen}
+    \descitem{US\#01}{itm:us01}
+    \textit{Als Techniker möchte ich einen vorherigen Test einsehen}
 
-    \item[\textbf{US\#02}]\textit{Als Techniker möchte ich einen folgenden Test
-    einsehen}
+    \descitem{US\#02}{itm:us02}
+    \textit{Als Techniker möchte ich einen folgenden Test einsehen}
 
-    \item[\textbf{US\#03}]\textit{Als Techniker möchte ich die Details eines Jiratickets
-    in aufgeschlüsselter Form einsehen}
+    \descitem{US\#03}{itm:us03}
+    \textit{Als Techniker möchte ich die Details eines Jira-Tickets in 
+    aufgeschlüsselter Form einsehen}
 
-    \item[\textbf{US\#04}]\textit{Als Techniker möchte ich alle aktiven Tests einsehen}
+    \descitem{US\#04}{itm:us04}
+    \textit{Als Techniker möchte ich alle aktiven Tests einsehen}
 
-    \item[\textbf{US\#10}]\textit{Als Planer möchte ich einen Wartungstermin einsehen, um zu erfahren
+    \descitem{US\#05}{itm:us05}
+    \textit{Als Techniker möchte ich eine schnelle Übersicht über die wichtigsten
+    Ressourcen erhalten, um den Aufbau von Tests zu planen}
+
+    \descitem{US\#10}{itm:us10}
+    \textit{Als Planer möchte ich einen Wartungstermin einsehen, um zu erfahren
     ob ich diese Ressource einplanen kann}
 
-    \item[\textbf{US\#11}]\textit{Als Planer möchte ich eine Wartungshistorie einsehen, um eventuelle
+    \descitem{US\#11}{itm:us11}
+    \textit{Als Planer möchte ich eine Wartungshistorie einsehen, um eventuelle
     vergangene Probleme aufzudecken}
 
-    \item[\textbf{US\#12}]\textit{Als Planer möchte ich alle aktiven Tickets sehen, 
+    \descitem{US\#12}{itm:us12}
+    \textit{Als Planer möchte ich alle aktiven Tickets sehen, 
     welche eine spezifische Ressource verwenden}
 
-    \item[\textbf{US\#13}]\textit{Als Planer möchte ich das vorherige Wartungsdatum einsehen, 
+    \descitem{US\#13}{itm:us13}
+    \textit{Als Planer möchte ich das vorherige Wartungsdatum einsehen, 
     um zu wissen, ob das Startdatum der Benutzung hinter dem Wartungsdatum liegt
     und ich somit die Ressource verwenden kann}
 
-    \item[\textbf{US\#14}]\textit{Als Planer möchte ich das Startdatum der Benutzung einsehen,
+    \descitem{US\#14}{itm:us14}
+    \textit{Als Planer möchte ich das Startdatum der Benutzung einsehen,
     um zu wissen, ob das Startdatum der Benutzung hinter dem Wartungsdatum liegt
     und ich somit die Ressource verwenden kann }
 
-    \item[\textbf{US\#15}]\textit{Als Planer möchte ich nach Ressourcen suchen}
+    \descitem{US\#15}{itm:us15}
+    \textit{Als Planer möchte ich nach Ressourcen suchen}
 
-    \item[\textbf{US\#20}]\textit{Als Wartungsbeauftragter möchte ich eine Ressource löschen}
+    \descitem{US\#20}{itm:us20}
+    \textit{Als Wartungsbeauftragter möchte ich eine Ressource löschen}
 
-    \item[\textbf{US\#21}]\textit{Als Wartungsbeauftragter möchte ich die Kategorie 
-    einer Ressource anpassen}
+    \descitem{US\#21}{itm:us21}
+    \textit{Als Wartungsbeauftragter möchte ich die Kategorie einer Ressource anpassen}
 
-    \item[\textbf{US\#22}]\textit{Als Wartungsbeauftragter möchte ich den Namen 
-    einer Ressource anpassen}
+    \descitem{US\#22}{itm:us22}
+    \textit{Als Wartungsbeauftragter möchte ich den Namen einer Ressource anpassen}
 
-    \item[\textbf{US\#23}]\textit{Als Wartungsbeauftragter möchte ich die Tags 
-    einer Ressource anpassen}
+    \descitem{US\#23}{itm:us23}
+    \textit{Als Wartungsbeauftragter möchte ich die Tags einer Ressource anpassen}
 
-    \item[\textbf{US\#24}]\textit{Als Wartungsbeauftragter möchte ich einen neuen 
-    Wartungstermin festlegen}
+    \descitem{US\#24}{itm:us24}
+    \textit{Als Wartungsbeauftragter möchte ich einen neuen Wartungstermin festlegen}
 
-    \item[\textbf{US\#25}]\textit{Als Wartungsbeauftragter möchte ich das Ergebnis eines
-    Wartungstest verlinken}
+    \descitem{US\#25}{itm:us25}
+    \textit{Als Wartungsbeauftragter möchte ich das Ergebnis eines Wartungstest verlinken}
 
-    \item[\textbf{US\#26}]\textit{Als Wartungsbeauftragter möchte ich Informationen
-    zu einer Wartung speichern}
+    \descitem{US\#26}{itm:us26}
+    \textit{Als Wartungsbeauftragter möchte ich Informationen zu einer Wartung speichern}
 
-    \item[\textbf{US\#27}]\textit{Als Wartungsbeauftragter möchte ich eine Ressource erstellen}
+    \descitem{US\#27}{itm:us27}
+    \textit{Als Wartungsbeauftragter möchte ich eine Ressource erstellen}
 
-    \item[\textbf{US\#90}]\textit{Als Entwickler möchte ich die REST API verwenden, um die
+    \descitem{US\#90}{itm:us90}
+    \textit{Als Entwickler möchte ich die REST API verwenden, um die
     Informationen von ``TestHub'' in meine Programm einzubinden}
 
-    \item[\textbf{US\#91}]\textit{Als Entwickler möchte ich die Dokumentation
+    \descitem{US\#91}{itm:us91}
+    \textit{Als Entwickler möchte ich die Dokumentation
     der API ansehen, um zu verstehen wie ich die API benutzen kann}
 
 \end{description}
 
 \subsection{Funktionale Anforderungen}
+Um die Funktion der im Umfang dieser Arbeit entwickelten Software validieren zu
+können, müssen Anforderungen definiert werden. Diese Funktionalen Anforderungen
+werden in drei Kategorien eingeteilt:
+
+\begin{description}
+    \item[\textbf{Muss-Kriterien}]Die Kriterien die ``TestHub'' als \gls{MVP} zwingend erfüllen muss
+
+    \item[\textbf{Soll-Kriterien}]Die Kriterien die für die Funktionalität von ``TestHub''
+    nicht zwingend notwendig sind, aber dennoch implementiert werden sollten.
+
+    \item[\textbf{Kann-Kriterien}]Die Kriterien, die rein optional sind. Da es sich
+    bei ``TestHub'' um ein \gls{MVP} handelt, werden diese Kriterien nicht berücksichtigt.
+
+\end{description}
+
+Die folgenden Anforderungen ergeben sich aus den \nameref{sec:userstories} und den
+in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
+
+\begin{description}
+    \descitem{FA\#01}{itm:fa01}
+    \textit{TestHub muss den vorherigen und folgenden Test eines aktuell 
+    ausgeführten Tests anzeigen können (\descref{US\#01}{itm:us01} \& \descref{US\#02}{itm:us02}).}\\
+    Ein Test kann vorherige und folgende Tests haben, es gibt jedoch auch Tests,
+    bei denen dies nicht der Fall ist.
+
+    \descitem{FA\#02}{itm:fa02}
+    \textit{TestHub muss die Informationen eines Jira-Tickets in übersichtlicher 
+    Form anzeigen (\descref{US\#03}{itm:us03}).}
+
+    \descitem{FA\#03}{itm:fa03}
+    \textit{TestHub muss die Labels eines Jira-Tickets kategorisiert anzeigen (\descref{US\#03}{itm:us03}).}\\
+    Die Labels eines Jira-Tickets liegen als simple Liste von Text vor. Dieser 
+    Text soll analysiert und entsprechend kategorisiert werden, um eine genauere 
+    Zuordnung zu ermöglichen.
+
+    \descitem{FA\#04}{itm:fa04}
+    \textit{TestHub muss alle aktiven Tests nach Klimakammer gruppiert anzeigen (\descref{US\#04}{itm:us04}).}\\
+    Ein Test gilt als aktiv, wenn der Status seines Jira-Tickets ``Read for Test''
+    oder ``In Execution'' ist.
+
+    \descitem{FA\#05}{itm:fa05}
+    \textit{TestHub muss eine schnelle Übersicht über die wichtigsten Ressourcen anzeigen (\descref{US\#05}{itm:us05}).}\\
+    Die wichtigsten Ressourcen sind: aktive Tests, Ressourcen mit einem Wartungstermin
+    in den nächsten 30 Tagen.
+
+    \descitem{FA\#05}{itm:fa05}
+    \textit{TestHub muss den nächsten Wartungstermin einer Ressource anzeigen (\descref{US\#10}{itm:us10}).}
+    
+    \descitem{FA\#06}{itm:fa06}
+    \textit{TestHub muss die Wartungshistorie einer Ressource anzeigen (\descref{US\#11}{itm:us11}).}\\
+    Die Wartungshistorie enthält alle Änderungen des Wartungstermins.
+
+    \descitem{FA\#07}{itm:fa07}
+    \textit{TestHub muss alle aktiven Tickets anzeigen, welche eine spezifische 
+    Ressource verwenden (\descref{US\#12}{itm:us12}).}
+
+    \descitem{FA\#08}{itm:fa08}
+    \textit{TestHub muss das vorherige Wartungsdatum anzeigen (\descref{US\#13}{itm:us13} \& \descref{US\#11}{itm:us11}).}
+    
+    \descitem{FA\#09}{itm:fa09}
+    \textit{TestHub muss das Startdatum der Verwendung einer Ressource anzeigen (\descref{US\#14}{itm:us14}).}\\
+    Das Startdatum ist das Datum des Jira-Tickets welches nach dem Wartungstermin 
+    der Ressource aktualisiert wurde und die Ressource verwendet.
+
+    \descitem{FA\#10}{itm:fa10}
+    \textit{TestHub muss die Suche nach Ressourcen unterstützen (\descref{US\#15}{itm:us15}).}
+    
+    \descitem{FA\#11}{itm:fa11}
+    \textit{TestHub muss das löschen einer Ressource unterstützen (\descref{US\#20}{itm:us20}).}
+       
+    \descitem{FA\#12}{itm:fa12}
+    \textit{TestHub muss das Anpassen der Kategorie einer Ressource unterstützen 
+    (\descref{US\#21}{itm:us21}).}
+
+    \descitem{FA\#13}{itm:fa13}
+    \textit{TestHub muss das Anpassen des Namens einer Ressource unterstützen 
+    (\descref{US\#22}{itm:us22}).}
+
+    \descitem{FA\#14}{itm:fa14}
+    \textit{TestHub muss das Anpassen der Tags einer Ressource unterstützen 
+    (\descref{US\#23}{itm:us23}).}
+
+    \descitem{FA\#15}{itm:fa15}
+    \textit{TestHub muss Festlegen eines neuen Wartungstermins unterstützen 
+    (\descref{US\#24}{itm:us24}).}
+
+    \descitem{FA\#16}{itm:fa16}
+    \textit{TestHub muss das Verlinken eines Wartungstests unterstützen 
+    (\descref{US\#25}{itm:us25}).}
+
+    \descitem{FA\#17}{itm:fa17}
+    \textit{TestHub muss das Speichern weiterer wartungsspezifischer Informationen unterstützen 
+    (\descref{US\#26}{itm:us26}).}
+
+    \descitem{FA\#18}{itm:fa18}
+    \textit{TestHub muss das Erstellen einer Ressource unterstützen 
+    (\descref{US\#23}{itm:us23}).}\\
+    Die Ressource benötigt mindestens einen Namen und sie muss nicht zwangsläufig 
+    einen Wartungstermin haben.
+
+\end{description}
+
+\subsection{Nichtfunktionale Anforderungen}
+Es ergeben sich folgende nichtfunktionale Anforderungen aus den Interviews und 
+den User Stories:
+
+\begin{description}
+    \descitem{NFA\#01}{itm:nfa01}
+    \textit{Die REST API von TestHub muss innerhalb der Firma verwendbar sein (\descref{US\#90}{itm:us90}).}
+
+    \descitem{NFA\#02}{itm:nfa02}
+    \textit{Die REST API von TestHub soll dokumentiert und erklärt werden (\descref{US\#91}{itm:us91}).}\\
+    Es soll eine Website oder ein Dokument geben, in dem alle Endpunkte der REST API
+    aufgelistet und erklärt sind. Des Weiteren soll es Beispiele zum 
+    Verständnis geben.
+
+    \descitem{NFA\#03}{itm:nfa03}
+    \textit{TestHub soll die Verteilung der Jira-Tickets auf die einzelnen Projekte 
+    aufzeigen (\descref{US\#05}{itm:us05}).}
+
+    \descitem{NFA\#04}{itm:nfa04}
+    \textit{Das \gls{UI} von TestHub soll ein einheitliches Design haben.}
+
+    \descitem{NFA\#05}{itm:nfa05}
+    \textit{TestHub muss in englischer Sprache verfügbar sein, da dies die 
+    Firmensprache von JSS ist.}
+
+    \descitem{NFA\#06}{itm:nfa06}
+    \textit{TestHub muss unabhängig von den Jira Benutzerrechten für das HOD Projekt funktionieren}\\
+    Da das System eine schnelle Übersicht schaffen soll und auch keine Möglichkeit
+    bietet, Jira Daten anzupassen, soll das System die Jira Informationen unabhängig der Jira Rechte anzeigen.
+
+    \descitem{NFA\#07}{itm:nfa07}
+    \textit{TestHub muss mindestens auf den Webbrowsern ``Chrome'' und ``Edge'' funktionieren}\\
+    Diese zwei Webbrowser werden innerhalb der Firma verwendet.
+
+    
+\end{description}

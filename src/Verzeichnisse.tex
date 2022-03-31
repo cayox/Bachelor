@@ -5,12 +5,14 @@
     \end{spacing}
     \newpage
     \begin{spacing}{1}
+        
     \section*{Abbildungsverzeichnis} 
     \addcontentsline{toc}{section}{Abbildungsverzeichnis}
     \renewcommand{\listfigurename}{}
     \listoffigures
     \end{spacing}
     \newpage
+
     \section*{Tabellenverzeichnis} 
     \addcontentsline{toc}{section}{Tabellenverzeichnis} 
     \renewcommand{\listtablename}{}
@@ -23,12 +25,18 @@
     % & \textbf{Symbol} & \textbf{Bedeutung} \\ \hline \hline
     % \end{tabular} \end{center} \end{table}
     % \newpage
-    \addcontentsline{toc}{section}{Akronyme}
+    % \section*{Akronyme}
+    
     \printglossary[type=\acronymtype]
+    \addcontentsline{toc}{section}{Akronyme} 
     \newpage
-    \addcontentsline{toc}{section}{Glossar}
+
+    % \section*{Glossar}
+    
     \printglossary[type=main]
+    \addcontentsline{toc}{section}{Glossar}
     \newpage
+
     \lstlistoflistings
     \newpage
     \clearpage

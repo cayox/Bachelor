@@ -6,7 +6,7 @@
 \include{src/Acronyms.tex}
 
 
-\title{\textbf{Entwicklung einer Resourcen-Übersicht auf Basis von Jira}}
+\title{\textbf{Entwicklung einer Ressourcen-Übersicht auf Basis von Jira}}
 \author{Nico Päller}
 
 \setlength{\parindent}{0cm} %keine Einrückung
@@ -17,6 +17,19 @@
 \newpage
 
 \newcounter{SeitenzahlSpeicher}
+
+\newcounter{desccount}
+\newcommand{\descitem}[2]{%
+  \item[\textbf{#1}] \refstepcounter{desccount}\label{#2}
+}
+\newcommand{\descref}[2]{\hyperref[#2]{\textbf{#1}}}
+\newcommand{\descrefnobold}[2]{\hyperref[#2]{#1}}
+
+\renewcommand{\lstlistingname}{Codebeispiel}% Listing -> Codebeispiel
+\renewcommand{\lstlistlistingname}{Codebeispiele}% 
+
+\newcommand{\footurl}[1]{\footnote{\url{#1}}}
+
 \begin{document}
 
 
@@ -24,7 +37,82 @@
 \definecolor{codekeyword}{rgb}{0.83,0.14,0.44}
 \definecolor{codestring}{rgb}{0.20,0.14,0.44}
 \definecolor{backcolour}{rgb}{0.98, 0.98, 0.98}
+\definecolor{jsonkey}{rgb}{0,0,0}
 
+%% From https://tex.stackexchange.com/questions/195486/how-can-i-highlight-json-string-values-but-not-attributes
+\newcommand\jsonkey{\color{jsonkey}}
+\newcommand\jsonvalue{\color{codestring}}
+\newcommand\jsonnumber{\color{codekeyword}}
+
+% switch used as state variable
+\makeatletter
+\newif\ifisvalue@json
+
+\lstdefinelanguage{json}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword},
+    numberstyle=\tiny\color{codecomment},
+    stringstyle=\color{codestring},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    keywords={false,true,null},
+    alsoletter=0123456789,
+    morestring          = [s]{"}{"},
+    stringstyle         = \jsonkey\ifisvalue@json\jsonvalue\fi,
+    MoreSelectCharTable = \lst@DefSaveDef{`:}\colon@json{\enterMode@json},
+    MoreSelectCharTable = \lst@DefSaveDef{`,}\comma@json{\exitMode@json{\comma@json}},
+    MoreSelectCharTable = \lst@DefSaveDef{`\{}\bracket@json{\exitMode@json{\bracket@json}}
+}
+
+\lstdefinelanguage{TypeScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, switch, var, if, in, while, do, else, case, break, let, const, then, JiraGroupedCCQueryResult},
+  keywordstyle=\color{codekeyword}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{black}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{codecomment}\ttfamily,
+  stringstyle=\color{codestring}\ttfamily,
+  morestring=[b]',
+  morestring=[b]",
+  morestring=[b]`,
+  tabsize=2
+}
+
+% enter "value" mode after encountering a colon
+\newcommand\enterMode@json{%
+    \colon@json%
+    \ifnum\lst@mode=\lst@Pmode%
+        \global\isvalue@jsontrue%
+    \fi
+}
+
+% leave "value" mode: either we hit a comma, or the value is a nested object
+\newcommand\exitMode@json[1]{#1\global\isvalue@jsonfalse}
+
+\lst@AddToHook{Output}{%
+    \ifisvalue@json%
+        \ifnum\lst@mode=\lst@Pmode%
+            \def\lst@thestyle{\jsonnumber}%
+        \fi
+    \fi
+    %override by keyword style if a keyword is detected!
+    \lsthk@DetectKeywords% 
+}
+
+\makeatother
 
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},   
@@ -42,7 +130,7 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=4
+    tabsize=2
 }
 
 \lstset{style=mystyle}
@@ -58,14 +146,19 @@
 
 \include{src/Anforderungen.tex}
 
+\include{src/Entwurf.tex}
+
+\include{src/Entwicklung.tex}
+
+\section{Literaturverzeichnis}
 \printbibliography
-% \section{Eigenständigkeitserklärung}
-% ``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein. Ich stimme der Überprüfung der Arbeit durch eine Plagiatssoftware zu.''
-% \paragraph{}$~~$\\
-% \paragraph{}$~~$\\
-% \vspace{50pt} 
-% \noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
-% \noindent Ort, Datum \hfill Unterschrift 
+\section{Eigenständigkeitserklärung}
+``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein.''
+\paragraph{}$~~$\\
+\paragraph{}$~~$\\
+\vspace{50pt} 
+\noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
+\noindent Ort, Datum \hfill Unterschrift 
 
 \include{anhang/Anhang.tex}
 \end{document}

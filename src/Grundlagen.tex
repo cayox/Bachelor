@@ -15,7 +15,7 @@ Lenkrad mit der von Joyson entwickelten \gls{ECU} getestet.
 \begin{figure}[H]
     \includegraphics[width=8cm,keepaspectratio]{img/duts_in_cc.jpg}
     \centering
-    \caption{HOD Lenkräder in einer Klimakammer}\label{fig:duts_in_cc}
+    \caption{HOD Lenkräder in einer Klimakammer}
 \end{figure}
 
 Die verschiedenen Funktionen der Lenkräder wird bei -40°C bis 80°C getestet. 
@@ -24,7 +24,7 @@ diese Tests verwendeten Teile, wie Kabelbäume, Messhardware, die Klimakammer et
 werden Ressourcen genannt.
 
 
-\subsection{REST API}
+\subsection{REST API}\label{sec:restapi}
 Seit der ersten Website von Tim Berners-Lee 1991 wächst das Web teilweise 
 exponentiell. Allerdings war das Web nicht für solch ein rasantes Wachstum gemacht.
 Es gab weder einheitliche Kommunikationsprotokolle, noch konnte die Infrastruktur
@@ -115,7 +115,7 @@ erfüllt. REST steht für Representational State Transfer und beschreibt eine An
 Regeln, nach welchem man seine \gls{API} architektonisch aufbauen sollte. Diese 
 Regeln lassen sich jedoch auf die unterschiedlichsten Weisen implementieren. 
 
-\subsection{HTTP Kommunikation}
+\subsection{HTTP Kommunikation}\label{sec:HTTP}
 Das Hypertext Transfer Protokoll (kurz HTTP) regelt die Datenübertragung zwischen
 Anwendungen. Viele \gls{REST} \gls{API}s verwenden HTTP, da dieses gewisse
 Anforderung, wie die Zustandslosigkeit, bereits implementiert. Im Folgenden soll
@@ -184,10 +184,12 @@ Verbindung aufbauen.
 \begin{figure}[H]
     \includegraphics[width=8cm,keepaspectratio]{img/Tcp-handshake.svg.png}
     \centering
-    \caption[Diagramm des Beginns einer TCP-Verbindung]{Diagramm des Beginns einer TCP-Verbindung~\cite{Wik10}}\label{fig:tcp}
+    \caption{Diagramm des Beginns einer TCP-Verbindung~\cite{Wik10}}
 \end{figure}
 
+\makeatletter
 \begin{description}
+    
     \item[\textbf{SYN}]\hfill \\
     Der Client erstellt eine zufällige Zahlenfolge $x$ und versendet diese (und
     eventuell weitere TCP Optionen) in einem \textit{SYN} Packet an den Server.
@@ -197,12 +199,13 @@ Verbindung aufbauen.
     Zahlenfolge $y$. Der Server kann an dieser Stelle seine eigenen TCP Optionen
     zusammen mit den Zahlenfolgen $x$ und $y$ an den Client zurückschicken.
 
-    \item[\textbf{ACK}]\hfill \\
+    \item[\textbf{ACK}\label{itm:ack}]\hfill \\
     Der Client inkrementiert sowohl $x$ als auch $y$ um 1 und sendet das Packet
     wieder an den Server zurück. 
 \end{description}
+\makeatother
 
-Sobald der Server die \textit{ACK} Nachricht empfangen hat, ist der Handshake
+Sobald der Server die \textit{\ref{itm:ack}} Nachricht empfangen hat, ist der Handshake
 abgeschlossen. Von nun an können Daten versendet werden. Dies geschieht über
 eine HTTP Nachricht, welche wie folgt aussehen kann:
 
@@ -239,7 +242,7 @@ steht. \\
 
 Schlussendlich kann die Verbindung geschlossen werden, um Platz für andere Anfragen
 von anderen Clients zu schaffen oder die Verbindung kann für Folgeanfragen genutzt
-werden.
+werden~\cite{http02}.
 
 
 \subsection{Programmiersprachen zur Backend Entwicklung}
