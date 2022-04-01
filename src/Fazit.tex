@@ -1,0 +1,43 @@
+\section{Fazit}
+
+Das im Rahmen dieser Arbeit entwickelte Programm ``TestHub'' konnte erfolgreich 
+als \gls{MVP} umgesetzt werden. Fast alle der zuvor definierten Anforderungen wurden
+erfüllt. Somit wurden auch die zu Beginn angesprochenen Probleme, wie etwa der 
+komplizierte Prozess zum Einsehen eines Wartungstermins, verbessert und gelöst werden.
+Dazu wurde ein Joyson Safety Systems spezifisches Programm entwickelt, welches
+genau auf das teilweise stark individualisierte Jira-Ticket-System angepasst wurde. 
+Nicht nur Jira Informationen wurden in TestHub eingebunden, sondern es wurde auch 
+eine zentrale und universelle einsetzbare Anlaufstelle für jegliche weitere 
+Ressourcen geschaffen. Durch TestHub sind alle Ressourceninformationen, welche
+man für benötigt, um einen Test aufzubauen und durchzuführen, an der gleichen Stelle 
+und lassen sich schnell und effizient einsehen und bearbeiten. Das in der 
+Client-Server Architektur entwickelte System erleichtert heute schon vielen Mitarbeitern
+die Arbeit. TestHub stellt außerdem eine \gls{REST} \gls{API} innerhalb der Firma 
+zur Verfügung, wodurch andere Programme die von TestHub verwendeten und verarbeiteten 
+Informationen verwerten können. Durch die Verwendung von modernen und aufstrebenden Technologien,
+wie Typescript oder der Programmiersprache Go, ist das Programm erweiterbar 
+und zukunftssicher.\\
+
+Jedoch gibt es bei \gls{JSS} nur wenige Entwickler, welche diese Sprachen beherrschen.
+Allerdings werden auch keine komplexen sprachenspezifischen Konzepte genutzt, wodurch
+der Einstieg in die Entwicklung dieses Projekts erleichtert wird. Zu diesem Zweck
+wurde auch eine \textit{setup.md} erstellt, welche Entwicklern beim Start der
+Entwicklung dieses Projekts helfen soll. Zusätzlich ist der Code umfangreich kommentiert.
+
+\subsection{Ausblick}
+Um die gesteigerte Effizienz auch wirklich belegen zu können sollten aussagekräftige
+Studien zur Bedienbarkeit und Benutzung von TestHub durchgeführt werden.
+Die nicht erfüllten Anforderungen geben einen kurzen Überblick über Möglichkeiten
+das Projekt weiterzuführen. Besonders das Gantt-Diagramm würde eine gute Ergänzung
+zur Übersichtlichkeit und Nachvollziehbarkeit der Teststruktur liefern und dafür
+wäre auch noch genug Platz auf dem Dashboard.
+Eine weitere Überlegung ist es, Benutzeraccounts einzuführen. Da bei einer Wartung
+die Wartende Person manuell eingetragen wird, lässt dies Platz für Falscheingaben und Fehler. 
+Durch die Einbindung von Benutzeraccounts kann man eher gewährleisten, dass die 
+wartende Person auch tatsächlich die eingetragene Person ist. Dafür könnte OAuth
+von Microsoft oder Jira verwendet werden. OAuth bietet dabei die Möglichkeit, dass
+die Verwaltung der Benutzerdaten nicht von TestHub übernommen werden muss. TestHub
+wird lediglich als Programm registriert und leitet den Benutzer weiter, sodass er sich
+bei dem entsprechendem Service anmeldet. Anschließend erhält TestHub die Accountdaten
+des Nutzers. Beide dieser OAuth Möglichkeiten sind aber noch nicht für eigens entwickelte 
+Anwendungen innerhalb der Firma nutzbar.

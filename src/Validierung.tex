@@ -7,7 +7,7 @@ Das Projekt ``TestHub'' konnte erfolgreich umgesetzt und die in Abschnitt~\ref{s
 definierten Probleme somit umfassend gelöst werden. 
 In den folgenden Abbildungen kann die finale Version des Projekts angesehen werden.
 Da das Projekt nur firmenintern nutzbar ist, wurde ein Video 
-(\textit{videos/abchlussdemo.mp4}) erstellt, welches alle Funktionen des 
+(\textit{videos/abschlussdemo.mp4}) erstellt, welches alle Funktionen des 
 Projekts aufzeigt. 
 
 \begin{figure}[H]
@@ -26,8 +26,157 @@ Projekts aufzeigt.
 \end{figure}
 
 \subsection{Verifizierung der Anforderungen}
+Das Erfüllen der Anforderungen wird anhand des in dieser Arbeit beigelegten Videos 
+validiert. Dabei werden Muss-, Soll- und Kann-Kriterien separat betrachtet.
+In der Spalte ``Zeitstempel'' lassen sich die Zeitabschnitte des Videos wiederfinden,
+wo die Erfüllung einer spezifischen Anforderung gezeigt wird.
+
+Aufgrund der Länge des Videos und der Einfachheit der Aufgabe, wird das Anpassen
+der Attribute einer Ressource nicht gezeigt.
+
+\subsubsection{Verifizierung der funktionalen Anforderungen}
+In Tabelle~\ref{tab:mussvalidierung} werden die Muss-Anforderungen aufgelistet
+und anhand des Videos validiert. Alle Muss Anforderungen wurden erfüllt.
+
+\begin{longtable}{| p{0.4\linewidth} | p{0.3\linewidth} | p{0.2\linewidth} |} 
+  \hline
+  \textbf{Anforderung} & \textbf{Validierung} & \textbf{Zeitstempel}\\ [0.5ex]  \hline
+  
+  \descref{FA\#01}{itm:fa01} & Erfüllt & 00:25 - 03:53 \\
+  Aktive Tests & & \\ [0.5ex] \hline
+
+  \descref{FA\#02}{itm:fa02} & Erfüllt & 00:25 - 03:53 \\
+  übersichtliche Ticketinformationen & Sowohl in kompakter als auch Detailansicht & \\ [0.5ex] \hline
+
+  \descref{FA\#03}{itm:fa03} & Erfüllt & 01:53 - 02:52 \\
+  Kategorisierte Labels &  & \\ [0.5ex] \hline
+
+  \descref{FA\#04}{itm:fa04} & Erfüllt & 02:55 - 03:21 \\
+  vorherige und folgende Tests &  & \\ [0.5ex] \hline
+
+  \descref{FA\#05}{itm:fa05} & Erfüllt & 00:25 - 03:53 \\
+  schnelle Übersicht &  & \\ [0.5ex] \hline
+
+  \descref{FA\#06}{itm:fa06} & Erfüllt & 06:49 - 09:30 \\
+  Wartungstermin anzeigen &  & \\ [0.5ex] \hline
+
+  \descref{FA\#07}{itm:fa07} & Erfüllt & 09:30 - 09:35 \\
+  Ressource löschen &  & \\ [0.5ex] \hline
+
+  \descref{FA\#08}{itm:fa08} & Erfüllt & - \\
+  Kategorie anpassen &  & \\ [0.5ex] \hline
+
+  \descref{FA\#09}{itm:fa09} & Erfüllt & - \\
+  Namen anpassen &  & \\ [0.5ex] \hline
+
+  \descref{FA\#10}{itm:fa10} & Erfüllt & - \\
+  Tags anpassen &  & \\ [0.5ex] \hline
+
+  \descref{FA\#11}{itm:fa11} & Erfüllt & 08:41 - 09:10 \\
+  neuer Wartungstermin &  & \\ [0.5ex] \hline
+
+  \descref{FA\#12}{itm:fa12} & Erfüllt & 06:01 - 06:50 \\
+  Ressource erstellen & Eine Ressource kann nur mit Namen und Kategorie erstellt werden & \\ [0.5ex] \hline
+
+  \descref{FA\#13}{itm:fa13} & Erfüllt & indirekt \\
+  Benutzerrechte & Es muss sich nicht angemeldet werden, um Jira Informationen zu sehen & \\ [0.5ex] \hline
+  
+  \caption{Validierung der funktionalen Muss-Anforderungen}\label{tab:mussvalidierung}
+\end{longtable}
+
+Die funktionalen Soll-Anforderungen werden in Tabelle~\ref{tab:sollvalidierung} angezeigt.
+Alle funktionalen Soll-Anforderungen wurden erfüllt. Allerdings wurde \descref{FA\#21}{itm:fa21}
+aufgrund der begrenzten Zeit der Arbeit nur in minimalem Umfang erfüllt.
+
+\begin{longtable}{| p{0.4\linewidth} | p{0.3\linewidth} | p{0.2\linewidth} |} 
+  \hline
+  \textbf{Anforderung} & \textbf{Validierung} & \textbf{Zeitstempel}\\ [0.5ex] 
+  \hline
+  
+  \descref{FA\#20}{itm:fa20} & Erfüllt & 04:36 - 05:55 \\
+  Suche & die Suche kategorisiert Suchergebnisse nach den entsprechend durchsuchten Attributen einer Ressource & \\ [0.5ex] \hline
+
+  \descref{FA\#21}{itm:fa21} & Funktionell erfüllt & 08:00 - 08:30 \\
+  Wartungshistorie & Eingetragene Informationen sind einsehbar, das Layout und Design und damit die Benutzerfreundlichkeit (z.B.: Anklickbare Links) können noch verbessert werden & \\ [0.5ex] \hline
+
+  \descref{FA\#22}{itm:fa22} & Erfüllt & 07:30 - 08:00 \\
+  Tickets welche Ressource verwenden & & \\ [0.5ex] \hline
+
+  \descref{FA\#23}{itm:fa23} & Erfüllt & 06:50 - 09:35 \\
+  vorheriges Wartungsdatum & & \\ [0.5ex] \hline
+
+  \descref{FA\#24}{itm:fa24} & Erfüllt & 06:50 - 09:35 \\
+  Startdatum der Verwendung & wird über Jira ermittelt; das erste Änderungsdatum (nach Wartungsdatum) eines Tickets, welches die Ressource verwendet, ist das Startdatum & \\ [0.5ex] \hline
+
+  \caption{Validierung der funktionalen Soll-Anforderungen}\label{tab:sollvalidierung}
+\end{longtable}
 
 
+Die funktionalen Kann-Anforderungen werden in Tabelle~\ref{tab:kannvalidierung} angezeigt.
+Auch hier gibt es eine Anforderung welche, aus Zeitgründen, nur teilweise erfüllt werden konnte.
+Da dies jedoch eine Kann-Anforderung ist und diese am niedrigsten priorisiert sind,
+fällt dies kaum ins Gewicht des Gesamtergebnisses des Projekts.
+
+\begin{longtable}{| p{0.4\linewidth} | p{0.3\linewidth} | p{0.2\linewidth} |} 
+  \hline
+  \textbf{Anforderung} & \textbf{Validierung} & \textbf{Zeitstempel}\\ [0.5ex] 
+  \hline
+  
+  \descref{FA\#30}{itm:fa30} & Teilweise erfüllt & 08:50 - 09:13 \\
+  Verlinken eines Wartungstests & Ein Link eines Wartungstets kann zwar abgespeichert werden, der Link ist jedoch nicht anklickbar & \\ [0.5ex] \hline
+
+  \descref{FA\#31}{itm:fa31} & Erfüllt & 09:00 - 09:13 \\
+  Wartungsinformationen & Weitere Informationen können als Text gespeichert werden & \\ [0.5ex] \hline
+
+  \caption{Validierung der funktionalen Kann-Anforderungen}\label{tab:sollvalidierung}
+\end{longtable}
+
+\subsection{Verifizierung der nicht-funktionalen Anforderungen}
+In Tabelle~\ref{tab:sollvalidierungnfa} werden alle nicht-funktionalen Soll-Anforderungen
+validiert. Diese wurden alle erfüllt.
+
+\begin{longtable}{| p{0.4\linewidth} | p{0.3\linewidth} | p{0.2\linewidth} |} 
+  \hline
+  \textbf{Anforderung} & \textbf{Validierung} & \textbf{Zeitstempel}\\ [0.5ex] 
+  \hline
+  
+  \descref{NFA\#01}{itm:nfa01} & Erfüllt & indirekt \\
+  REST API & Da das \gls{UI} die \gls{REST} \gls{API} selbst auch verwendet, sind alle im Video dargestellten Daten über die REST API empfangen worden und somit ist diese auch verwendbar & \\ [0.5ex] \hline
+
+  \descref{NFA\#20}{itm:nfa20} & Erfüllt & ab 10:02 \\
+  API Dokumentation & Dokumentation wurde über Postman erstellt und bereitgestellt & \\ [0.5ex] \hline
+
+  \descref{NFA\#21}{itm:nfa21} & Erfüllt & gesamte Dauer \\
+  einheitliches Design &  & \\ [0.5ex] \hline
+
+  \descref{NFA\#22}{itm:nfa22} & Erfüllt & gesamte Dauer \\
+  Englische Sprache & Nicht nur das \gls{UI} sondern auch die API Dokumentation ist englisch & \\ [0.5ex] \hline
+
+  \descref{NFA\#23}{itm:nfa23} & Erfüllt & gesamte Dauer \\
+  Browserkompatibilität & Das Projekt funktioniert auf allen ``Chromium\footurl{https://www.chromium.org/Home/}'' basierten Browsern. Diese inkludieren ``Edge'' sowie ``Chrome'' & \\ [0.5ex] \hline
+
+  \caption{Validierung der nicht-funktionalen Soll-Anforderungen}\label{tab:sollvalidierungnfa}
+\end{longtable}
+
+In Tabelle~\ref{tab:kannvalidierungnfa} werden alle nicht-funktionalen Kann-Anforderungen 
+validiert. Die Anforderung \descref{NFA\#31}{itm:nfa31} konnte im zeitlichen Rahmen
+dieser Bachelorarbeit nicht erfüllt werden. Des weiteren werden momentan die Start und Endzeiten
+der Test nur selten in Jira eingepflegt, weswegen das Diagramm zum jetzigen Zeitpunkt wenig 
+Aussagekraft hätte.
+
+\begin{longtable}{| p{0.4\linewidth} | p{0.3\linewidth} | p{0.2\linewidth} |} 
+  \hline
+  \textbf{Anforderung} & \textbf{Validierung} & \textbf{Zeitstempel}\\ [0.5ex] 
+  \hline
+  
+  \descref{NFA\#30}{itm:nfa30} & Erfüllt & 00:25 - 03:53 \\
+  Projektticketverteilung &  & \\ [0.5ex] \hline
+
+  \descref{NFA\#31}{itm:nfa31} & Nicht erfüllt & - \\
+  Gantt-Diagramm &  & \\ [0.5ex] \hline
+
+  \caption{Validierung der nicht-funktionalen Soll-Anforderungen}\label{tab:kannvalidierungnfa}
+\end{longtable}
 
 \subsection{Validierung der Bedienbarkeit}
 Um die Bedienbarkeit von TestHub zu analysieren, wird der in Abschnitt~\ref{sec:problems}
@@ -35,7 +184,7 @@ angeführt alte Prozess mit dem neuen durch TestHub optimierten Prozess verglich
 Folgende Aufgaben werden ausgeführt:
 
 \begin{enumerate}
-    \item Heraussuchen des Jira Tickets, welches auf das Ticket C3003889-2681 folgt.
+    \item Heraussuchen des Jira Tickets, welches auf das Ticket \textit{C3003889-2681} folgt.
     \item Heraussuchen der Ressourcen, welche in den nächsten 30 Tagen gewartet werden sollen.
     \item Einer Ressource einen neuen Wartungstermin hinzufügen und diesen mit dem Team synchronisieren.
 \end{enumerate}

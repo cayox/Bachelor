@@ -209,11 +209,13 @@ Die folgenden Anforderungen ergeben sich aus den \nameref{sec:userstories} und d
 in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
 
 \begin{description}
+
+% Muss Kriterien
+
     \descitem{FA\#01}{itm:fa01}
-    \textit{TestHub muss den vorherigen und folgenden Test eines aktuell 
-    ausgeführten Tests anzeigen können (\descref{US\#01}{itm:us01} \& \descref{US\#02}{itm:us02}).}\\
-    Ein Test kann vorherige und folgende Tests haben, es gibt jedoch auch Tests,
-    bei denen dies nicht der Fall ist.
+    \textit{TestHub muss alle aktiven Tests nach Klimakammer gruppiert anzeigen (\descref{US\#04}{itm:us04}).}\\
+    Ein Test gilt als aktiv, wenn der Status seines Jira-Tickets ``Read for Test''
+    oder ``In Execution'' ist.
 
     \descitem{FA\#02}{itm:fa02}
     \textit{TestHub muss die Informationen eines Jira-Tickets in übersichtlicher 
@@ -226,69 +228,81 @@ in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
     Zuordnung zu ermöglichen.
 
     \descitem{FA\#04}{itm:fa04}
-    \textit{TestHub muss alle aktiven Tests nach Klimakammer gruppiert anzeigen (\descref{US\#04}{itm:us04}).}\\
-    Ein Test gilt als aktiv, wenn der Status seines Jira-Tickets ``Read for Test''
-    oder ``In Execution'' ist.
+    \textit{TestHub muss den vorherigen und folgenden Test eines aktuell 
+    ausgeführten Tests anzeigen können (\descref{US\#01}{itm:us01} \& \descref{US\#02}{itm:us02}).}\\
+    Ein Test kann vorherige und folgende Tests haben, es gibt jedoch auch Tests,
+    bei denen dies nicht der Fall ist.    
 
     \descitem{FA\#05}{itm:fa05}
     \textit{TestHub muss eine schnelle Übersicht über die wichtigsten Ressourcen anzeigen (\descref{US\#05}{itm:us05}).}\\
     Die wichtigsten Ressourcen sind: aktive Tests, Ressourcen mit einem Wartungstermin
     in den nächsten 30 Tagen.
 
-    \descitem{FA\#05}{itm:fa05}
+    \descitem{FA\#06}{itm:fa06}
     \textit{TestHub muss den nächsten Wartungstermin einer Ressource anzeigen (\descref{US\#10}{itm:us10}).}
     
-    \descitem{FA\#06}{itm:fa06}
-    \textit{TestHub muss die Wartungshistorie einer Ressource anzeigen (\descref{US\#11}{itm:us11}).}\\
-    Die Wartungshistorie enthält alle Änderungen des Wartungstermins.
-
     \descitem{FA\#07}{itm:fa07}
-    \textit{TestHub muss alle aktiven Tickets anzeigen, welche eine spezifische 
-    Ressource verwenden (\descref{US\#12}{itm:us12}).}
-
-    \descitem{FA\#08}{itm:fa08}
-    \textit{TestHub muss das vorherige Wartungsdatum anzeigen (\descref{US\#13}{itm:us13} \& \descref{US\#11}{itm:us11}).}
-    
-    \descitem{FA\#09}{itm:fa09}
-    \textit{TestHub muss das Startdatum der Verwendung einer Ressource anzeigen (\descref{US\#14}{itm:us14}).}\\
-    Das Startdatum ist das Datum des Jira-Tickets welches nach dem Wartungstermin 
-    der Ressource aktualisiert wurde und die Ressource verwendet.
-
-    \descitem{FA\#10}{itm:fa10}
-    \textit{TestHub muss die Suche nach Ressourcen unterstützen (\descref{US\#15}{itm:us15}).}
-    
-    \descitem{FA\#11}{itm:fa11}
     \textit{TestHub muss das löschen einer Ressource unterstützen (\descref{US\#20}{itm:us20}).}
        
-    \descitem{FA\#12}{itm:fa12}
+    \descitem{FA\#08}{itm:fa08}
     \textit{TestHub muss das Anpassen der Kategorie einer Ressource unterstützen 
     (\descref{US\#21}{itm:us21}).}
 
-    \descitem{FA\#13}{itm:fa13}
+    \descitem{FA\#09}{itm:fa09}
     \textit{TestHub muss das Anpassen des Namens einer Ressource unterstützen 
     (\descref{US\#22}{itm:us22}).}
 
-    \descitem{FA\#14}{itm:fa14}
+    \descitem{FA\#10}{itm:fa10}
     \textit{TestHub muss das Anpassen der Tags einer Ressource unterstützen 
     (\descref{US\#23}{itm:us23}).}
 
-    \descitem{FA\#15}{itm:fa15}
+    \descitem{FA\#11}{itm:fa11}
     \textit{TestHub muss Festlegen eines neuen Wartungstermins unterstützen 
     (\descref{US\#24}{itm:us24}).}
 
-    \descitem{FA\#16}{itm:fa16}
-    \textit{TestHub muss das Verlinken eines Wartungstests unterstützen 
-    (\descref{US\#25}{itm:us25}).}
-
-    \descitem{FA\#17}{itm:fa17}
-    \textit{TestHub muss das Speichern weiterer wartungsspezifischer Informationen unterstützen 
-    (\descref{US\#26}{itm:us26}).}
-
-    \descitem{FA\#18}{itm:fa18}
+    \descitem{FA\#12}{itm:fa12}
     \textit{TestHub muss das Erstellen einer Ressource unterstützen 
     (\descref{US\#23}{itm:us23}).}\\
-    Die Ressource benötigt mindestens einen Namen und sie muss nicht zwangsläufig 
+    Die Ressource benötigt mindestens einen Namen und eine Kategorie und sie muss nicht zwangsläufig 
     einen Wartungstermin haben.
+
+    \descitem{FA\#13}{itm:fa13}
+    \textit{TestHub muss unabhängig von den Jira Benutzerrechten für das HOD Projekt funktionieren}\\
+    Da das System eine schnelle Übersicht schaffen soll und auch keine Möglichkeit
+    bietet, Jira Daten anzupassen, soll das System die Jira Informationen unabhängig der Jira Rechte anzeigen.
+    Dies ergab sich auch den Interviews mit den Mitarbeitern.
+
+
+% Soll Kriterien
+
+    \descitem{FA\#20}{itm:fa20}
+    \textit{TestHub soll die Suche nach Ressourcen unterstützen (\descref{US\#15}{itm:us15}).}
+
+    \descitem{FA\#21}{itm:fa21}
+    \textit{TestHub soll die Wartungshistorie einer Ressource anzeigen (\descref{US\#11}{itm:us11}).}\\
+    Die Wartungshistorie enthält alle Änderungen des Wartungstermins.
+
+    \descitem{FA\#22}{itm:fa22}
+    \textit{TestHub soll alle aktiven Tickets anzeigen, welche eine spezifische 
+    Ressource verwenden (\descref{US\#12}{itm:us12}).}
+
+    \descitem{FA\#23}{itm:fa23}
+    \textit{TestHub soll das vorherige Wartungsdatum anzeigen (\descref{US\#13}{itm:us13} \& \descref{US\#11}{itm:us11}).}
+    
+    \descitem{FA\#24}{itm:fa24}
+    \textit{TestHub soll das Startdatum der Verwendung einer Ressource anzeigen (\descref{US\#14}{itm:us14}).}\\
+    Das Startdatum ist das Datum des Jira-Tickets welches nach dem Wartungstermin 
+    der Ressource aktualisiert wurde und die Ressource verwendet.
+
+% Kann Kriterien
+
+    \descitem{FA\#30}{itm:fa30}
+    \textit{TestHub kann das Verlinken eines Wartungstests unterstützen 
+    (\descref{US\#25}{itm:us25}).}
+
+    \descitem{FA\#31}{itm:fa31}
+    \textit{TestHub kann das Speichern weiterer wartungsspezifischer Informationen unterstützen 
+    (\descref{US\#26}{itm:us26}).}
 
 \end{description}
 
@@ -297,34 +311,37 @@ Es ergeben sich folgende nichtfunktionale Anforderungen aus den Interviews und
 den User Stories:
 
 \begin{description}
-    \descitem{NFA\#01}{itm:nfa01}
-    \textit{Die REST API von TestHub muss innerhalb der Firma verwendbar sein (\descref{US\#90}{itm:us90}).}
 
-    \descitem{NFA\#02}{itm:nfa02}
+% Soll Kriterien
+    \descitem{NFA\#01}{itm:nfa01}
+    \textit{Die REST API von TestHub soll innerhalb der Firma verwendbar sein (\descref{US\#90}{itm:us90}).}
+
+    \descitem{NFA\#20}{itm:nfa20}
     \textit{Die REST API von TestHub soll dokumentiert und erklärt werden (\descref{US\#91}{itm:us91}).}\\
     Es soll eine Website oder ein Dokument geben, in dem alle Endpunkte der REST API
     aufgelistet und erklärt sind. Des Weiteren soll es Beispiele zum 
     Verständnis geben.
 
-    \descitem{NFA\#03}{itm:nfa03}
-    \textit{TestHub soll die Verteilung der Jira-Tickets auf die einzelnen Projekte 
-    aufzeigen (\descref{US\#05}{itm:us05}).}
-
-    \descitem{NFA\#04}{itm:nfa04}
+    \descitem{NFA\#21}{itm:nfa21}
     \textit{Das \gls{UI} von TestHub soll ein einheitliches Design haben.}
 
-    \descitem{NFA\#05}{itm:nfa05}
-    \textit{TestHub muss in englischer Sprache verfügbar sein, da dies die 
+    \descitem{NFA\#22}{itm:nfa22}
+    \textit{TestHub soll in englischer Sprache verfügbar sein, da dies die 
     Firmensprache von JSS ist.}
 
-    \descitem{NFA\#06}{itm:nfa06}
-    \textit{TestHub muss unabhängig von den Jira Benutzerrechten für das HOD Projekt funktionieren}\\
-    Da das System eine schnelle Übersicht schaffen soll und auch keine Möglichkeit
-    bietet, Jira Daten anzupassen, soll das System die Jira Informationen unabhängig der Jira Rechte anzeigen.
-
-    \descitem{NFA\#07}{itm:nfa07}
-    \textit{TestHub muss mindestens auf den Webbrowsern ``Chrome'' und ``Edge'' funktionieren}\\
+    \descitem{NFA\#23}{itm:nfa23}
+    \textit{TestHub soll mindestens auf den Webbrowsern ``Chrome'' und ``Edge'' funktionieren}\\
     Diese zwei Webbrowser werden innerhalb der Firma verwendet.
+
+% Kann Kriterien
+
+    \descitem{NFA\#30}{itm:nfa30}
+    \textit{TestHub kann die Verteilung der Jira-Tickets auf die einzelnen Projekte 
+    aufzeigen (\descref{US\#05}{itm:us05}).}
+
+    \descitem{NFA\#31}{itm:nfa31}
+    \textit{TestHub kann ein Gantt-Diagramm zur besseren Übersicht von aktuellen Tests anzeigen}
+
 
     
 \end{description}
