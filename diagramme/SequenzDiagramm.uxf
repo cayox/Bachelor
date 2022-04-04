@@ -30,8 +30,8 @@ fontsize=18
     <coordinates>
       <x>14</x>
       <y>14</y>
-      <w>868</w>
-      <h>616</h>
+      <w>952</w>
+      <h>588</h>
     </coordinates>
     <panel_attributes>title=Initialisierung
 obj=Nutzer~user
@@ -46,7 +46,7 @@ off=client; on=server; id2-&gt;id3 :"http://testhub.com/"             HTTP GET
 on=client;off=server; id3.&gt;id2 : HTML Dokument                 HTTP 200 (OK)
 
 id2.&gt;id1:Rendert Website mit Platzhaltern
-off=client;on=server; id2-&gt;id3 :"http://testhub.com/jira/active" HTTP GET
+off=client;on=server; id2-&gt;id3 :"http://testhub.com/api/jira/active" HTTP GET
 on=jira; id3-&gt;id4 :"http://jira.com/search"          HTTP POST
 off=jira; id4.&gt;id3 :JSON Dokument                   HTTP 200 (OK)
 server:Aufbereitung der Daten

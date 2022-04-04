@@ -7,7 +7,7 @@ Das Projekt ``TestHub'' konnte erfolgreich umgesetzt und die in Abschnitt~\ref{s
 definierten Probleme somit umfassend gelöst werden. 
 In den folgenden Abbildungen kann die finale Version des Projekts angesehen werden.
 Da das Projekt nur firmenintern nutzbar ist, wurde ein Video 
-(\textit{videos/abschlussdemo.mp4}) erstellt, welches alle Funktionen des 
+(\textit{videos/abschlussdemo.mp4}) erstellt, welches die wichtigsten Funktionen des 
 Projekts aufzeigt. 
 
 \begin{figure}[H]
@@ -79,12 +79,12 @@ und anhand des Videos validiert. Alle Muss Anforderungen wurden erfüllt.
   Ressource erstellen & Eine Ressource kann nur mit Namen und Kategorie erstellt werden & \\ [0.5ex] \hline
 
   \descref{FA\#13}{itm:fa13} & Erfüllt & indirekt \\
-  Benutzerrechte & Es muss sich nicht angemeldet werden, um Jira Informationen zu sehen & \\ [0.5ex] \hline
+  Benutzerrechte & Es muss sich nicht angemeldet werden, um \gls{Jira} Informationen zu sehen & \\ [0.5ex] \hline
   
   \caption{Validierung der funktionalen Muss-Anforderungen}\label{tab:mussvalidierung}
 \end{longtable}
 
-Die funktionalen Soll-Anforderungen werden in Tabelle~\ref{tab:sollvalidierung} angezeigt.
+Die funktionalen Soll-Anforderungen werden in Tabelle~\ref{tab:sollvalidierung} aufgezeigt.
 Alle funktionalen Soll-Anforderungen wurden erfüllt. Allerdings wurde \descref{FA\#21}{itm:fa21}
 aufgrund der begrenzten Zeit der Arbeit nur in minimalem Umfang erfüllt.
 
@@ -106,7 +106,7 @@ aufgrund der begrenzten Zeit der Arbeit nur in minimalem Umfang erfüllt.
   vorheriges Wartungsdatum & & \\ [0.5ex] \hline
 
   \descref{FA\#24}{itm:fa24} & Erfüllt & 06:50 - 09:35 \\
-  Startdatum der Verwendung & wird über Jira ermittelt; das erste Änderungsdatum (nach Wartungsdatum) eines Tickets, welches die Ressource verwendet, ist das Startdatum & \\ [0.5ex] \hline
+  Startdatum der Verwendung & wird über \gls{Jira} ermittelt; das erste Änderungsdatum (nach Wartungsdatum) eines Tickets, welches die Ressource verwendet, ist das Startdatum & \\ [0.5ex] \hline
 
   \caption{Validierung der funktionalen Soll-Anforderungen}\label{tab:sollvalidierung}
 \end{longtable}
@@ -128,7 +128,7 @@ fällt dies kaum ins Gewicht des Gesamtergebnisses des Projekts.
   \descref{FA\#31}{itm:fa31} & Erfüllt & 09:00 - 09:13 \\
   Wartungsinformationen & Weitere Informationen können als Text gespeichert werden & \\ [0.5ex] \hline
 
-  \caption{Validierung der funktionalen Kann-Anforderungen}\label{tab:sollvalidierung}
+  \caption{Validierung der funktionalen Kann-Anforderungen}\label{tab:kannvalidierung}
 \end{longtable}
 
 \subsection{Verifizierung der nicht-funktionalen Anforderungen}
@@ -141,7 +141,7 @@ validiert. Diese wurden alle erfüllt.
   \hline
   
   \descref{NFA\#01}{itm:nfa01} & Erfüllt & indirekt \\
-  REST API & Da das \gls{UI} die \gls{REST} \gls{API} selbst auch verwendet, sind alle im Video dargestellten Daten über die REST API empfangen worden und somit ist diese auch verwendbar & \\ [0.5ex] \hline
+  REST API & Da das \gls{UI} die \gls{REST} \gls{API} selbst auch verwendet, sind alle im Video dargestellten Daten über die REST API empfangen worden. Folglich ist diese auch verwendbar. & \\ [0.5ex] \hline
 
   \descref{NFA\#20}{itm:nfa20} & Erfüllt & ab 10:02 \\
   API Dokumentation & Dokumentation wurde über Postman erstellt und bereitgestellt & \\ [0.5ex] \hline
@@ -160,8 +160,8 @@ validiert. Diese wurden alle erfüllt.
 
 In Tabelle~\ref{tab:kannvalidierungnfa} werden alle nicht-funktionalen Kann-Anforderungen 
 validiert. Die Anforderung \descref{NFA\#31}{itm:nfa31} konnte im zeitlichen Rahmen
-dieser Bachelorarbeit nicht erfüllt werden. Des weiteren werden momentan die Start und Endzeiten
-der Test nur selten in Jira eingepflegt, weswegen das Diagramm zum jetzigen Zeitpunkt wenig 
+dieser Bachelorarbeit nicht erfüllt werden. Des Weiteren werden momentan die Start und Endzeiten
+der Test nur selten in \gls{Jira} eingepflegt, weswegen das Diagramm zum jetzigen Zeitpunkt wenig 
 Aussagekraft hätte.
 
 \begin{longtable}{| p{0.4\linewidth} | p{0.3\linewidth} | p{0.2\linewidth} |} 
@@ -180,13 +180,14 @@ Aussagekraft hätte.
 
 \subsection{Validierung der Bedienbarkeit}
 Um die Bedienbarkeit von TestHub zu analysieren, wird der in Abschnitt~\ref{sec:problems}
-angeführt alte Prozess mit dem neuen durch TestHub optimierten Prozess verglichen.
-Folgende Aufgaben werden ausgeführt:
+angeführte alte Prozess mit dem neuen durch TestHub optimierten Prozess verglichen.
+
+Folgende Aufgaben wurden ausgeführt:
 
 \begin{enumerate}
-    \item Heraussuchen des Jira Tickets, welches auf das Ticket \textit{C3003889-2681} folgt.
+    \item Heraussuchen des \gls{Jira} Tickets, welches auf das Ticket \textit{C3003889-2681} folgt.
     \item Heraussuchen der Ressourcen, welche in den nächsten 30 Tagen gewartet werden sollen.
-    \item Einer Ressource einen neuen Wartungstermin hinzufügen und diesen mit dem Team synchronisieren.
+    \item Hinzufügen eines neuen Wartungstermin einer Ressource und diesen mit dem Team synchronisieren.
 \end{enumerate}
 
 Um aussagekräftige Daten zu erhalten, wird neben der Zeit auch die Cursordistanz,
@@ -216,19 +217,23 @@ verwendet.
         \caption{Mausrad Ticks}
       \end{subfigure}
     \caption{Ergebnisse der Bedienbarkeitsvalidierung, aufgeschlüsselt nach Aufgaben}
+    \textit{Tests wurden lokal auf einem Dell Latitude 5590 (Intel Core i5-8350U CPU
+    @ 1.70GHz; 8GB RAM) mit angeschlossenem 32'' Bildschirm mit 4K Auflösung im HomeOffice durchgeführt}
 \end{figure}
 
-Auf den ersten subjektiven Blick fällt auf, dass TestHub in fast allen Bereichen eine 
-Verbesserung von groben 50\% aufweist. Gerade der wichtigste Faktor, der Zeitaufwand, ist durch TestHub 
-erheblich geringer. Nur bei der Erstellung eines neuen Wartungstermins
+
+Auf den ersten subjektiven Blick fällt auf, dass TestHub in fast allen Bereichen eine erhebliche
+Verbesserung aufweist. Gerade der wichtigste Faktor, der Zeitaufwand, ist durch TestHub 
+mit einer Verbesserung von ca. 70\% erheblich geringer. Nur bei der Erstellung eines neuen Wartungstermins
 ist die Mauszeigerdistanz etwas größer als bisher, da in einem maximierten Browserfenster
 gearbeitet wird statt im kleinen Windows Dateiexplorer Fenster. Auch auffallend ist,
 dass nur beim Folgetest heraussuchen das Mausrad benutzt werden muss. Die Benutzung des 
-Mausrads beim erstellen eines neuen Wartungstermins fällt komplett weg, was für 
-eine Übersichtlichkeit des Designs spricht.
+Mausrads beim Erstellen eines neuen Wartungstermins fällt komplett weg, was für 
+eine Übersichtlichkeit des Projekts spricht.
 
 Um diese Aussagen zu belegen, müsste jedoch eine viel größere Studie mit mehreren 
 Teilnehmern und Testfällen durchgeführt werden.
 
+\newpage
 
 

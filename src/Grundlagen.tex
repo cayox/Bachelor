@@ -6,8 +6,8 @@ gegenübergestellt und eine potenzielle Verwendung abgewogen.
 
 \subsection{HOD Systemtest}
 Die Abteilung Hands-On-Detection entwickelt ein Lenkrad, welches durch eine 
-kapazitive Matte im Lenkrad erkennen kann, ob und wie ein Lenkrad berührt wurde.
-Dieses System muss nicht nur entwickelt sondern auch ausgiebig getestet werden.
+integrierte kapazitive Matte erkennen kann, ob und wie es berührt wurde.
+Dieses \gls{HOD} System muss nicht nur entwickelt sondern auch ausgiebig getestet werden.
 Da Joyson nach dem V-Modell testet, werden die Tests auf mehrere Ebenen verteilt.
 Die Ebene des Systemtests, testet das ganze System, das heißt es wird das ganze
 Lenkrad mit der von Joyson entwickelten \gls{ECU} getestet.
@@ -15,20 +15,20 @@ Lenkrad mit der von Joyson entwickelten \gls{ECU} getestet.
 \begin{figure}[H]
     \includegraphics[width=8cm,keepaspectratio]{img/duts_in_cc.jpg}
     \centering
-    \caption{HOD Lenkräder in einer Klimakammer}
+    \caption{HOD Lenkräder in einer Klimakammer}\label{fig:cc}
 \end{figure}
 
-Die verschiedenen Funktionen der Lenkräder wird bei -40°C bis 80°C getestet. 
-Dabei werden meistens 3 Lenkräder in einer Klimakammer getestet. Alle, für 
-diese Tests verwendeten Teile, wie Kabelbäume, Messhardware, die Klimakammer etc.,
-werden Ressourcen genannt.
+Die verschiedenen Funktionen der Lenkräder werden bei -40°C bis 80°C getestet.
+Dabei werden meistens 3 Lenkräder in einer Klimakammer (siehe Abb.~\ref{fig:cc}) getestet.
+Alle, für diese Tests verwendeten Teile, wie Kabelbäume, Messhardware, die 
+Klimakammer etc. werden Ressourcen genannt.
 
 
 \subsection{REST API}\label{sec:restapi}
 Seit der ersten Website von Tim Berners-Lee 1991 wächst das Web teilweise 
 exponentiell. Allerdings war das Web nicht für solch ein rasantes Wachstum gemacht.
 Es gab weder einheitliche Kommunikationsprotokolle, noch konnte die Infrastruktur
-den Datenverkehr standhalten. Alarmiert von diesem Problem, entwickelte Roy Fielding
+dem Datenverkehr standhalten. Alarmiert von diesem Problem, entwickelte Roy Fielding
 eine Web Architektur, welche die Bedingungen des Webs einheitlich lösen soll.
 Diese Bedingungen lassen sich in 6 Kategorien zusammenfassen~\cite{Mas11}:
 
@@ -37,29 +37,29 @@ Diese Bedingungen lassen sich in 6 Kategorien zusammenfassen~\cite{Mas11}:
     \item[1. Client-Server]\hfill \\
     Die Client-Server Struktur stellt eine Trennung der Anliegen dar. Der Client
     fordert dabei einen Dienst oder eine Information an, welche der Server erfüllt.
-    Die Technologie welche zum Entwickeln von Client und Server verwendet wird,
-    spielt dabei keine Rolle, solange sie das einheitliche Interface implementieren.
+    Die Technologie, welche zum Entwickeln von Client und Server verwendet wird,
+    spielt dabei keine Rolle, solange sie das folgende einheitliche Interface implementieren.
 
     \item[2. Einheitliches Interface]\hfill \\
     Mark Massé fasst in seinem Buch \textit{Rest Api: Design Rulebook}~\cite{Mas11}
     das einheitliche Interface in 4 Anforderungen zusammen: 
     
     \begin{enumerate}
-        \item Identifikation von Ressourcen\hfill \\
-        Jedes webbasierte Konzept (Ressource) muss über einen einzigartigen 
+        \item Identifikation von Web-Ressourcen\hfill \\
+        Jedes webbasierte Konzept (Web-Ressource) muss über einen einzigartigen 
         \gls{URI} adressiert werden können. 
 
-        \item Manipulation von Ressourcen durch Repräsentationen\hfill \\
+        \item Manipulation von Web-Ressourcen durch Repräsentationen\hfill \\
         Clients müssen die Ressourcen manipulieren können, indem Sie mit verschiedenen
         Repräsentationen arbeiten. Beispielsweise kann ein Dokument sowohl in 
         \gls{JSON} für ein automatisiertes Programm als auch als \gls{HTML} für 
         einen Webbrowser repräsentiert werden. Dadurch lässt sich laut Massé eine
-        Interaktion mit dem Dokument gewährleisten, ohne das Dokument und seinen
-        Identifier zu verändern.
+        Interaktion mit dem Dokument gewährleisten, ohne das tatsächliche Dokument
+        und seinen Identifier zu verändern.
 
         \item Selbstbeschreibende Nachrichten\hfill \\
         Wenn der Client eine Anfrage schickt, ist dies nur der gewünschte Zustand
-        der Ressource. Der tatsächlich aktuelle Zustand, ist repräsentativ in 
+        der Web-Ressource. Der tatsächlich aktuelle Zustand, ist repräsentativ in 
         der Antwort des Servers enthalten. Wenn also jemand einen Kommentar bei 
         YouTube schreibt, schlägt er nur den Inhalt des Kommentars vor. Ob der 
         Kommentar tatsächlich übernommen und angezeigt wird, hängt allein vom 
@@ -84,7 +84,7 @@ Diese Bedingungen lassen sich in 6 Kategorien zusammenfassen~\cite{Mas11}:
     Durch ein Schichtsystem soll ermöglicht werden, Zwischensysteme, wie einen
     Proxy Server oder ein Gateway zu etablieren. Diese Systeme werden benötigt, 
     um beispielsweise Sicherheitsstandards zu erzwingen oder um viele gleichzeitige
-    Anfragen auf die vorhandene Hardware zu balancieren (load balancing).
+    Anfragen auf die vorhandene Hardware zu verteilen (load balancing).
 
     \item[4. Caching]\hfill \\
     Caching ist das Zwischenspeichern von Informationen. Um den Server zu entlasten
@@ -97,9 +97,9 @@ Diese Bedingungen lassen sich in 6 Kategorien zusammenfassen~\cite{Mas11}:
 
     \item[5. Zustandslosigkeit]\hfill \\
     Die Anforderungen der Zustandslosigkeit beschreibt, dass alle kontextuellen 
-    Informationen in der Anfrage des Clients enthalten sein muss, sodass der 
+    Informationen in der Anfrage des Clients enthalten sein müssen, sodass der 
     Server keine Informationen zum Client speichern muss. Dadurch kann der Server
-    wesentlich mehr Anfragen bearbeiten, das der Aufwand pro Anfrage gering 
+    wesentlich mehr Anfragen bearbeiten, da der Aufwand pro Anfrage gering 
     gehalten wird. Die Zustandslosigkeit trägt erheblich zur Skalierung der
     Architektur des Webs bei, laut Massé~\cite[][4]{Mas11}. 
 
@@ -116,30 +116,30 @@ Regeln, nach welchem man seine \gls{API} architektonisch aufbauen sollte. Diese
 Regeln lassen sich jedoch auf die unterschiedlichsten Weisen implementieren. 
 
 \subsection{HTTP Kommunikation}\label{sec:HTTP}
-Das Hypertext Transfer Protokoll (kurz HTTP) regelt die Datenübertragung zwischen
+Das Hypertext Transfer Protocol (kurz HTTP) regelt die Datenübertragung zwischen
 Anwendungen. Viele \gls{REST} \gls{API}s verwenden HTTP, da dieses gewisse
 Anforderung, wie die Zustandslosigkeit, bereits implementiert. Im Folgenden soll
 die Funktionsweise vom HTTP erläutert werden, da dies grundlegend für sowohl ``TestHub''
-als auch die \gls{JIRA} Kommunikation ist.
+als auch die \gls{Jira} Kommunikation ist.
 
 \subsubsection{Allgemeines}
 HTTP implementiert verschiedene Anfragetypen und Headertypen. Die wichtigsten,
-welche auch von der \gls{REST} \gls{API} von ``TestHub'' verwendet wird, werden 
-hier aufgelistet:
+welche auch von der \gls{REST} \gls{API} von ``TestHub'' verwendet werden, sind 
+in Tabelle~\ref{table:requests} aufgelistet:
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c | c|} 
      \hline
      \textbf{Anfragetyp} & \textbf{Beschreibung} \\ [1ex] 
      \hline
-     GET & erhalten einer Ressource \\ [1ex]
+     GET & Erhalten einer Ressource \\ [1ex]
      \hline
-     POST* & erstellen einer Ressource oder Query-Abfrage \\ [1ex] 
+     POST* & Erstellen einer Ressource \\ [1ex] 
      \hline
-     PUT* & editieren einer Ressource \\ [1ex] 
+     PUT* & Editieren einer Ressource \\ [1ex] 
      \hline
-     DELETE & löschen einer Ressource \\ [1ex] 
+     DELETE & Löschen einer Ressource \\ [1ex] 
      \hline
     \end{tabular}
     \caption{REST API HTTP Anfragetypen}
@@ -150,7 +150,7 @@ hier aufgelistet:
 Außerdem hat jede Antwort des Servers auch einen entsprechenden Status Code, 
 welcher verschiedene Aussagemöglichkeiten hat:
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c | c|} 
      \hline
@@ -205,9 +205,9 @@ Verbindung aufbauen.
 \end{description}
 \makeatother
 
-Sobald der Server die \textit{\ref{itm:ack}} Nachricht empfangen hat, ist der Handshake
+Sobald der Server die \textit{ACK} Nachricht empfangen hat, ist der Handshake
 abgeschlossen. Von nun an können Daten versendet werden. Dies geschieht über
-eine HTTP Nachricht, welche wie folgt aussehen kann:
+eine HTTP Nachricht, welche wie folgt aussehen kann:\\
 
 \begin{lstlisting}[caption=Beispielhafte HTTP Anfrage]
     GET / HTTP/1.1
@@ -215,14 +215,14 @@ eine HTTP Nachricht, welche wie folgt aussehen kann:
     Accept-Language: de
 \end{lstlisting}
 
-In dieser Nachricht sind Anfragetyp, und die HTTP Version enthalten. \textit{Host}
+In der ersten Zeile sind Anfragetyp, und die HTTP Version enthalten. \textit{Host}
 und \textit{Accept-Language} sind dabei Header, welche gewisse Metadaten zur 
 Anfrage enthalten. HTTP/1.1 ist dabei noch in Klartext gestaltet, und somit 
 von Menschen lesbar. HTTP/2 verwendet das gleiche Prinzip, jedoch sind die 
-Nachrichten als Frames verpackt und somit nicht mehr einfach so lesbar. \\
+Nachrichten als Frames verpackt und somit nicht mehr einfach so lesbar~\cite{Moz21}. \\
 
 Sobald der Server alle vom Client angefragten Ressourcen gesammelt hat, 
-sendet er eine Antwort:
+sendet er eine Antwort:\\
 
 \begin{lstlisting}[caption=Beispielhafte HTTP Antwort]
     HTTP/1.1 200 OK
@@ -233,10 +233,10 @@ sendet er eine Antwort:
     <!DOCTYPE html ... (29769 Bytes der angefragten Seite)
 \end{lstlisting}
 
-Üblicherweise sendet der Server zu seiner Antwort, für den Client wichtige Header,
-wie der zuvor genannte \textit{Content-Type} Header, wodurch der Client weiß,
+Üblicherweise sendet der Server zusätzlich zu seiner Antwort auch für den Client wichtige Header,
+wie der zuvor genannte \textit{Content-Type} Header. Dadurch weiß der Client,
 wie er die empfangenen Daten interpretieren soll. Die tatsächlichen Daten stehen
-dabei ganz unten im sogenannten Body. Der Server sendet zusätzlich einen Status,
+dabei ganz unten, im sogenannten ``Body''. Der Server sendet zusätzlich einen Status,
 in diesem Fall ist das der Status 200, welcher für einen unspezifischen Erfolg
 steht. \\
 
@@ -248,7 +248,7 @@ werden~\cite{http02}.
 \subsection{Programmiersprachen zur Backend Entwicklung}
 Die Grundlage und demnach auch die Performance des Backends bildet die 
 verwendete Programmiersprache. Joyson verwendet in der Firma hauptsächlich 
-Python, C\# und Go. Da mit C\# nicht in der Abteilung 
+Python\footurl{https://www.python.org}, C\#\footurl{https://docs.microsoft.com/de-de/dotnet/csharp/} und Go\footurl{https://go.dev}. Da mit C\# nicht in der Abteilung 
 \gls{HOD} System Test entwickelt wird, werden lediglich die 
 Sprachen Python und Go gegenüber gestellt und ein Fazit zur verwendeten Sprache 
 gebildet. \\
@@ -260,9 +260,11 @@ gibt für beide Sprachen mehrere Bibliotheken zur Entwicklung einer \gls{REST}
 \subsubsection{Python}
 Python wurde von Guido van Rossum 1989 in Amsterdam entwickelt. Es ist eine 
 \gls{dynamisch typisiert}e Skriptsprache, welche auch \gls{objektorientiert} nutzbar 
-ist. Python ist allerdings eine interpretierte Sprache, das bedeutet, das der 
+ist. Python ist allerdings eine interpretierte Sprache, das bedeutet, dass der 
 compilierte Byte-Code in einer virtuellen Maschine ausgeführt wird. Diese 
-virtuelle Maschine nennt man Interpreter~\cite{ErKa20}. \\
+virtuelle Maschine nennt man Interpreter. Durch den Interpreter ist Python 
+zwar plattformunabhängig, jedoch wird auch die Geschwindigkeit der Sprache vermindert,
+da sie nicht direkt auf der Hardware läuft.~\cite{ErKa20},\\
 
 Trotz der umfangreichen Standardbibliothek von Python kann ein Webserver nicht
 ohne Weiteres entwickelt werden. Hierfür wird ein \gls{Framework} benötigt, wie 
@@ -276,28 +278,32 @@ Die Programmiersprache Go wurde 2012 von der Firma Google veröffentlicht. Go
 wirbt damit, effizient und übersichtlich zu sein. Weiterhin kann in Go 
 Concurrency, also das parallele ausführen von Code, sehr leicht umgesetzt werden.
 Im Gegensatz zu Python ist Go \gls{statisch typisiert}, beide Sprachen besitzen jedoch
-einen \gls{Garbage Collector}~\cite{Freeman2022}. \\
+einen \gls{Garbage Collector}, wodurch die manuelle Speicherverwaltung
+wegfällt~\cite{Freeman2022}. \\
 
-Go bietet in seiner Standardbibliothek schon das `net/http' package an, welches
-verwendet werden kann um einen Webserver zu implementieren. 
+Go bietet in seiner Standardbibliothek schon das ``net/http'' package an, welches
+verwendet werden kann, um einen Webserver zu implementieren. 
 
 \subsubsection{Gegenüberstellung}
 Sowohl Python als auch Go sind bekannte Sprachen, wobei Python wesentlich 
 beliebter ist. Python wird von ca. 48\% der an der \textit{StackOverflow 
-Developer Survey 2021} teilgenommenen Entwickler verwendet, Go hingegen nur ca. 
-10\%.Allerdings ist Go auf Platz 4 der Sprachen, die die meisten dieser Entwickler
+Developer Survey 2021} teilgenommenen Entwickler verwendet. Go hingegen verwenden nur ca. 
+10\%.Allerdings sind beide Sprachen in den Top 5 der Sprachen, die die meisten dieser Entwickler
 lernen wollen~\cite{Sta21}. Demnach gibt es für beide Sprachen eine ausreichende
 Community für Fragen oder Probleme. Außerdem werden beide Sprachen wahrscheinlich
-in den nächsten Jahren weiterhin verwendet werden. \\
+in den nächsten Jahren weiterhin verwendet werden. Go ist zusätzlich wesentlich jünger als
+Python, wodurch sich die verhältnismäßig geringe Verwendung der Entwickler erklären könnte.
+Dennoch bietet Go nützliche Eigenschaften für die Entwicklung eines Webservers.
+Die leichte Umsetzung von parallel ausführbarem Code ist beispielsweise nur eine dieser Eigenschaften.\\
 
-Da `TestHub' so schnell und responsive wie möglich sein sollte, wurde ein 
+Da ``TestHub'' so schnell und responsive wie möglich sein sollte, wurde ein 
 Geschwindigkeitstest durchgeführt. Es wurden jeweils ein Webserver in Go mit 
-dem `net/http' Package und in Python mit Flask entwickelt. Beide Webserver stellen
-einen \gls{REST} \gls{API} Endpunkt bereit, welcher eine Test Website~\cite{Bra22} verschickt.
+dem ``net/http'' Package und in Python mit Flask entwickelt. Beide Webserver stellen
+einen \gls{API} Endpunkt bereit, welcher eine Test Website~\cite{Bra22} verschickt.
 Es wurden anschließend 100 asynchrone Request an diesen Endpunkt geschickt und die jeweilige
 Zeit gemessen.
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
     \begin{tabular}{|c | c|} 
      \hline
@@ -307,7 +313,7 @@ Zeit gemessen.
      \hline
      Python (Flask) & 2,2979 \\ [0.5ex] 
      \hline
-     \textbf{Leistungsunterschied} & 10,2493 \\ [1ex] 
+     \textbf{Faktor} & 10,2493 \\ [1ex] 
      \hline
     \end{tabular}
     \caption{$\diameter$ Antwortzeit zwischen Go und Python Webservers}
@@ -320,26 +326,25 @@ Zeit gemessen.
 \end{figure}
 
 \textit{Tests wurden lokal auf einem Dell Latitude 5590 (Intel Core i5-8350U CPU
-@ 1.70GHz; 8GB RAM) durchgeführt, der Code lässt sich im Anhang finden} \\[2ex]
+@ 1.70GHz; 8GB RAM) durchgeführt, der Code lässt sich im~\nameref{sec:anhang} finden} \\[2ex]
 
 In Abbildung~\ref{fig:speedtestresults} ist die Antwortzeit in Sekunden über der Nummer 
-der Anfrage dargestellt. Es ist schnell ersichtlich, dass Go ca. 10 mal schneller
+der Anfragen dargestellt. Es ist schnell ersichtlich, dass Go ca. 10 mal schneller
 als Flask ist, zumindest beim verschicken einer HTML Datei. Diese Ergebnisse 
 decken sich mit den Web Framework Benchmarks von TechEmpower, wo Go beim 
 versenden von Text auf Platz 18 vor Flask auf Platz 55 ist. Auch bei der 
 \gls{JSON} Serialisierung liegt Go (Platz 22) weit vor Flask (Platz 59)
-~\cite{Tec21}. Weiterhin ist die Performance des Go Servers mehr konsistent, als
-die des Python Servers\\
+~\cite{Tec21}. Weiterhin geht aus Abbildung~\ref{fig:speedtestresults} hervor, 
+dass die Performance des Go Servers mehr konsistent ist, als die des Python Servers. 
+Um diese Aussage zu belegen, müssten jedoch weitere Tests durchgeführt werden.\\
 
 \subsubsection{Fazit}
 Da die Geschwindigkeit der Webseite und der \gls{REST} \gls{API} essentiell für 
-die Benutzererfahrung ist, sowohl beim Laden der Seite, als auch beim bearbeiten
+die Benutzererfahrung ist, sowohl beim Laden der Seite, als auch beim Bearbeiten
 von \gls{HTTP} Anfragen, beispielsweise Suchanfragen, ist Go hier klar die
-bessere Alternative. Des weiteren werden nur weniger Abhängigkeiten benötigt, da
-Go schon viele benötigten Webserver Funktionen in seiner Standardbibliothek hat.
+bessere Alternative. Des Weiteren werden weniger Abhängigkeiten benötigt, da
+Go schon viele der benötigten Webserver Funktionen in seiner Standardbibliothek integriert.
 Somit ist das Programm, langfristig gesehen, weniger anfällig für Fehler bei 
-Aktualisierungen der Bibliotheken.
+Aktualisierungen der Bibliotheken und somit unabhängiger und wartungsärmer.
 
-
-
-
+\newpage

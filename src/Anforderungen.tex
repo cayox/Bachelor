@@ -1,34 +1,36 @@
 \section{Anforderungsanalyse}
 Das folgende Kapitel analysiert den bestehenden Prozess zur Ressourcenübersicht
 beim \gls{HOD} Systemtest. Basierend auf dieser Analyse wird der Soll-Zustand 
-des Projekt definiert, indem genaue Anforderungen an das System gestellt werden. 
-Diese Anforderungen werden priorisiert, um anschließend die Funktion des 
+des Projekts definiert, indem genaue Anforderungen an das System gestellt werden. 
+Diese Anforderungen werden priorisiert, um am Ende die Funktion des 
 fertigen Systems zu validieren.
 
 \subsection{Analyse des aktuellen Testprozesses}
-Aufgrund der Mitgliedschaft von mehreren Jahren bei \gls{JSS} und der Entwicklung
-von mehreren Programmen, die diesen Prozess automatisieren oder unterstützen, Infrastruktur
-mir der Prozess äußerst bekannt. Dennoch wurden Interviews mit den Hauptbeauftragten
+Aufgrund des Arbeitsverhältnisses von mehreren Jahren bei \gls{JSS} und der Entwicklung
+von mehreren Programmen, die den Testprozess automatisieren oder unterstützen, ist
+dem Autor dieser Arbeit der Prozess äußerst bekannt. Dennoch wurden Interviews mit den Hauptbeauftragten
 der unten beschriebenen Rollen durchgeführt. Um den Prozess besser zu verstehen,
 wurden UML Aktivitätsdiagramme erstellt. Da die Rollen teilweise wenig 
 miteinander interagieren, wurden die Prozesse der jeweiligen Rollen einzelnen
 betrachtet.\\
 
 Der aktuelle Testprozess basiert auf einem täglich erstelltem Tagesplan 
-(Siehe~\ref{fig:tagesplan}). Dieser Tagesplan beinhaltet die Tests, welche an diesem
+(Siehe~\nameref{fig:tagesplan}). Dieser Tagesplan beinhaltet die Tests, welche an diesem
 Tag von den \gls{Techniker}n durchgeführt werden sollen, mit den wichtigsten 
 Informationen, wie zum Beispiel das Programm zur Reihenfolge der simulierten Griffe.
-Da diese Liste als Jira Auszug in Form einer \gls{PDF} oder statische \gls{HTML} Datei zur Verfügung 
+Da diese Liste als \gls{Jira} Auszug in Form einer \gls{PDF} oder statischer \gls{HTML} Datei zur Verfügung 
 gestellt wird, kann sie keinerlei Informationen zu vorherigen oder folgenden 
 Tests liefern, welche jedoch für einen effizienten Umbau benötigt werden.
 
 Weiterhin gibt es keinerlei Informationen zu Wartungszeiten der einzelnen Ressourcen.
 Diese müssen in einer separaten Ressourcenliste eingesehen werden
-(Siehe~\ref{fig:ressourcenliste}). Die Aktualisierung dieser Liste findet nur über 
+(Siehe~\nameref{fig:ressourcenliste}). Die Aktualisierung dieser Liste findet nur über 
 das Versionskontrollsystem \gls{SVN} statt und liegt verborgen in einer Vielzahl
 an Ordnern. Zusätzlich muss der Start der Benutzung der Ressource eingetragen
-werden. Dadurch muss die Liste nach einer Wartung erneut angepasst werden. So 
-ergeben sich die folgenden Prozesse:
+werden. Dadurch muss die Liste nach einer Wartung erneut angepasst werden. \\
+
+ 
+Demnach ergeben sich folgende Prozesse:
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{diagramme/TechnikerPlanerProzess.png}
@@ -38,19 +40,19 @@ ergeben sich die folgenden Prozesse:
 Aus Abbildung~\ref{fig:TechnikerPlanerProzess} gehen zwei verschiedene Rollen hervor. Der
 Planer (rechts) ist verantwortlich für das langfristige Planen von Tests. Dabei muss
 dieser beachten, dass die Wartungstermine eingehalten werden, wenn
-eine gewisse Ressource eingeplant wird. Welche Ressourcen überhaupt zur
-Verfügung stehen und wann die Wartungstermine überhaupt sind, kann der Planer aus
+eine gewisse Ressource eingeplant wird. Welche Ressourcen zur
+Verfügung stehen und wann die Wartungstermine sind, kann der Planer aus
 der Ressourcenliste entnehmen. Zusätzlich erstellt der Planer auch den täglichen 
 Tagesplan, welcher nur das Ergebnis eines \gls{JQL} Filters ist. 
 
 Der Techniker (links) hingegen, ist für den Umbau und die tatsächliche Durchführung der 
 Tests verantwortlich. Er benötigt den Tagesplan um zu wissen, welche Tests als 
-nächstes durchgeführt werden. Da im Tagesplan allerdings nicht vermerkt ist, 
-welcher Test nach eine spezifischen Test durchgeführt werden muss, muss er die 
+nächstes durchgeführt werden sollen. Da im Tagesplan allerdings nicht vermerkt ist, 
+welcher Test nach einem spezifischen Test durchgeführt werden muss, muss er die 
 Klimakammer so weit es nötig ist leeren, um anschließend den nächsten Test 
-aufzubauen. Zusätzlich weiß er nicht, welcher Test der letzte einer Testgruppe ist.
+aufzubauen. Zusätzlich weiß der Techniker nicht, welcher Test der letzte Test einer Testreihe ist.
 Diese Information ist nötig, um die anschließende Lagerung des Lenkrads einzuleiten.
-Um diese Information zu erhalten, muss er im jeweiligen Jira Ticket nachschauen. \\
+Um diese Information zu erhalten, muss er im jeweiligen \gls{Jira} Ticket nachschauen. \\
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{diagramme/WartungsbeauftragterProzess.png}
@@ -65,9 +67,9 @@ zu \gls{SVN} Konflikten kommen oder die entnommenen Informationen sind veraltet.
 Falls er irgendetwas an der Liste anpasst, muss diese anschließend wieder ins 
 \gls{SVN} hochgeladen werden, um die Informationen mit allen anderen Mitarbeitern
 zu synchronisieren. Zusätzlich muss zu jedem neuen Wartungstermin, das tatsächliche
-Datum der ersten Benutzung seit der Wartung eingetragen werden.
+Datum der ersten Benutzung seit der Wartung eingetragen werden. \\
 
-Somit ergeben sich die folgenden Rollen:
+Aus den zuvor aufgeführten Prozessen ergeben sich folglich die nachfolgenden Rollen:
 
 \begin{description}
     \item[\textbf{Planer}] Die Rolle der Person, die Pläne für kurzfristige oder
@@ -77,16 +79,16 @@ Somit ergeben sich die folgenden Rollen:
     überwacht, plant und durchführt. 
 
     \item[\textbf{Techniker}] Die Rolle der Person, die Tests aufbaut, umbaut und
-    durchführt
+    durchführt.
 \end{description}
 
 Auch wenn es sein kann, dass eine Person mehrere Rollen annimmt, ist es dennoch 
-wichtig die Rollen voneinander zu unterscheiden um den Prozess nachvollziehbarer
+wichtig die Rollen voneinander zu unterscheiden, um den Prozess nachvollziehbarer
 und übersichtlicher zu gestalten.
 
 \subsection{Einbindung in vorhandene Programme}
 Da gerade die Wartungsinformationen auch in anderen Programmen benötigt werden, 
-beispielsweise um Warnungen bei abgelaufener Wartungen bei der Testvorbereitung
+beispielsweise um Warnungen bei bald ablaufenden Wartungen bei der Testvorbereitung
 anzeigen lassen zu können, ergibt sich eine weitere Rolle:
 
 \begin{description}
@@ -97,7 +99,7 @@ anzeigen lassen zu können, ergibt sich eine weitere Rolle:
 \subsection{Use Cases}\label{sec:usecases}
 In Abbildung~\ref{fig:usecases} und Abbildung~\ref{fig:usecasesEntwickler} sind 
 die bereits definierten Rollen als Akteure dargestellt.
-Die Use Cases ergeben sich aus den Interviews.
+Die Use Cases ergeben sich aus den Interviews und der Prozessanalyse.
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{diagramme/Usecases.png}
@@ -110,7 +112,7 @@ Die Use Cases ergeben sich aus den Interviews.
 \end{figure}
 
 \subsection{User Stories}\label{sec:userstories}
-Die User Stories ergeben sich aus den Use Cases.
+Die folgenden User Stories ergeben sich aus den zuvor definierten Use Cases.
 
 \begin{description}
     \descitem{US\#01}{itm:us01}
@@ -165,7 +167,8 @@ Die User Stories ergeben sich aus den Use Cases.
     \textit{Als Wartungsbeauftragter möchte ich den Namen einer Ressource anpassen}
 
     \descitem{US\#23}{itm:us23}
-    \textit{Als Wartungsbeauftragter möchte ich die Tags einer Ressource anpassen}
+    \textit{Als Wartungsbeauftragter möchte ich die Tags einer Ressource anpassen,
+    um Besonderheiten oder Gruppierungen hervorzuheben}
 
     \descitem{US\#24}{itm:us24}
     \textit{Als Wartungsbeauftragter möchte ich einen neuen Wartungstermin festlegen}
@@ -190,7 +193,7 @@ Die User Stories ergeben sich aus den Use Cases.
 \end{description}
 
 \subsection{Funktionale Anforderungen}\label{sec:fas}
-Um die Funktion der im Umfang dieser Arbeit entwickelten Software validieren zu
+Um die Funktionen der im Umfang dieser Arbeit entwickelten Software validieren zu
 können, müssen Anforderungen definiert werden. Diese Funktionalen Anforderungen
 werden in drei Kategorien eingeteilt:
 
@@ -206,7 +209,8 @@ werden in drei Kategorien eingeteilt:
 \end{description}
 
 Die folgenden Anforderungen ergeben sich aus den \nameref{sec:userstories} und den
-in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
+in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases. Zusätzlich ergeben sich einige 
+Anforderungen aus den mit den Mitarbeitern durchgeführten Interviews:
 
 \begin{description}
 
@@ -235,7 +239,7 @@ in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
 
     \descitem{FA\#05}{itm:fa05}
     \textit{TestHub muss eine schnelle Übersicht über die wichtigsten Ressourcen anzeigen (\descref{US\#05}{itm:us05}).}\\
-    Die wichtigsten Ressourcen sind: aktive Tests, Ressourcen mit einem Wartungstermin
+    Die wichtigsten Ressourcen sind: aktive Tests und Ressourcen mit einem Wartungstermin
     in den nächsten 30 Tagen.
 
     \descitem{FA\#06}{itm:fa06}
@@ -267,9 +271,9 @@ in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
     einen Wartungstermin haben.
 
     \descitem{FA\#13}{itm:fa13}
-    \textit{TestHub muss unabhängig von den Jira Benutzerrechten für das HOD Projekt funktionieren}\\
+    \textit{TestHub muss unabhängig von den \gls{Jira} Benutzerrechten für das HOD Projekt funktionieren}\\
     Da das System eine schnelle Übersicht schaffen soll und auch keine Möglichkeit
-    bietet, Jira Daten anzupassen, soll das System die Jira Informationen unabhängig der Jira Rechte anzeigen.
+    bietet, \gls{Jira} Daten anzupassen, soll das System die \gls{Jira} Informationen unabhängig der \gls{Jira} Rechte anzeigen.
     Dies ergab sich auch den Interviews mit den Mitarbeitern.
 
 
@@ -306,8 +310,8 @@ in Abschnitt~\ref{sec:usecases} aufgezeigten Use Cases:
 
 \end{description}
 
-\subsection{Nichtfunktionale Anforderungen}\label{sec:nfas}
-Es ergeben sich folgende nichtfunktionale Anforderungen aus den Interviews und 
+\subsection{Nicht-funktionale Anforderungen}\label{sec:nfas}
+Es ergeben sich folgende nicht-funktionale Anforderungen aus den Interviews und 
 den User Stories:
 
 \begin{description}
@@ -345,3 +349,5 @@ den User Stories:
 
     
 \end{description}
+
+\newpage

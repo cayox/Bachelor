@@ -1,12 +1,13 @@
 \section{Entwicklung}
-In diesem Kapitel wird die Umsetzung des in Kapitel~\ref{fig:components} besprochenen
+In diesem Kapitel wird die Umsetzung des in Kapitel~\ref{sec:entwurf} besprochenen
 Entwurfs erläutert. Es wird nicht nur auf den Projektaufbau und die Implementierung 
-von \gls{Frontend} und \gls{Backend} eingegangen, sondern auch auf den Softwarelebenszyklus.
+von \gls{Frontend} und \gls{Backend} eingegangen, sondern auch auf den 
+Softwarelebenszyklus des Projekts und die Dokumentation der \gls{REST} \gls{API}.
 
 \subsection{Projektaufbau}
 Das Projekt wurde als ``Monorepo'', also als allumfassendes Repository, entwickelt.
 Dadurch sind alle für TestHub benötigten Dateien am gleichen Ort. Weiterhin muss 
-keine Synchronisation von Frontend und Backend Versionen stattfinden, was den
+keine Synchronisation der Frontend und Backend Versionen stattfinden, was den
 Entwicklungs- und Update-Prozess erleichtert~\cite{PL16}.
 
 Dennoch kann das Projekt in zwei interne Teile aufgeteilt werden:
@@ -26,10 +27,10 @@ Dennoch kann das Projekt in zwei interne Teile aufgeteilt werden:
 Im \textit{frontend/src/} Ordner lassen sich Quellcode für den Style Sheet und 
 die Controller finden. Der finale Style Sheet wird mittels TailwindCSS\footurl{https://tailwindcss.com}
 kompiliert, welches den Quellcode der HTML und TypeScript Dateien analysiert und
-die darin verwendeten Klassen generiert. Die Controller hingegen, wurden alle mit 
+die darin verwendeten \gls{CSS} Klassen generiert. Die Controller hingegen, wurden alle mit 
 TypeScript\footurl{https://www.typescriptlang.org} erstellt, welches, im Gegensatz zu 
 JavaScript, Typisierung, Interfaces und vieles mehr ermöglicht. Die TypeScript Dateien 
-werden ebenfalls in einen einstellbaren JavaScript Standard, wie zum Beispiel ``es2016''
+werden in einen einstellbaren JavaScript Standard, wie zum Beispiel ``es2016''
 kompiliert. Alle Kompilate werden im \textit{static/} Ordner unter der gleichen 
 Struktur gespeichert.
 
@@ -37,18 +38,17 @@ Das Projekt wurde gänzlich im Dateieditor Visual Studio Code\footurl{https://co
 unter Verwendung der Go und der JavaScript und TypeScript Extension entwickelt.
 
 \subsection{Implementierung des Frontends}
-In diesem Abschnitt werden ausgewählte Teile des Frontendquellcodes vorgestellt.
-Dabei wird nicht nur auf relevante, sondern auch auf problematische Stellen eingegangen,
-welche während der Entwicklung zu Problemen geführt oder eine besondere 
-Implementierung gefordert haben.
+In diesem Abschnitt wird anhand eines Beispiels aus dem Projekt, die Umsetzung
+asynchroner Anfragen erläutert.
 
 \subsubsection{Asynchrones Laden aktiver Jira-Tickets}
-Um das Laden der aktiven Tickets so schnell wie Möglich zu gestalten, werden die
-Tickets asynchron, also pseudo-parallel geladen. Dies wird zum einen Möglich, durch
+Um das Laden der aktiven Tickets so schnell wie möglich zu gestalten, werden die
+Tickets asynchron, also pseudo-parallel geladen. Dies wird zum einen möglich, durch
 die intuitiv benutzbare Fetch API\footurl{https://developer.mozilla.org/en-US/docs/Web/API/Fetch\_API/Using\_Fetch}
-von JavaScript, welche eine einfache asynchrone Umsetzung von Requests ermöglicht.
+von JavaScript, welche eine einfache asynchrone Umsetzung von Anfragen ermöglicht.
 Zum Anderen, kann die Anzahl der angeforderten Tickets durch sogenannte Pagination
-limitiert und eingestellt werden. 
+limitiert und eingestellt werden. Pagination ist die Möglichkeit, den Umfang 
+der angefragten Ressourcen zu limitieren.
 
 \begin{lstlisting}[caption=TypeScript Funktion zum asynchronen Laden aktiver Tickets (\textit{frontend/src/ts/dashboard.ts}),language=TypeScript]
 const issueAmount = 20
@@ -81,50 +81,49 @@ function loadClimateChamberWidget(){
 }
 \end{lstlisting}
 
-In der Funktion \textit{loadClimateChamberWidget} wird zuerst eine GET API Anfrage gemacht.
+In der Funktion \textit{loadClimateChamberWidget} wird zuerst eine GET Anfrage an die \gls{API} gesendet.
 Das Ergebnis ist ein Objekt, welches dem Interface \textit{JiraGroupedCCQueryResult} entspricht.
 Die Anfrage wird an die \gls{URI} \textit{/jira/active} gesendet, wobei noch einige optionale 
 Formwerte angegeben werden:
 
 \begin{description}
     \item[grouped]
-    Angabe, ob die aktiven Tickets vom Server, so wie in \descref{FA\#04}{itm:fa04}
+    Angabe, ob die aktiven Tickets vom Server, so wie in \descref{FA\#01}{itm:fa01}
     gefordert, nach Klimakammer sortiert werden sollen.
 
     \item[startAt]
     Der Startindex, ab welchem die Tickets in der Antwort enthalten werden sollen. In der ersten 
-    Anfrage an den Server (Zeile 10) sollen alle Tickets ab dem ersten empfangen werden.
+    Anfrage an den Server (Zeile 8) sollen alle Tickets ab dem ersten empfangen werden.
 
     \item[maxResults]
     Die Anzahl der Tickets, die maximal empfangen werden soll. In der ersten 
-    Anfrage an den Server (Zeile 10) sollen die ersten 20 Tickets empfangen werden (weil startAt=0).
+    Anfrage an den Server (Zeile 8) sollen maximal 20 Tickets empfangen werden.
 \end{description}
 
-Die Antwort des Server enthält demnach nicht nur die Tickets, sondern auch Informationen
-zum Requests,wie die eben genannten \textit{startAt} und \textit{maxResult} Werte
+Die Antwort des Servers enthält demnach nicht nur die Tickets, sondern auch Informationen
+zum Requests, wie die eben genannten \textit{startAt} und \textit{maxResult} Werte
 aber auch die Anzahl der gesamten verfügbaren Tickets.
 
 Wenn eine Antwort empfangen wurde, werden weitere Anfragen dieser Art verschickt, mit inkrementiertem \textit{startAt} Wert.
-Durch die asynchrone Eigenschaft der fetch Funktion (Innerhalb der \textit{api} Funktion),
-wird nicht auf die Antwort einer Anfrage gewartet bis man die nächste startet.
-Stattdessen können weitere Anfragen gestartet werden, während auf Antworten gewartet wird.
+Durch die asynchrone Eigenschaft der \textit{fetch} Funktion (innerhalb der \textit{api} Funktion),
+wird nicht auf die Antwort einer Anfrage gewartet bis man die Nächste startet.
+Stattdessen können weitere Anfragen gestartet werden, während auf andere Antworten gewartet wird.
 Durch diese Umsetzung lässt sich ein wesentlich schnelleres Laden der Jira-Tickets ermöglichen .
 
 \subsection{Implementierung des Backends}
 In diesem Abschnitt werden ausgewählte Teile des Backendquellcodes vorgestellt.
-Dabei wird nicht nur auf relevante, sondern auch auf problematische Stellen eingegangen,
-welche während der Entwicklung zu Problemen geführt oder eine besondere 
-Implementierung gefordert haben.
+Dabei wird nicht nur auf die Umsetzung der Kategorisierung anhand eines Beispiels eingegangen,
+sondern auch auf die Kommunikation mit dem \gls{Jira} Server.
 
 \subsubsection{Kategorisieren der Jira Labels}
 Das Kategorisieren der Labels wird durch reguläre Ausdrücke (englisch: Regular 
 Expressions; kurz: RegEx) umgesetzt. Mit diesen kann der strukturelle Aufbau 
 von Text schnell analysiert werden~\cite{fitzgerald2012einstieg}. Da reguläre
-Ausdrücke sehr schnell sehr unübersichtlich werden können, wurden zu jedem 
+Ausdrücke sehr schnell sehr unübersichtlich werden können, wurde zu jedem 
 RegEx String ein entsprechender Link zu Regex101.com erstellt, in welchem der String
 analysiert, erklärt und getestet werden kann.\\
 
-Im folgenden wird beispielhaft ein RegEx String für ein Erdungskabel kurz gezeigt 
+Im Folgenden wird beispielhaft ein RegEx String für ein Erdungskabel kurz gezeigt 
 und aufgeschlüsselt erklärt:
 
 \begin{center}
@@ -133,31 +132,28 @@ und aufgeschlüsselt erklärt:
 
 Die ID eines Erdungskabel hat das Format: GC\_100. Jedoch gibt es, durch das manuelle
 Eintragen der ID, häufig andere Variationen dieser ID, welche vom Programm 
-dennoch als Erdungskabel kategorisiert werden sollen, wie zum Beispiel: GC100, gc\_100, GC-100, GC\_0100.
+dennoch als Erdungskabel kategorisiert werden sollen. Beispiele dieser Variation wären: GC100, gc\_100, GC-100, GC\_0100.
 Durch den RegEx String können all diese Formate schnell und ohne viel Quellcode 
 erkannt werden. Obwohl der String anfangs recht kompliziert aussieht, lässt er 
 sich sehr leicht erklären\footurl{https://pkg.go.de/regexp/syntax}:
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c | c | c|} 
+    \begin{tabular}{| p{0.2\linewidth} | p{0.5\linewidth} | p{0.2\linewidth} |} 
         \hline
-        \textbf{Substring} & \textbf{Erklärung} & \textbf{Veranschaulichung}\\ [0.5ex] 
+        \textbf{Substring} & \textbf{Erklärung} & \textbf{Beispiel}\\ [0.5ex] 
         \hline
         \verb@(?i)@ & Case-insensitive flag; ignoriert Groß- und Kleinschreibung & - \\ [0.5ex]
         \hline
         \verb@^@ & String muss mit folgendem Zeichensatz beginnen & - \\ [0.5ex] 
         \hline
-        \verb@gc@ & akzeptiert nur die Buchstaben ``g'' & \textbf{\textcolor{blue}{GC}}\_100 \\ 
-        & und ``c'' in dieser Reihenfolge &  \\ [0.5ex] 
+        \verb@gc@ & akzeptiert nur die Buchstaben ``g'' und ``c'' in dieser Reihenfolge & \textbf{\textcolor{blue}{GC}}\_100 \\ [0.5ex] 
         \hline
         \verb@(_|-)@ & akzeptiert entweder ``\_'' oder ``-'' & GC\textbf{\textcolor{blue}{\_}}100 \\ [0.5ex] 
         \hline
-        \verb@?@ & das vorherige Zeichen oder Gruppe & - \\
-        & darf 0 oder 1 mal vorkommen &  \\ [0.5ex] 
+        \verb@?@ & das vorherige Zeichen oder Gruppe darf maximal 1 mal vorkommen & - \\ [0.5ex] 
         \hline
-        \verb@\d+@ & akzeptiert nur Zahlen & GC\_\textbf{\textcolor{blue}{100}}\\
-        &(eine oder mehr durch \textbf{+}) &  \\ [0.5ex] 
+        \verb@\d+@ & akzeptiert nur Zahlen (mindestens eine durch \textbf{+}) & GC\_\textbf{\textcolor{blue}{100}}\\ [0.5ex] 
         \hline
         \verb@$@ & String muss mit vorherigem Zeichensatz enden & - \\ [0.5ex] 
         \hline
@@ -165,23 +161,29 @@ sich sehr leicht erklären\footurl{https://pkg.go.de/regexp/syntax}:
     \caption{Aufschlüsselung des regulären Ausdrucks zum Identifizieren einer Erdungskabelstruktur in einem String}
 \end{table}
 
-\subsubsection{Jira Kommunikation}
-Das TestHub Backend kommuniziert mit dem Jira Server via \gls{HTTP}. Dabei muss 
+Wenn also die \textit{ParseLabels} Methode eines Jira-Tickets aufgerufen wird, werden
+alle Labels nacheinander auf das Passen der Struktur mit einem der definierten ReGex Strings geprüft.
+Falls ein Label zu einer gewissen Struktur passt, wird es in das entsprechende \textit{ParsedLabel}
+geschrieben. Durch das Kompilieren der ReGex Strings beim Start des Servers, können 
+diese so schnell wie möglich die Labels kategorisieren.
+
+\subsubsection{\gls{Jira} Kommunikation}
+Das TestHub Backend kommuniziert mit dem \gls{Jira} Server via \gls{HTTP}. Dabei muss 
 jede Anfrage eine Authentifizierung im Header mitschicken. Diese Authentifizierung
 wird durch den Benutzernamen und das Passwort als Base64 kodierter String ermöglicht.
 Diese Methode ist zwar nicht sehr sicher, gerade über eine unverschlüsselte
 Verbindung wie \gls{HTTP}, allerdings gibt es, da es keine OAuth Authentifizierung auf
-dem Jira Server von \gls{JSS} bereitgestellt wird, keine andere Möglichkeit.
-Allerdings ist der Jira Server nur im Firmennetzwerk erreichbar, was das Sicherheitsrisiko
+dem \gls{Jira} Server von \gls{JSS} bereitgestellt wird, keine andere Möglichkeit.
+Allerdings ist der \gls{Jira} Server nur im Firmennetzwerk erreichbar, was das Sicherheitsrisiko
 durch Dritte, die eventuell sensible Daten, wie das Passwort, mitlesen, verringert.
 
-Um die in \descref{NFA\#06}{itm:nfa06} geforderte Funktionalität umzusetzen, 
+Um die in \descref{NA\#13}{itm:fa13} geforderte Funktionalität umzusetzen, 
 wird ein standard Jira-Account verwendet, der die Rechte zu den benötigten Projekten besitzt.
-Die Zugangsdaten werden aus Sicherheitsgründen nicht direkt im Quellcode beschrieben, 
-sondern über Umgebungsvariablen gelöst. Eine Umgebungsvariable ist eine Variable, 
-welche Werte zur Laufzeit bereitstellen kann. Sie wird meistens vom Betriebssystem verwaltet.
+Die Zugangsdaten werden aus Sicherheitsgründen nicht direkt in den Quellcode geschrieben, 
+sondern über Umgebungsvariablen gelöst. Solch eine Umgebungsvariable ist eine Variable, 
+welche Werte zur Laufzeit eines Programms bereitstellen kann. Sie wird meistens vom Betriebssystem verwaltet.
 Durch diese Lösung, existieren die Accountdaten nur auf dem Rechner, wo sie auch
-angelegt wurden und können nicht einfach so geteilt werden.
+angelegt wurden und können nicht einfach so und geteilt oder von Außen eingesehen werden.
 Da es jedoch, je nach Betriebssystem, etwas mühselig ist, Umgebungsvariablen zu
 verwalten, verwendet TestHub eine \textit{.env} Datei, welche zur Laufzeit eingelesen
 wird und die darin enthaltenen Variablen als Umgebungsvariablen setzt. Diese Datei
@@ -195,22 +197,21 @@ Dadurch wird die Funktion in einer Go Routine ausgeführt, welche mit einem Thre
 des Betriebssystems vergleichbar ist. 
 Jedoch ist das Problem bei der Entwicklung, dass der Server, wie in Abbildung~\ref{fig:components}
 dargestellt, zwischen Client und Server liegt. Daher muss, nachdem der Client 
-eine entsprechende Anfrage geschickt hat, der TestHub Server die Daten vom Jira 
+eine entsprechende Anfrage geschickt hat, der TestHub Server die Daten vom \gls{Jira} 
 Server so schnell wie möglich lesen und in der gewünschten Form an den Client zurücksenden.
-Werden die Anfragen von TestHub an Jira jedoch in einer Go Routine ausgeführt, wird logischer Weise nicht
-auf die Antwort des Jira Servers gewartet, bis die nächste Zeile ausgeführt wird.
+Werden die Anfragen von TestHub an \gls{Jira} jedoch in einer Go Routine ausgeführt, wird logischer Weise nicht
+auf die Antwort des \gls{Jira} Servers gewartet, bis die nächste Zeile Code ausgeführt wird.
 Dadurch würde TestHub dem Client mit einem leeren Datensatz antworten.
 
-Daher müssen diese Anfragen weiterhin asynchron verschickt werden, um den Geschwindigkeitsbonus
+Aus diesem Grund müssen diese Anfragen weiterhin asynchron verschickt werden, um den Geschwindigkeitsbonus
 beizubehalten, jedoch muss auf jede Jira-Antwort gewartet werden, bis TestHub an
-den Client eine Rückmeldung geben kann. Da der Code etwas umfangreicher ist, wird er vorerst 
-an einem Pseudo-Code Beispiel erklärt.
+den Client eine Rückmeldung geben kann.
 
-Die Implementierung dieses Lösungsansatzes wird an einem Auszug der in \descref{NFA\#03}{itm:nfa03}
+Die Implementierung dieses Lösungsansatzes wird an einem Auszug der in \descref{NFA\#30}{itm:nfa30}
 geforderten Projektübersicht erklärt.
 
 
-\begin{lstlisting}[caption=Go Umsetzung von asynchronen HTTP Anfragen (\textit{backend/api/api\_jira.go}), language=Go]
+\begin{lstlisting}[caption=Go Umsetzung von asynchronen HTTP Anfragen (\textit{backend/api/api\_jira.go}), language=Go, label={asyncgo}]
     // create a channel to retrieve the results of each request
     c := make(chan *models.JiraAsyncQueryResult)
     // create a waitgroup to wait for all requests to finish
@@ -238,7 +239,7 @@ geforderten Projektübersicht erklärt.
     // respond to client
 \end{lstlisting}
 
-In diesem Beispiel das rapide starten mehrere HTTP Anfragen zu sehen. Um dies In
+Im Codebeispiel~\ref{asyncgo} ist das rapide starten mehrerer HTTP Anfragen zu sehen. Um dies in
 Go zu ermöglichen, wird eine \textit{WaitGroup} benötigt, welche eine \gls{threadsicher}e
 Möglichkeit bietet, das Ausführen weiteren Codes zu verhindern, solange mindestens
 ein Element in der \textit{WaitGroup} noch nicht beendet wurde. Man kann sich diese
@@ -247,44 +248,41 @@ gestartet und wie viele beendet wurden.
 
 Um eine Kommunikation mit den Go Routinen herzustellen, wird ein von Go 
 bereitgestellter \gls{threadsicher}er Channel verwendet. 
-Dieser kann \textit{JiraAsyncQueryResult} speichern. 
+Dieser kann Daten in Form der \textit{JiraAsyncQueryResult} Struktur speichern. 
 
 Ab Zeile 7 wird pro Projekt die \textit{WaitGroup} hochgezählt und ein \gls{JQL}
 String erstellt. Anschließend wird die \textit{QueryIssuesAsync} Funktion in einer
 Go Routine ausgeführt, welche die tatsächliche Anfragelogik beinhaltet. Diese Funktion
-erhält, neben den Standardparametern auch den Key, zur Identifikation der Antwort,
+erhält, neben den Standardparametern einer Jira Anfrage auch den Key, zur Identifikation der Antwort,
 den Channel, zum versenden der Antwort an die Haupt-Go-Routine und eine Referenz 
-der \textit{WaitGroup} zum Dekrementieren dieser, bei Termination der Funktion.
+der \textit{WaitGroup} zum Dekrementieren dieser, nach der Termination der Funktion.
 
-Darauf folgend wird in Zeile 16 auf das beendigen aller zuvor gestarteten Go 
-Routinen gewartet und anschließend der Channel wieder geschlossen, damit aus diesem
+Darauf folgend wird in Zeile 16 auf das Beendigen aller zuvor gestarteten Go 
+Routinen gewartet. Anschließend wird der Channel wieder geschlossen, damit aus diesem
 die gespeicherten Daten entnommen und weiterverarbeitet werden können.
 
 \subsubsection{REST API Dokumentation}
-Um die Anforderung \descref{NFA\#02}{itm:nfa02} zu erfüllen, wurde eine Dokumentation
+Um die Anforderung \descref{NFA\#20}{itm:nfa20} zu erfüllen, wurde eine Dokumentation
 mittels Postman\footurl{https://www.postman.com} erstellt. Postman ist ein Programm
 zum gemeinsamen Testen und Debuggen von APIs. Es bietet zusätzlich an eine Dokumentation
-zu generieren und bereitzustellen, mit den tatsächlichen Anfragen und realen Antworten
-vom Server. Dadurch lässt sich das Testen der API Endpunkte und das Dokumentieren
+zu generieren und bereitzustellen. Diese Dokumentation lässt sich mit Beispielen von 
+den tatsächlichen Anfragen und realen Antworten vom Server versehen.
+Dadurch lässt sich das Testen der API Endpunkte und das Dokumentieren
 dieser effizient zusammenfassen und an einem Ort wiederfinden. Außerdem kann in der
 Dokumentation automatisch die gewünschte Sprache und somit Codebeispiele für die
-jeweiligen Anfragen generieren. Durch die zusätzliche Integration von Markdown, 
+jeweiligen Anfragen generiert werden. Durch die zusätzliche Integration von Markdown, 
 lassen sich aussagekräftige und tatsächlich hilfreiche API Dokumentationen erstellen.
 
-\subsection{Qualitätssicherung}
-Da es sich bei dieser Arbeit um ein \gls{MVP} handelt, wurde ein Großteil der Tests
-vorerst ausgesetzt. Da es sich bei der \gls{REST} \gls{API} jedoch um das zentrale
-Glied des Systems handelt, und \\
-
-TODO TESTS
 
 \subsection{Bereitstellung}
 Das Deployment des Systems kann ziemlich einfach erfolgen, da es nur firmenintern
 zur Verfügung stehen muss. Dafür gibt es innerhalb der \gls{HOD} Abteilung einen
 dafür bestimmten Windows-Rechner. Dieser Rechner fungiert als Server, auf dem TestHub
-laufen kann. Da die Auslastung von TestHub zeimlich gering ausfallen wird, da es 
+laufen kann. Da die Auslastung von TestHub ziemlich gering ausfallen wird, da es 
 eine sehr spezifische Anwendung ist, wird auch kein Reverse Proxy oder Loadbalancing
-benötigt. Dadurch das TestHub eine eigene Datenbank verwendet, können diese auch problemlos in 
-die schon vorhandene MongoDB Instanz integriert werden. Dadurch, dass es innerhalb 
-des Firmennetzwerks eine Portweiterleitung fast aller freien Ports gibt, lässt sich Testhub
-ohne weiteren Aufwand bereitstellen.
+benötigt. Dadurch das TestHub eigene Datenbank Cluster verwendet, können diese auch problemlos in 
+die schon vorhandene MongoDB Instanz integriert werden. Mittels der Portweiterleitung
+fast aller freien Ports innerhalb der Firma, lässt sich Testhub
+ohne großen Aufwand bereitstellen.
+
+\newpage
