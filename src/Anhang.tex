@@ -1,11 +1,41 @@
-\section{Anhang}\label{sec:anhang}
 
-\lstinputlisting[language=Python, caption=Python Flask Webserver]{speedtests/python.py}
+\section*{Anhang}\label{sec:anhang}
+\addcontentsline{toc}{section}{Anhang} 
 
-\lstinputlisting[language=Go, caption=Go Webserver]{speedtests/go.go}
+\appendix
+\section*{Allgemeine Ergänzungen}
+Dieser Arbeit wurde ein USB-Stick beigelegt, welcher den gesamten im Rahmen 
+dieser Arbeit verfassten Quellcode und das zuvor angeführte Video enthält. Die
+Ordnerstruktur ist wie folgt angelegt:
 
-\lstinputlisting[language=Python, caption=Python test Skript]{speedtests/test.py}
+\begin{description}
+    \item[\textit{./backend}] $\rightarrow$~die serverseitige Software (Go)
 
+    \item[\textit{./data}] $\rightarrow$~Daten auf die der Server zur Laufzeit 
+    zugreifen muss
+
+    \item[\textit{./frontend}] $\rightarrow$~die clientseitige Software 
+    (\textit{./frontend/ts}) und der Stylesheet (\textit{./frontend/css})
+
+    \item[\textit{./static}] $\rightarrow$~statische Dateien wie Bilder oder Vektorgrafiken.
+    Außerdem werden die von TypeScript kompilierten JavaScript Dateien und der 
+    von TailwindCSS generierte Stylesheet hier abgelegt.
+
+    \item[\textit{./templates}] $\rightarrow$~Die HTML Templates welche vom Server
+    zu einem richtigen HTML Dokument zusammengesetzt werden.
+    
+    \item[\textit{./videos}] $\rightarrow$~Das zuvor angeführte Video.
+
+\end{description}
+
+\section*{Webservertest Quellcode}
+\lstinputlisting[language=Python, caption=Python Flask Webserver]{resources/python.py}
+
+\lstinputlisting[language=Go, caption=Go Webserver]{resources/go.go}
+
+\lstinputlisting[language=Python, caption=Python Testskript]{resources/test.py}
+
+\section*{Tagesplan und Ressourcenliste}
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{img/tagesplan_auszug_02_03_22.png}
     \caption{Auszug eines Tagesplans vom 02.03.2022}\label{fig:tagesplan}

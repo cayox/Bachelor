@@ -26,7 +26,7 @@
 \newcommand{\descrefnobold}[2]{\hyperref[#2]{#1}}
 
 \renewcommand{\lstlistingname}{Codebeispiel}% Listing -> Codebeispiel
-\renewcommand{\lstlistlistingname}{Codebeispiele}% 
+\renewcommand{\lstlistlistingname}{Codebeispielverzeichnis}% 
 
 \newcommand{\footurl}[1]{\footnote{\url{#1}}}
 
@@ -35,6 +35,7 @@
 
 \begin{document}
 
+\nocite{*}
 
 \definecolor{codecomment}{rgb}{0.70, 0.70, 0.70}
 \definecolor{codekeyword}{rgb}{0.83,0.14,0.44}
@@ -141,6 +142,8 @@
 
 \include{src/Titelseite.tex}
 
+\include{src/Vorwort.tex}
+
 \include{src/Verzeichnisse.tex}
 
 \include{src/Einfuehrung.tex}
@@ -157,21 +160,34 @@
 
 \include{src/Fazit.tex}
 
+\begin{spacing}{1}
+    \pagenumbering{Roman}
+    \setcounter{page}{7}
+
+    \section*{Literaturverzeichnis}
+    \addcontentsline{toc}{section}{Literaturverzeichnis}
+    \printbibliography[title={Fachliteratur},type=book]
+    \printbibliography[title={Onlinequellen},type=online]
+    \newpage
+    \begin{spacing}{1}
+            
+        \section*{Abbildungsverzeichnis} 
+        \addcontentsline{toc}{section}{Abbildungsverzeichnis}
+        \renewcommand{\listfigurename}{}
+        \listoffigures
+    \end{spacing}
+    \newpage
+
+    \section*{Tabellenverzeichnis} 
+    \addcontentsline{toc}{section}{Tabellenverzeichnis} 
+    \renewcommand{\listtablename}{}
+    \listoftables % Tabellenverzeichnis
+    \newpage
+
+    \addcontentsline{toc}{section}{Codebeispielverzeichnis} 
+    \lstlistoflistings
 
 
-\section{Eigenständigkeitserklärung}
-``Ich versichere, dass ich die Arbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel angefertigt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen oder anderen Quellen entnommen sind, sind als solche kenntlich gemacht. Die schriftliche und die elektronische Form der Arbeit stimmen überein.''
-\paragraph{}$~~$\\
-\paragraph{}$~~$\\
-\vspace{50pt} 
-\noindent\rule{5cm}{.4pt}\hfill\rule{5cm}{.4pt}\par 
-\noindent Ort, Datum \hfill Unterschrift 
-\newpage
-
-\section{Literaturverzeichnis}
-\printbibliography[title={Fachliteratur},type=book]
-\printbibliography[title={Onlinequellen},type=online]
-
-
-\include{src/Anhang.tex}
+    \include{src/Anhang.tex}
+\end{spacing}
 \end{document}

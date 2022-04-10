@@ -2,45 +2,20 @@
     \pagenumbering{Roman}
     \setcounter{page}{2}
     \tableofcontents
-    \end{spacing}
-    \newpage
-    \begin{spacing}{1}
-        
-    \section*{Abbildungsverzeichnis} 
-    \addcontentsline{toc}{section}{Abbildungsverzeichnis}
-    \renewcommand{\listfigurename}{}
-    \listoffigures
-    \end{spacing}
-    \newpage
+\end{spacing}
+\newpage
 
-    \section*{Tabellenverzeichnis} 
-    \addcontentsline{toc}{section}{Tabellenverzeichnis} 
-    \renewcommand{\listtablename}{}
-    \listoftables % Tabellenverzeichnis
-    \newpage
-    % \section*{Symbolverzeichnis} 
-    % \addcontentsline{toc}{section}{Symbolverzeichnis} 
-    % %Sortieren nach Auftreten im Text
-    % \begin{table}[h] \begin{center} \begin{tabular}{|lll|} \hline 
-    % & \textbf{Symbol} & \textbf{Bedeutung} \\ \hline \hline
-    % \end{tabular} \end{center} \end{table}
-    % \newpage
-    % \section*{Akronyme}
-    
-    \printglossary[type=\acronymtype]
-    \addcontentsline{toc}{section}{Akronyme} 
-    \newpage
+\printglossary[type=\acronymtype]
+\addcontentsline{toc}{section}{Akronyme} 
+\newpage
 
-    % \section*{Glossar}
-    
-    \printglossary[type=main]
-    \addcontentsline{toc}{section}{Glossar}
-    \newpage
+\printglossary[type=main]
+\addcontentsline{toc}{section}{Glossar}
+\newpage
 
-    \lstlistoflistings
-    \newpage
-    \clearpage
-    \setcounter{SeitenzahlSpeicher}{\value{page}}
-    \pagenumbering{arabic}
-    \newpage
-    \pagenumbering{arabic}
+\newpage
+\clearpage
+\setcounter{SeitenzahlSpeicher}{\value{page}}
+\pagenumbering{arabic}
+\newpage
+\pagenumbering{arabic}
