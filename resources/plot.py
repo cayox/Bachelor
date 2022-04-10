@@ -66,6 +66,9 @@ def plot_validation():
             ax.yaxis.set_major_formatter(formatter)
             # this ensures each bar has a 'date' label
             ax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(base=1))
+        elif col == "Mausrad_Ticks":
+            ax.set_ylabel("Mausrad Ticks")
+            
         ax.grid(zorder=0)
         ax.legend()
 
