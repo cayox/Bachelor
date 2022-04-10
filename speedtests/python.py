@@ -1,6 +1,5 @@
 from flask import Flask, send_from_directory
 
-# create Flask App
 app = Flask(__name__)
 app.config.from_object(__name__)
 

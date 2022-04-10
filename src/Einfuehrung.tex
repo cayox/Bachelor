@@ -35,49 +35,55 @@ erheblichen Aufwand darstellt.
     \caption{\gls{Jira} Ticket}
 \end{figure}
 
-Solch ein \gls{Jira} Ticket ist zu unübersichtlich um schnell alle wichtigen 
+Solch ein \gls{Jira} Ticket ist zu unübersichtlich, um schnell alle wichtigen 
 Informationen zu erhalten. Wichtige Daten, wie etwa das zu verwendende Zubehör
 sind nur in unstrukturierter Form in den Labels des Tickets vorhanden. 
 Außerdem bringt das Heraussuchen jedes Tickets einen gewissen Zeitaufwand mit sich.\\
 
 Ein weiteres Problem ist, dass die Wartungsinformationen momentan lediglich in einer Excel
 Tabelle gespeichert und vom Wartungsbeauftragten gepflegt werden. Somit
-weiß der \gls{Techniker} oder der \gls{Planer} nicht genau, ob das geplante 
+wissen der \gls{Techniker} oder der \gls{Planer} nicht genau, ob das geplante 
 Zubehör auch wirklich verwendet werden darf. Er muss sich folglich darauf verlassen, 
 dass es rechtzeitig gewartet wurde, da ein Nachsehen in der Liste einen zu hohen
 Aufwand bedeuten würde.\\
 
-\pagebreak
+\newpage
 Aus den zuvor genannten Situationen treten folgende Probleme hervor:
 
 \begin{description}
 
     \item[1. Heraussuchen der Jiratickets für Informationen]\hfill \\
     Wenn der Techniker beispielsweise beim Umbau eines Tests wissen möchte,
-    welcher Test folgt, muss er sich in \gls{Jira} anmelden, das Ticket über die
-    Testrun-ID aus dem Tagesplan suchen, und im Ticket gucken, ob der nächste 
-    Test verlinkt ist. Da in einer Klimakammer meistens 3 Muster getestet werden
-    muss dieser Prozess für jedes weitere Muster wiederholt werden. Bei über 20 
-    Klimakammern ist dies ein zu hoher Aufwand.
+    welcher Test folgt, muss er sich in \gls{Jira} anmelden. Danach muss er das Ticket über die
+    Testrun-ID aus dem Tagesplan suchen und im Ticket einsehen, ob der nächste 
+    Test verlinkt ist. Da in einer Klimakammer meistens 3 Muster getestet werden,
+    muss dieser Prozess für jedes weitere Muster wiederholt werden. Das ist ein 
+    zu hoher zusätzlich zum Umbau hinzukommender Zeitaufwand. Denn um den maximalen
+    betriebswirtschaftlichen Nutzen der Klimakammern zu ermöglichen, muss die 
+    Umbauzeit so gering wie möglich gehalten werden.
     
 
     \item[2. Wartungsdatum eines Zubehörs einsehen und anpassen]\hfill \\
-    Wer wissen möchte, wann ein gewisses Zubehör gewartet werden soll, bzw. ob 
-    es verwendet werden darf, muss in einer Excel Datei nach dem entsprechenden
+    Wenn ein Mitarbeiter wissen möchte, wann ein gewisses Zubehör gewartet werden muss oder ob 
+    es verwendet werden darf, muss er in einer Excel Datei nach dem entsprechenden
     Zubehör suchen. Da diese Excel Datei im \gls{SVN} abgelegt ist, wird sie auch nur
     darüber mit allen weiteren Benutzern synchronisiert. Dabei kann es auch zu 
-    unterschiedlichen Versionen der Datei kommen, wenn beispielsweise jemand 
-    vor dem Einsehen der Datei seine lokale Working Copy nicht aktualisiert.
+    unterschiedlichen Versionen der Datei kommen, wenn beispielsweise ein Mitarbeiter 
+    vor dem Einsehen der Datei seine \gls{Working Copy} nicht aktualisiert.
 
     \item[3. Universelle Schnittstelle]\hfill \\
-    Da es Sinn macht, gerade die Wartungsdaten schon beim Vorbereiten der Tests
-    zugänglich zu machen, damit der \gls{Techniker} schon vor dem Test weiß,
-    ob alle verwendeten Ressourcen in Ordnung sind, ist es notwendig eine universell
-    verwendbare Schnittstelle bereitzustellen. Dadurch ist es anderen Programmen 
-    und Entwicklern möglich, die von TestHub bereitgestellten Informationen zu 
-    erhalten und zu verarbeiten.
+    Es ist zudem notwendig, gerade die Wartungsdaten schon beim Vorbereiten der Tests
+    zugänglich zu machen. Somit kann der \gls{Techniker} schon vor dem Umbau wissen,
+    ob alle im nächsten Test verwendeten Ressourcen auch tatsächlich für die 
+    Verwendung geeignet sind.
+    Auf Grundlage dieser Informationen, kann er die nötigen Ressourcen vorbereiten, sodass der
+    Zeitaufwand des Umbaus minimiert wird.
+    Da für die Vorbereitung jedoch ein separates Programm verwendet wird, müssen
+    die von dieser Arbeit bereitgestellten Informationen universell von Programmen
+    und Entwicklern abrufbar sein.
 \end{description}
 
+\newpage
 
 \subsection{Zielsetzung}
 Das Programm wird unter dem Namen ``TestHub'' innerhalb der Firma \gls{JSS} 
@@ -85,9 +91,9 @@ veröffentlicht. Die Arbeit hat folgende Ziele:
 
 \begin{itemize}
 \item Entwicklung einer interaktiven Übersicht zum schnellen Überblick über Wartungstermine, aktuelle, vorherige und folgende Tests 
-\item Aufbereitung und Visualisierung der unstrukturierten Daten in den Labels eines \gls{Jira} Tickets
-\item Zentrale Speicherung, Einsicht und Anpassung von Testzubehör Informationen
-\item Entwicklung einer offenen Schnittstelle, der zuvor genannten Punkte, zur Integration in andere Programme
+\item Aufbereitung und Kategorisierung der Daten in den Labels eines \gls{Jira} Tickets
+\item Zentrale Speicherung, Einsicht und Anpassung von Testzubehörinformationen
+\item Entwicklung einer universell erreichbaren Schnittstelle, zur Integration der von dieser Arbeit bereitgestellten Informationen in andere Softwareprojekte
 
 \end{itemize}
 
@@ -95,13 +101,13 @@ Die Entwicklung von TestHub lässt sich in zwei grobe Punkte unterteilen:
 
 \begin{description}
 
-    \item[Entwicklung des Backends]\hfill \\
+    \item[1. Entwicklung des Backends]\hfill \\
     Das Backend ist die zentrale serverseitige Software, welche die nötigen 
-    Daten von \gls{Jira} oder einer Datenbank sammelt und aufbereitet über das Internet 
+    Daten von \gls{Jira} oder einer Datenbank sammelt und anschließend in standardisierten Formaten über das Internet 
     versendet.
     
 
-    \item[Entwicklung des UI]\hfill \\
+    \item[2. Entwicklung des UI]\hfill \\
     Um die Daten visuell und kompakt darzustellen, gibt es ein Interface, 
     welches die vom Backend empfangenen Daten übersichtlich auf einer Webseite
     anzeigt
@@ -109,24 +115,24 @@ Die Entwicklung von TestHub lässt sich in zwei grobe Punkte unterteilen:
 \end{description}
 
 
-Durch eine Trennung des Backends und des \gls{Frontend}s entstehen verschiedene 
+Durch eine Trennung des \gls{Backend}s und des \gls{Frontend}s entstehen verschiedene 
 Vorteile. Zum einen können andere Programme das Backend ebenfalls benutzen und
 die nötigen Daten bei sich integrieren. Es lässt sich außerdem leicht erweitern.
-Zum Anderen lässt sich das \gls{UI} leicht austauschen bzw. anpassen, da es lediglich 
+Zum anderen lässt sich das \gls{UI} leicht austauschen bzw. anpassen, da es lediglich 
 die vorhandenen Daten anzeigt. \\
 
 Testhub ist als \gls{MVP} entwickelt. Es werden daher nur die wichtigsten in 
-Abschnitt Funktionen implementiert.
+Abschnitt~\ref{sec:fas} und Abschnitt~\ref{sec:nfas} genannten Anforderungen implementiert.
 
 
 \subsection{Vorgehensweise}
-Die vorliegende Arbeit wird ind mehrere Kapitel unterteilt:
+Die vorliegende Arbeit wird in mehrere Kapitel unterteilt:
 
 \begin{description}
 
     \item[Kapitel 1: Einleitung:]
-    In der Einleitung werden die Problemstellung und die Ziele mitsamt der Motivation
-    der Arbeit beschrieben.
+    In der Einleitung werden die Problemstellung und die Ziele inklusive der Motivation
+    dieser Arbeit beschrieben.
     
     \item[Kapitel 2: Grundlagen:]
     Im Kapitel über die Grundlagen werden Implementierungsmöglichkeiten diskutiert
@@ -134,7 +140,7 @@ Die vorliegende Arbeit wird ind mehrere Kapitel unterteilt:
     dieser Arbeit, die \gls{REST} \gls{API} erklärt.
 
     \item[Kapitel 3: Anforderungsanalyse:]
-    Im dritten Kapitel werden die aktuellen Probleme analysiert und Anforderungen an 
+    Eine Analyse der aktuellen Prozesse findet in Kapitel 3 statt. Darauf basierend werden Anforderungen an 
     das zu entwickelnde Programm definiert.
 
     \item[Kapitel 4: Entwurf:]
@@ -142,16 +148,16 @@ Die vorliegende Arbeit wird ind mehrere Kapitel unterteilt:
     des \gls{UI} beschrieben.
     
     \item[Kapitel 5: Entwicklung:]
-    Im Entwicklungsteil der Arbeit werden sowohl die Implementierung als auch 
-    der Softwarelebenszyklus des gesamten Projekts beschrieben.
+    Der Entwicklungsteil der Arbeit erläutert sowohl die Implementierung als auch 
+    den Softwarelebenszyklus des gesamten Projekts.
 
     \item[Kapitel 6: Validierung:]
-    Die in Kapitel 3 ermittelten Anforderungen werden in diesem Kapitel dem 
+    Die in Kapitel 3 ermittelten Anforderungen werden in diesem Kapitel den
     tatsächlichen Funktionen des Programms gegenübergestellt und verifiziert.
 
     \item[Kapitel 7: Fazit:]
-    Im Fazit Kapitel werden die Ergebnisse der Arbeit zusammengefasst und weitere
-    mögliche Schritte hinsichtlich der Weiterentwicklung besprochen.
+    Das letzte Kapitel fasst die Ergebnisse dieser Arbeit zusammen. Zusätzlich werden die
+    die nächsten Schritte der Weiterentwicklung besprochen.
 
 \end{description}
 \newpage

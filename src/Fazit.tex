@@ -7,9 +7,9 @@ komplizierte Prozess zum Einsehen eines Wartungstermins, verbessert und gelöst.
 Dazu wurde ein Joyson Safety Systems spezifisches Programm entwickelt, welches
 genau auf das teilweise stark individualisierte Jira-Ticket-System angepasst wurde. 
 Nicht nur \gls{Jira} Informationen wurden in TestHub eingebunden, sondern es wurde auch 
-eine zentrale und universelle einsetzbare Anlaufstelle für jegliche weitere 
+eine zentrale und universell einsetzbare Anlaufstelle für jegliche weitere
 Ressourcen geschaffen. Durch TestHub sind alle Ressourceninformationen, welche
-benötigt werden, um einen Test aufzubauen und durchzuführen, an der gleichen Stelle 
+für den Aufbau und die Durchführung eines Tests benötigt werden, zentral gespeichert 
 und lassen sich schnell und effizient einsehen und bearbeiten. Das in der 
 Client-Server Architektur entwickelte System könnte vielen Mitarbeitern
 die Arbeit erleichtern. TestHub stellt außerdem eine \gls{REST} \gls{API} innerhalb der Firma 
@@ -21,20 +21,21 @@ und zukunftssicher.\\
 Jedoch gibt es bei \gls{JSS} nur wenige Entwickler, welche diese Sprachen beherrschen.
 Allerdings werden auch keine komplexen sprachenspezifischen Konzepte genutzt, wodurch
 der Einstieg in die Entwicklung dieses Projekts erleichtert wird. Zu diesem Zweck
-wurde auch eine \textit{setup.md} erstellt, welche Entwicklern beim Start der
-Entwicklung dieses Projekts helfen soll. Zusätzlich ist der Code umfangreich kommentiert.
+wurde auch eine \textit{README.md} erstellt, welche Mitarbeitern beim Start der
+Entwicklung dieses Projekts als Hilfestellung dient. Zusätzlich ist der Code umfangreich kommentiert.
 
 \subsection{Ausblick}
-Um die gesteigerte Effizienz auch wirklich belegen zu können sollten aussagekräftige
+Um die gesteigerte Effizienz auch wirklich belegen zu können, sollten aussagekräftige
 Studien zur Bedienbarkeit und Benutzung von TestHub durchgeführt werden.
 Die nicht erfüllten Anforderungen geben einen kurzen Überblick über Möglichkeiten,
 wie das Projekt weiterzuführen wäre. Besonders das Gantt-Diagramm würde eine gute Ergänzung
-zur Übersichtlichkeit und Nachvollziehbarkeit der Teststruktur liefern und dafür
-wäre auch noch genug Platz auf dem Dashboard.
-Eine weitere Überlegung ist es, Benutzeraccounts einzuführen. Da bei einer Wartung
-die Wartende Person manuell eingetragen wird, lässt dies Platz für Falscheingaben und Fehler. 
+zur Übersichtlichkeit und Nachvollziehbarkeit der Teststruktur liefern, wofür
+das Dashboard noch potenziellen Platz bietet.
+
+Eine weitere Überlegung ist, Benutzeraccounts einzuführen. Da bei einer Wartung
+die durchführende Person manuell eingetragen wird, lässt dies Platz für Falscheingaben und Fehler. 
 Durch die Einbindung von Benutzeraccounts kann man eher gewährleisten, dass die 
-wartende Person auch tatsächlich die eingetragene Person ist. Dafür könnte OAuth
+Person, welche die Wartung durchgeführt hat, auch tatsächlich die eingetragene Person ist. Dafür könnte OAuth
 von Microsoft oder \gls{Jira} verwendet werden. OAuth bietet dabei die Möglichkeit, dass
 die Verwaltung der Benutzerdaten nicht von TestHub übernommen werden muss. TestHub
 wird lediglich als Programm registriert und leitet den Benutzer weiter, sodass er sich
@@ -46,8 +47,10 @@ Da das Projekt als \gls{MVP} entworfen wurde, wurden derzeit keine Softwaretests
 implementiert. Diese sind jedoch notwendig, um die korrekte Funktion des
 Programms, auch nach weiteren Änderungen, zu gewährleisten. Besonderer Fokus sollte dabei
 auf Tests der \gls{REST} \gls{API} gelegt werden, da diese für den Informationsgehalt 
-zuständig ist. Bei \gls{API} Tests sollten neben Statuscode, Datenqualität auch 
-falsche Benutzereingaben und damit Fehler getestet werden. Es ist auch Sinnvoll
-Stresstests durchzuführen, um die Grenzen des Webservers zu kennen um diese nach 
-so gut wie möglich zu vermeiden. Diese \gls{API} Test würden sich über Postman\footurl{https://www.postman.com}
-durchführen lassen, da dort die Endpunkte schon dokumentiert sind.
+zuständig ist. Bei \gls{API} Tests sollten neben Statuscode und Datenqualität auch 
+falsche Benutzereingaben und damit Fehler getestet werden. Es ist zusätzlich sinnvoll,
+Stresstests durchzuführen. Dadurch können die Grenzen des Servers ermittelt werden,
+um zu prüfen, ob auch die Hardware den Anforderungen gerecht wird. Diese \gls{API}
+Tests würden sich über Postman\footurl{https://www.postman.com} durchführen lassen,
+da dort die Endpunkte schon hinreichend dokumentiert sind und zusätzlich umfangreiche Tests
+implementiert werden können.

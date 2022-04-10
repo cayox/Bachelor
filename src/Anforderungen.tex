@@ -1,6 +1,6 @@
 \section{Anforderungsanalyse}
 Das folgende Kapitel analysiert den bestehenden Prozess zur Ressourcenübersicht
-beim \gls{HOD} Systemtest. Basierend auf dieser Analyse wird der Soll-Zustand 
+in der Abteilung \gls{HOD} Systemtest. Basierend auf dieser Analyse wird der Soll-Zustand 
 des Projekts definiert, indem genaue Anforderungen an das System gestellt werden. 
 Diese Anforderungen werden priorisiert, um am Ende die Funktion des 
 fertigen Systems zu validieren.
@@ -16,11 +16,11 @@ betrachtet.\\
 
 Der aktuelle Testprozess basiert auf einem täglich erstelltem Tagesplan 
 (Siehe~\nameref{fig:tagesplan}). Dieser Tagesplan beinhaltet die Tests, welche an diesem
-Tag von den \gls{Techniker}n durchgeführt werden sollen, mit den wichtigsten 
+Tag von den \gls{Techniker}n durchgeführt werden sollen, inklusive der wichtigsten 
 Informationen, wie zum Beispiel das Programm zur Reihenfolge der simulierten Griffe.
 Da diese Liste als \gls{Jira} Auszug in Form einer \gls{PDF} oder statischer \gls{HTML} Datei zur Verfügung 
 gestellt wird, kann sie keinerlei Informationen zu vorherigen oder folgenden 
-Tests liefern, welche jedoch für einen effizienten Umbau benötigt werden.
+Tests liefern. Diese werden jedoch für einen effizienten Umbau benötigt.
 
 Weiterhin gibt es keinerlei Informationen zu Wartungszeiten der einzelnen Ressourcen.
 Diese müssen in einer separaten Ressourcenliste eingesehen werden
@@ -29,8 +29,9 @@ das Versionskontrollsystem \gls{SVN} statt und liegt verborgen in einer Vielzahl
 an Ordnern. Zusätzlich muss der Start der Benutzung der Ressource eingetragen
 werden. Dadurch muss die Liste nach einer Wartung erneut angepasst werden. \\
 
- 
-Demnach ergeben sich folgende Prozesse:
+\newpage
+
+Daraus ergeben sich folgende Prozesse:
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{diagramme/TechnikerPlanerProzess.png}
@@ -46,11 +47,11 @@ der Ressourcenliste entnehmen. Zusätzlich erstellt der Planer auch den täglich
 Tagesplan, welcher nur das Ergebnis eines \gls{JQL} Filters ist. 
 
 Der Techniker (links) hingegen, ist für den Umbau und die tatsächliche Durchführung der 
-Tests verantwortlich. Er benötigt den Tagesplan um zu wissen, welche Tests als 
-nächstes durchgeführt werden sollen. Da im Tagesplan allerdings nicht vermerkt ist, 
-welcher Test nach einem spezifischen Test durchgeführt werden muss, muss er die 
-Klimakammer so weit es nötig ist leeren, um anschließend den nächsten Test 
-aufzubauen. Zusätzlich weiß der Techniker nicht, welcher Test der letzte Test einer Testreihe ist.
+Tests verantwortlich. Er benötigt den Tagesplan, um zu wissen, welche Tests als 
+nächstes durchgeführt werden sollen. Da im Tagesplan allerdings der Folgetest 
+nicht vermerkt ist, muss er die Klimakammer so weit wie nötig leeren, um 
+anschließend den nächsten Test aufzubauen. Zusätzlich weiß der Techniker nicht, 
+welcher Test der letzte Test einer Testreihe ist.
 Diese Information ist nötig, um die anschließende Lagerung des Lenkrads einzuleiten.
 Um diese Information zu erhalten, muss er im jeweiligen \gls{Jira} Ticket nachschauen. \\
 
@@ -60,30 +61,32 @@ Um diese Information zu erhalten, muss er im jeweiligen \gls{Jira} Ticket nachsc
 \end{figure}
 
 Der in Abbildung~\ref{fig:WarterProzess} beschriebene Prozess zeigt den Umgang mit der 
-Ressourcenliste. Der Wartungsbeauftragte muss jedes mal, wenn er die Wartungsliste
+Ressourcenliste. Der Wartungsbeauftragte muss jedes Mal, wenn er die Wartungsliste
 einsehen will, vorher ein \gls{SVN} Update machen, um auch tatsächlich die aktuelle
-Version der Liste zu erhalten. Wird dies nicht getan, kann es bei Änderungen 
+Version der Liste zu erhalten. Wird kein Update durchgeführt, kann es bei Änderungen 
 zu \gls{SVN} Konflikten kommen oder die entnommenen Informationen sind veraltet.
-Falls er irgendetwas an der Liste anpasst, muss diese anschließend wieder ins 
+Falls Anpassungen vorgenommen werden, müssen diese anschließend wieder ins 
 \gls{SVN} hochgeladen werden, um die Informationen mit allen anderen Mitarbeitern
-zu synchronisieren. Zusätzlich muss zu jedem neuen Wartungstermin, das tatsächliche
+zu synchronisieren. Zusätzlich muss zu jedem neuen Wartungstermin das tatsächliche
 Datum der ersten Benutzung seit der Wartung eingetragen werden. \\
 
-Aus den zuvor aufgeführten Prozessen ergeben sich folglich die nachfolgenden Rollen:
+\newpage
+
+Aus den zuvor aufgeführten Prozessen ergeben sich die nachfolgenden Rollen:
 
 \begin{description}
-    \item[\textbf{Planer}] Die Rolle der Person, die Pläne für kurzfristige oder
-    langfristige Tests erstellt.
+    \item[\textbf{Planer}]\hfill \\
+    Die Rolle der Person, die Pläne für kurzfristige oder langfristige Tests erstellt.
 
-    \item[\textbf{Wartungsbeauftragter}] Die Rolle der Person, die Wartungen 
-    überwacht, plant und durchführt. 
+    \item[\textbf{Wartungsbeauftragter}]\hfill \\
+    Die Rolle der Person, die Wartungen überwacht, plant und durchführt. 
 
-    \item[\textbf{Techniker}] Die Rolle der Person, die Tests aufbaut, umbaut und
-    durchführt.
+    \item[\textbf{Techniker}]\hfill \\
+    Die Rolle der Person, die Tests aufbaut, umbaut und durchführt.
 \end{description}
 
 Auch wenn es sein kann, dass eine Person mehrere Rollen annimmt, ist es dennoch 
-wichtig die Rollen voneinander zu unterscheiden, um den Prozess nachvollziehbarer
+wichtig, die Rollen voneinander zu unterscheiden, um den Prozess nachvollziehbarer
 und übersichtlicher zu gestalten.
 
 \subsection{Einbindung in vorhandene Programme}
@@ -92,8 +95,8 @@ beispielsweise um Warnungen bei bald ablaufenden Wartungen bei der Testvorbereit
 anzeigen lassen zu können, ergibt sich eine weitere Rolle:
 
 \begin{description}
-    \item[\textbf{Entwickler}] Die Rolle der Person, die die Informationen der
-    offenen Schnittstelle für eigene Programme verwendet
+    \item[\textbf{Entwickler}]\hfill \\
+    Die Rolle der Person, die die Informationen der offenen Schnittstelle für eigene Programme verwendet
 \end{description}
 
 \subsection{Use Cases}\label{sec:usecases}
@@ -133,7 +136,7 @@ Die folgenden User Stories ergeben sich aus den zuvor definierten Use Cases.
     Ressourcen erhalten, um den Aufbau von Tests zu planen}
 
     \descitem{US\#10}{itm:us10}
-    \textit{Als Planer möchte ich einen Wartungstermin einsehen, um zu erfahren
+    \textit{Als Planer möchte ich einen Wartungstermin einsehen, um zu erfahren,
     ob ich diese Ressource einplanen kann}
 
     \descitem{US\#11}{itm:us11}
@@ -141,7 +144,7 @@ Die folgenden User Stories ergeben sich aus den zuvor definierten Use Cases.
     vergangene Probleme aufzudecken}
 
     \descitem{US\#12}{itm:us12}
-    \textit{Als Planer möchte ich alle aktiven Tickets sehen, 
+    \textit{Als Planer möchte ich alle aktiven Tickets einsehen, 
     welche eine spezifische Ressource verwenden}
 
     \descitem{US\#13}{itm:us13}
@@ -174,7 +177,7 @@ Die folgenden User Stories ergeben sich aus den zuvor definierten Use Cases.
     \textit{Als Wartungsbeauftragter möchte ich einen neuen Wartungstermin festlegen}
 
     \descitem{US\#25}{itm:us25}
-    \textit{Als Wartungsbeauftragter möchte ich das Ergebnis eines Wartungstest verlinken}
+    \textit{Als Wartungsbeauftragter möchte ich das Ergebnis eines Wartungstests verlinken}
 
     \descitem{US\#26}{itm:us26}
     \textit{Als Wartungsbeauftragter möchte ich Informationen zu einer Wartung speichern}
@@ -184,27 +187,30 @@ Die folgenden User Stories ergeben sich aus den zuvor definierten Use Cases.
 
     \descitem{US\#90}{itm:us90}
     \textit{Als Entwickler möchte ich die REST API verwenden, um die
-    Informationen von ``TestHub'' in meine Programm einzubinden}
+    Informationen von ``TestHub'' in mein Programm einzubinden}
 
     \descitem{US\#91}{itm:us91}
     \textit{Als Entwickler möchte ich die Dokumentation
-    der API ansehen, um zu verstehen wie ich die API benutzen kann}
+    der \gls{API} ansehen, um zu verstehen, wie ich die \gls{API} benutzen kann}
 
 \end{description}
 
 \subsection{Funktionale Anforderungen}\label{sec:fas}
 Um die Funktionen der im Umfang dieser Arbeit entwickelten Software validieren zu
-können, müssen Anforderungen definiert werden. Diese Funktionalen Anforderungen
+können, müssen Anforderungen definiert werden. Diese funktionalen Anforderungen
 werden in drei Kategorien eingeteilt:
 
 \begin{description}
-    \item[\textbf{Muss-Kriterien}]Die Kriterien die ``TestHub'' als \gls{MVP} zwingend erfüllen muss
+    \item[\textbf{Muss-Kriterien}]\hfill \\
+    Die Kriterien, die ``TestHub'' als \gls{MVP} zwingend erfüllen muss
 
-    \item[\textbf{Soll-Kriterien}]Die Kriterien die für die Funktionalität von ``TestHub''
+    \item[\textbf{Soll-Kriterien}]\hfill \\
+    Die Kriterien, die für die Funktionalität von ``TestHub''
     nicht zwingend notwendig sind, aber dennoch implementiert werden sollten.
 
-    \item[\textbf{Kann-Kriterien}]Die Kriterien, die rein optional sind. Da es sich
-    bei ``TestHub'' um ein \gls{MVP} handelt, werden diese Kriterien nicht berücksichtigt.
+    \item[\textbf{Kann-Kriterien}]\hfill \\
+    Die Kriterien, die rein optional sind. Da es sich
+    bei ``TestHub'' um ein \gls{MVP} handelt, werden diese Kriterien am niedrigsten priorisiert.
 
 \end{description}
 
@@ -218,7 +224,7 @@ Anforderungen aus den mit den Mitarbeitern durchgeführten Interviews:
 
     \descitem{FA\#01}{itm:fa01}
     \textit{TestHub muss alle aktiven Tests nach Klimakammer gruppiert anzeigen (\descref{US\#04}{itm:us04}).}\\
-    Ein Test gilt als aktiv, wenn der Status seines Jira-Tickets ``Read for Test''
+    Ein Test gilt als aktiv, wenn der Status seines Jira-Tickets ``Ready for Test''
     oder ``In Execution'' ist.
 
     \descitem{FA\#02}{itm:fa02}
@@ -227,15 +233,15 @@ Anforderungen aus den mit den Mitarbeitern durchgeführten Interviews:
 
     \descitem{FA\#03}{itm:fa03}
     \textit{TestHub muss die Labels eines Jira-Tickets kategorisiert anzeigen (\descref{US\#03}{itm:us03}).}\\
-    Die Labels eines Jira-Tickets liegen als simple Liste von Text vor. Dieser 
+    Die Labels eines Jira-Tickets liegen als gelisteter Text vor. Dieser 
     Text soll analysiert und entsprechend kategorisiert werden, um eine genauere 
     Zuordnung zu ermöglichen.
 
     \descitem{FA\#04}{itm:fa04}
     \textit{TestHub muss den vorherigen und folgenden Test eines aktuell 
     ausgeführten Tests anzeigen können (\descref{US\#01}{itm:us01} \& \descref{US\#02}{itm:us02}).}\\
-    Ein Test kann vorherige und folgende Tests haben, es gibt jedoch auch Tests,
-    bei denen dies nicht der Fall ist.    
+    Ein Test kann vorherige und folgende Tests haben. Es gibt jedoch auch Tests,
+    bei denen dieses nicht der Fall ist.    
 
     \descitem{FA\#05}{itm:fa05}
     \textit{TestHub muss eine schnelle Übersicht über die wichtigsten Ressourcen anzeigen (\descref{US\#05}{itm:us05}).}\\
@@ -246,7 +252,7 @@ Anforderungen aus den mit den Mitarbeitern durchgeführten Interviews:
     \textit{TestHub muss den nächsten Wartungstermin einer Ressource anzeigen (\descref{US\#10}{itm:us10}).}
     
     \descitem{FA\#07}{itm:fa07}
-    \textit{TestHub muss das löschen einer Ressource unterstützen (\descref{US\#20}{itm:us20}).}
+    \textit{TestHub muss das Löschen einer Ressource unterstützen (\descref{US\#20}{itm:us20}).}
        
     \descitem{FA\#08}{itm:fa08}
     \textit{TestHub muss das Anpassen der Kategorie einer Ressource unterstützen 
@@ -261,20 +267,21 @@ Anforderungen aus den mit den Mitarbeitern durchgeführten Interviews:
     (\descref{US\#23}{itm:us23}).}
 
     \descitem{FA\#11}{itm:fa11}
-    \textit{TestHub muss Festlegen eines neuen Wartungstermins unterstützen 
+    \textit{TestHub muss das Festlegen eines neuen Wartungstermins unterstützen 
     (\descref{US\#24}{itm:us24}).}
 
     \descitem{FA\#12}{itm:fa12}
     \textit{TestHub muss das Erstellen einer Ressource unterstützen 
     (\descref{US\#23}{itm:us23}).}\\
-    Die Ressource benötigt mindestens einen Namen und eine Kategorie und sie muss nicht zwangsläufig 
-    einen Wartungstermin haben.
+    Die Ressource benötigt mindestens einen Namen und eine Kategorie. Sie muss 
+    nicht zwangsläufig einen Wartungstermin haben.
 
     \descitem{FA\#13}{itm:fa13}
     \textit{TestHub muss unabhängig von den \gls{Jira} Benutzerrechten für das HOD Projekt funktionieren}\\
     Da das System eine schnelle Übersicht schaffen soll und auch keine Möglichkeit
-    bietet, \gls{Jira} Daten anzupassen, soll das System die \gls{Jira} Informationen unabhängig der \gls{Jira} Rechte anzeigen.
-    Dies ergab sich auch den Interviews mit den Mitarbeitern.
+    bietet, \gls{Jira} Daten anzupassen, soll das System die \gls{Jira} 
+    Informationen unabhängig der \gls{Jira} Rechte anzeigen.
+    Diese Anforderung ergab sich aus den Interviews mit den Mitarbeitern.
 
 
 % Soll Kriterien
@@ -295,7 +302,7 @@ Anforderungen aus den mit den Mitarbeitern durchgeführten Interviews:
     
     \descitem{FA\#24}{itm:fa24}
     \textit{TestHub soll das Startdatum der Verwendung einer Ressource anzeigen (\descref{US\#14}{itm:us14}).}\\
-    Das Startdatum ist das Datum des Jira-Tickets welches nach dem Wartungstermin 
+    Das Startdatum ist das Datum des Jira-Tickets, welches nach dem Wartungstermin 
     der Ressource aktualisiert wurde und die Ressource verwendet.
 
 % Kann Kriterien
@@ -331,7 +338,7 @@ den User Stories:
 
     \descitem{NFA\#22}{itm:nfa22}
     \textit{TestHub soll in englischer Sprache verfügbar sein, da dies die 
-    Firmensprache von JSS ist.}
+    Firmensprache von \gls{JSS} ist.}
 
     \descitem{NFA\#23}{itm:nfa23}
     \textit{TestHub soll mindestens auf den Webbrowsern ``Chrome'' und ``Edge'' funktionieren}\\
@@ -345,8 +352,6 @@ den User Stories:
 
     \descitem{NFA\#31}{itm:nfa31}
     \textit{TestHub kann ein Gantt-Diagramm zur besseren Übersicht von aktuellen Tests anzeigen}
-
-
     
 \end{description}
 
